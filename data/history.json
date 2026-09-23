@@ -126,6 +126,8 @@
       "title": "4-Pack Square Glass Clamps, 304 SS, Black, 1/3-1/2 Inch (LIUCHONGYANG99)",
       "price": 9.5,
       "currency": "USD",
+      "priceSource": "apex_offscreen",
+      "listPrice": null,
       "rating": 4.5,
       "reviews": 67,
       "bsrSmall": {
@@ -145,8 +147,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-23T17:49:44.507Z",
-      "timingMs": 1846
+      "fetchedAt": "2026-09-23T17:51:57.625Z",
+      "timingMs": 1935
     },
     "B0C9TCZ7WC": {
       "asin": "B0C9TCZ7WC",
@@ -154,6 +156,8 @@
       "title": "Glass Clamp－304 SS,Adjustable Fits1/3 -1/2\" Glass Thickness(Black-4pcs)",
       "price": 9.22,
       "currency": "USD",
+      "priceSource": "apex_offscreen",
+      "listPrice": null,
       "rating": 4,
       "reviews": 41,
       "bsrSmall": {
@@ -173,8 +177,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-23T17:49:54.334Z",
-      "timingMs": 1824
+      "fetchedAt": "2026-09-23T17:52:07.725Z",
+      "timingMs": 2098
     },
     "B09MYYVC3H": {
       "asin": "B09MYYVC3H",
@@ -182,6 +186,8 @@
       "title": "Muzata 4Pack Black Square Glass Clamp with Rubber Gaskets GA04 BP4",
       "price": 6.75,
       "currency": "USD",
+      "priceSource": "apex_offscreen",
+      "listPrice": null,
       "rating": 4.4,
       "reviews": 70,
       "bsrSmall": {
@@ -201,8 +207,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-23T17:50:03.995Z",
-      "timingMs": 1656
+      "fetchedAt": "2026-09-23T17:52:17.544Z",
+      "timingMs": 1814
     },
     "B0DR8RDRFM": {
       "asin": "B0DR8RDRFM",
@@ -210,6 +216,8 @@
       "title": "LukLoy 8 PCS Glass Railing Clamp Brushed for 5/16 \"-15/32 \"(8mm-12mm)",
       "price": 42.99,
       "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
       "rating": 3.9,
       "reviews": 23,
       "bsrSmall": {
@@ -229,8 +237,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-23T17:50:13.523Z",
-      "timingMs": 1526
+      "fetchedAt": "2026-09-23T17:52:27.164Z",
+      "timingMs": 1617
     }
   }
 }
