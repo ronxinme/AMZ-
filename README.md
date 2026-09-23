@@ -36,6 +36,8 @@ https://你的用户名.github.io/仓库名/
 | 看每次采集结果明细 | Actions 页点开对应那次运行，底部有完整结果表格 |
 | 导出当天 CSV | 网页右上角按钮 |
 | 修改访问口令 | 计算 `sha256(新口令)`（任意在线 SHA-256 工具），替换 `app.js` 顶部 `ACCESS_CODE_SHA256` 后提交 |
+| 给商品设预期价格区间 | 在 `data/products.json` 给该商品加 `"priceMin": 30, "priceMax": 60`；采到区间外的价格时网页标红「价格异常」（用于识别买箱轮换到变体/其他卖家报价） |
+| 核对价格来源 | 每条记录带 `priceSource`（apex_offscreen = 页面核心价格区 / buybox_json = 买箱数据）和 `listPrice`（划线价，若页面有） |
 
 ## 验证码问题（重要，如实说明）
 
