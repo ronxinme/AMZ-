@@ -63,7 +63,9 @@ function fmtStock(r) {
   const s = r.stock || { kind: 'unknown' };
   const manual = s.source === 'manual' ? ' <span class="badge badge-manual">手工</span>' : '';
   switch (s.kind) {
-    case 'stock': return `<span class="stock-qty">库存 ${s.qty}</span>${manual}`;
+    case 'stock': return s.source === 'amazon_page'
+      ? `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="pmeta">（页面提示）</span>`
+      : `<span class="stock-qty">库存 ${s.qty}</span>${manual}`;
     case 'purchase_limit': return `<span class="stock-limit">限购 ${s.qty}</span>${manual}`;
     case 'in_stock_no_qty': return `<span class="stock-noqty">有货，数量未显示</span>${manual}`;
     case 'unavailable': return '<span class="stock-na">不可购买 / 缺货</span>';
