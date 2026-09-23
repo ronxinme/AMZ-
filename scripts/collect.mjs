@@ -241,6 +241,7 @@ for (const p of list) {
       rec = {
         asin: p.asin, realAsin: parsed.realAsin, title: parsed.title,
         price: parsed.price, currency: parsed.currency,
+        priceSource: parsed.priceSource || null, listPrice: parsed.listPrice ?? null,
         rating: parsed.rating, reviews: parsed.reviews,
         bsrSmall: parsed.bsrSmall, bsrLarge: parsed.bsrLarge,
         stock: parsed.stock, purchaseLimit: parsed.purchaseLimit,
