@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>亚马逊每日竞品记录工具</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div>
+      <h1>亚马逊每日竞品记录工具 <span class="ver">GitHub 免费版</span></h1>
+      <p class="sub">每日自动采集 · 售价 / 星级 / 评论数 / BSR / 库存状态 · 云端随时查看</p>
+    </div>
+    <div class="topbar-right">
+      <span id="runInfo" class="server-date"></span>
+      <a id="btnActions" class="btn-ghost" href="https://github.com/你的用户名/你的仓库名/actions" target="_blank" rel="noopener">运行记录</a>
+      <button id="btnExportCsv" class="btn-collect" title="导出当天数据为 CSV">↓ 导出当天 CSV</button>
+    </div>
+  </div>
+</header>
+
+<div id="loginMask" class="login-mask hidden">
+  <div class="login-box">
+    <h2>亚马逊每日竞品记录工具</h2>
+    <p class="sub">请输入访问口令</p>
+    <input type="password" id="loginPwd" placeholder="访问口令" autocomplete="current-password">
+    <button id="btnLogin" class="btn-primary">进 入</button>
+    <p id="loginErr" class="err"></p>
+    <p class="sub" style="color:#98a8a4;margin-top:10px">（口令仅阻止误入，非加密保护，请勿在此页放敏感信息）</p>
+  </div>
+</div>
+
+<main class="container">
+  <div id="emptyTip" class="demo-banner hidden">
+    ⚠️ 仓库还没有采集数据。请在 GitHub 仓库页面点 <b>Actions → Amazon Daily Collect → Run workflow</b> 手动触发第一次采集，
+    或等待每天定时任务执行。
+  </div>
+
+  <section class="stat-cards">
+    <div class="card"><div class="num" id="stTotal">-</div><div class="label">商品总数</div></div>
+    <div class="card"><div class="num" id="stCollected">-</div><div class="label">今日已采 / 总数</div></div>
+    <div class="card"><div class="num" id="stOk">-</div><div class="label">今日成功</div></div>
+    <div class="card"><div class="num" id="stFail">-</div><div class="label">今日失败 / 异常</div></div>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="today">📋 当天数据</button>
+    <button class="tab" data-tab="history">📅 历史对比</button>
+    <button class="tab" data-tab="products">🗂 商品清单</button>
+  </nav>
+
+  <section id="tab-today" class="tab-panel">
+    <div class="filter-row">
+      <span class="filter-label">店铺筛选：</span>
+      <div id="shopTabs" class="shop-tabs"></div>
+      <span class="spacer"></span>
+      <span class="filter-label">状态：</span>
+      <select id="statusFilter">
+        <option value="all">全部</option>
+        <option value="ok">正常</option>
+        <option value="fail">异常/未采到</option>
+        <option value="none">未采集</option>
+      </select>
+      <span class="spacer"></span>
+      <button id="btnExpandAll" class="btn-mini">全部展开</button>
+      <button id="btnCollapseAll" class="btn-mini">全部收起</button>
+    </div>
+    <div class="table-wrap" id="todayTable"></div>
+    <div id="changesBox" class="tip"></div>
+  </section>
+
+  <section id="tab-history" class="tab-panel hidden">
+    <div class="filter-row">
+      <span class="filter-label">历史范围：</span>
+      <select id="histRange">
+        <option value="7">最近 7 天</option>
+        <option value="14">最近 14 天</option>
+        <option value="30" selected>最近 30 天</option>
+        <option value="9999">全部</option>
+      </select>
+      <span class="spacer"></span>
+      <button id="btnExpandAll2" class="btn-mini">全部展开</button>
+      <button id="btnCollapseAll2" class="btn-mini">全部收起</button>
+    </div>
+    <div class="table-wrap" id="historyTable"></div>
+    <div class="legend">
+      <span class="lg lg-stock">库存 N</span>
+      <span class="lg lg-limit">限购 N（红字）</span>
+      <span class="lg lg-noqty">有货，数量未显示</span>
+      <span class="lg lg-na">不可购买 / 缺货</span>
+      <span class="lg lg-unknown">库存未获取</span>
+    </div>
+  </section>
+
+  <section id="tab-products" class="tab-panel hidden">
+    <div class="filter-row">
+      <span class="filter-label">商品清单由仓库的 <span class="mono">data/products.json</span> 维护：在 GitHub 上编辑该文件即可增删改 ASIN，次日自动生效。</span>
+    </div>
+    <div class="table-wrap" id="productsTable"></div>
+  </section>
+
+  <footer class="footer">
+    <span id="lastRunInfo"></span> · 数据来源：仓库 data/history.json ·
+    每天定时由 GitHub Actions 自动采集（免费额度内）
+  </footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
