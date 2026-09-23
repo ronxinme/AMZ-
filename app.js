@@ -54,7 +54,9 @@ async function boot() {
 
 /* ---------- 渲染工具 ---------- */
 const todayData = () => historyData[todayKey] || {};
-const fmtPrice = r => r.price != null ? `$${r.price.toFixed(2)}` : '<span class="stock-unknown">—</span>';
+const fmtPrice = r => r.price != null
+  ? `$${r.price.toFixed(2)}${r.priceOutOfRange ? ' <span class="badge badge-fail" title="' + esc(r.priceNote || '超出预期区间') + '">价格异常</span>' : ''}`
+  : '<span class="stock-unknown">—</span>';
 const fmtRating = r => r.rating != null ? `<span class="rating">★${r.rating}</span>` : '—';
 const fmtReviews = r => r.reviews != null ? `<span class="reviews">${r.reviews}</span>` : '—';
 const fmtBsrS = r => r.bsrSmall ? `<span class="bsr-small">#${r.bsrSmall.rank.toLocaleString()}</span> <span class="pmeta">${esc(r.bsrSmall.label)}</span>` : '<span class="stock-unknown">未获取</span>';
