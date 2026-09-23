@@ -147,23 +147,29 @@ function parseAmazon(html, asin) {
   m = html.match(/"hiRes"\s*:\s*"(https:[^"]+\.(?:jpg|png))"/i) || html.match(/id="landingImage"[^>]*data-old-hires="(https:[^"]+)"/);
   if (m) out.image = m[1];
 
-  let priceStr = null;
+  let priceStr = null, priceSrc = null;
   const apexIdx = html.indexOf('corePriceDisplay_desktop_feature_div');
   if (apexIdx >= 0) {
     const seg = html.slice(apexIdx, apexIdx + 12000);
     const mm = seg.match(/class="a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})\s*</);
-    if (mm) priceStr = mm[1];
+    if (mm) { priceStr = mm[1]; priceSrc = 'apex_offscreen'; }
   }
   if (priceStr == null) {
     const ctx = (html.match(/api_buybox_group_1[\s\S]{0,900}/) || [])[0] || '';
     const mm = ctx.match(/"displayPrice"\s*:\s*"(?:US)?\$([\d,]+\.\d{2})"/) || ctx.match(/"priceAmount"\s*:\s*([\d,]+\.\d{2})/);
-    if (mm) priceStr = mm[1];
+    if (mm) { priceStr = mm[1]; priceSrc = 'buybox_json'; }
   }
   if (priceStr == null) {
     const mm = html.match(/"displayPrice"\s*:\s*"(?:US)?\$([\d,]+\.\d{2})"/);
-    if (mm) priceStr = mm[1];
+    if (mm) { priceStr = mm[1]; priceSrc = 'buybox_json'; }
   }
-  if (priceStr != null) { out.price = parseFloat(priceStr.replace(/,/g, '')); out.currency = 'USD'; }
+  if (priceStr != null) { out.price = parseFloat(priceStr.replace(/,/g, '')); out.currency = 'USD'; out.priceSource = priceSrc; }
+  // 划线价（List Price）用于对照当前售价是否处于促销
+  const lp = html.match(/"basisPrice"\s*:\s*"?(?:US)?\$([\d,]+\.\d{2})/);
+  if (lp || html.match(/class="a-text-price"[\s\S]{0,200}?a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})/)) {
+    const mm2 = lp || html.match(/class="a-text-price"[\s\S]{0,200}?a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})/);
+    out.listPrice = parseFloat(String(mm2[1]).replace(/,/g, ''));
+  }
 
   m = html.match(/id="acrPopover"[^>]*title="([\d.]+) out of 5 stars"/) || html.match(/([\d.]+) out of 5 stars/);
   if (m) out.rating = parseFloat(m[1]);
@@ -253,6 +259,15 @@ for (const p of list) {
   // 保留手工补录库存（需在 data/manual-stock.json 维护，或直接编辑 history.json）
   const prev = history[date][p.asin];
   if (prev && prev.stock && prev.stock.source === 'manual' && rec.stock.kind === 'unknown') rec.stock = prev.stock;
+
+  // 价格合理性校验：products.json 里可给每个 ASIN 设 priceMin / priceMax
+  if (rec.ok && rec.price != null) {
+    const mn = Number(p.priceMin), mx = Number(p.priceMax);
+    if ((p.priceMin != null && rec.price < mn) || (p.priceMax != null && rec.price > mx)) {
+      rec.priceOutOfRange = true;
+      rec.priceNote = `超出预期区间 ${p.priceMin ?? '-'} ~ ${p.priceMax ?? '-'}（可能买箱换到变体/其他卖家报价）`;
+    }
+  }
 
   if (rec.ok) { ok++; if (p.name && rec.title && !rec.title.includes('（')) p.latestTitle = rec.title; }
   else fail++;
