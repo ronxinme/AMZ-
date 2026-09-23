@@ -1,1 +1,92 @@
-{}
+{
+  "2026-09-23": {
+    "B09PTH84M7": {
+      "asin": "B09PTH84M7",
+      "realAsin": "B09PTH84M7",
+      "title": null,
+      "price": null,
+      "currency": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "unknown"
+      },
+      "purchaseLimit": null,
+      "image": null,
+      "ok": false,
+      "error": "CAPTCHA",
+      "captcha": true,
+      "source": "direct",
+      "fetchedAt": "2026-09-23T16:47:24.213Z",
+      "timingMs": 179
+    },
+    "B0C9TCZ7WC": {
+      "asin": "B0C9TCZ7WC",
+      "realAsin": "B0C9TCZ7WC",
+      "title": null,
+      "price": null,
+      "currency": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "unknown"
+      },
+      "purchaseLimit": null,
+      "image": null,
+      "ok": false,
+      "error": "CAPTCHA",
+      "captcha": true,
+      "source": "direct",
+      "fetchedAt": "2026-09-23T16:47:32.246Z",
+      "timingMs": 33
+    },
+    "B09MYYVC3H": {
+      "asin": "B09MYYVC3H",
+      "realAsin": "B09MYYVC3H",
+      "title": null,
+      "price": null,
+      "currency": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "unknown"
+      },
+      "purchaseLimit": null,
+      "image": null,
+      "ok": false,
+      "error": "CAPTCHA",
+      "captcha": true,
+      "source": "direct",
+      "fetchedAt": "2026-09-23T16:47:40.279Z",
+      "timingMs": 29
+    },
+    "B0DR8RDRFM": {
+      "asin": "B0DR8RDRFM",
+      "realAsin": "B0DR8RDRFM",
+      "title": null,
+      "price": null,
+      "currency": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "unknown"
+      },
+      "purchaseLimit": null,
+      "image": null,
+      "ok": false,
+      "error": "CAPTCHA",
+      "captcha": true,
+      "source": "direct",
+      "fetchedAt": "2026-09-23T16:47:48.314Z",
+      "timingMs": 31
+    }
+  }
+}
