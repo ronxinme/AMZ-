@@ -78,9 +78,11 @@ function readJSON(file, fallback) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { return fallback; }
 }
 function todayStr(d) {
+  // 按北京时间（UTC+8）记日期，避免夜晚运行时日期比实际早一天
   const dt = d ? new Date(d) : new Date();
+  const bj = new Date(dt.getTime() + 8 * 3600 * 1000);
   const p = n => String(n).padStart(2, '0');
-  return `${dt.getUTCFullYear()}-${p(dt.getUTCMonth() + 1)}-${p(dt.getUTCDate())}`;
+  return `${bj.getUTCFullYear()}-${p(bj.getUTCMonth() + 1)}-${p(bj.getUTCDate())}`;
 }
 
 /* ---------------- 抓取：三种模式 ---------------- */
@@ -186,8 +188,12 @@ function parseAmazon(html, asin) {
   const avail = (html.match(/id="availability"[\s\S]{0,1200}/) || [])[0] || '';
   if (/Currently unavailable|out of stock/i.test(avail)) out.stock = { kind: 'unavailable' };
   else if (/In Stock/i.test(avail) || out.price != null) out.stock = { kind: 'in_stock_no_qty' };
-  m = html.match(/Only (\d+) left in stock/i);
-  if (m) out.stock = { kind: 'stock', qty: parseInt(m[1], 10), source: 'amazon_page' };
+  // 「仅剩 N 件」只在购物车按钮附近取，避免误取侧栏/推荐商品的提示
+  let anchor = html.indexOf('add-to-cart-button');
+  let region = anchor > 0 ? html.slice(Math.max(0, anchor - 6000), anchor + 2500) : '';
+  if (!region) region = (html.match(/id="qualifiedBuybox"[\s\S]{0,6000}/) || [])[0] || '';
+  m = region.match(/Only (\d+) left in stock/i);
+  if (m) out.stock = { kind: 'stock', qty: parseInt(m[1], 10), source: 'amazon_page', note: '页面提示仅剩 N 件，非卖家精灵库存' };
   m = html.match(/limit (\d+) (?:units )?per (?:customer|order)/i);
   if (m) out.purchaseLimit = { qty: parseInt(m[1], 10), source: 'amazon_page' };
 
