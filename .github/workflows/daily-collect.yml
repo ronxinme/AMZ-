@@ -1,9 +1,11 @@
 name: Amazon Daily Collect
+# 每天定时采集（下方为 UTC 时间，北京时间换算请减 8 小时）
+# 北京时间 09:00 → '0 1 * * *'   北京时间 17:00 → '0 9 * * *'
 on:
   schedule:
     - cron: '0 1 * * *'    # 北京时间 09:00（主采集）
-    - cron: '0 13 * * *'   # 北京时间 21:00（补采）
-  workflow_dispatch:
+    - cron: '0 13 * * *'   # 北京时间 21:00（补采：早上没采到的再试一次）
+  workflow_dispatch:      # 允许在网页上手动点「Run workflow」立即跑一次
 
 permissions:
   contents: write
@@ -14,17 +16,24 @@ jobs:
     steps:
       - name: 拉取仓库
         uses: actions/checkout@v4
+
       - name: 安装 Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: 执行采集
         env:
+          # 默认 direct（直连，可能因数据中心 IP 触发验证码）
+          # 若想提高成功率，在仓库 Settings → Secrets 添加 SCRAPER_MODE / SCRAPER_KEY
+          # SCRAPER_MODE=jina 或 scrapingbee；SCRAPER_KEY 填对应服务的免费额度 Key
           SCRAPER_MODE: ${{ secrets.SCRAPER_MODE || 'direct' }}
           SCRAPER_KEY: ${{ secrets.SCRAPER_KEY }}
           INTERVAL_MS: '8000'
+          # 手动点 Run workflow 时强制重采；定时任务不覆盖当天已成功的数据
           FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
         run: node scripts/collect.mjs
+
       - name: 保存数据到仓库
         run: |
           git config user.name "amazon-tracker-bot"
