@@ -93,6 +93,7 @@ td.num-cell { font-family: Consolas, monospace; font-size: 13.5px; }
 .stock-limit { color: var(--red); font-weight: 700; }
 .stock-noqty { color: var(--green-ok); }
 .stock-na { color: #999; }
+.stock-nooffer { color: #8a6d1a; }
 .stock-unknown { color: #b58900; }
 .badge { display: inline-block; border-radius: 8px; padding: 1px 8px; font-size: 11px; }
 .badge-ok { background: #e3f4ec; color: var(--green-ok); }
@@ -143,6 +144,7 @@ td.num-cell { font-family: Consolas, monospace; font-size: 13.5px; }
 .legend { margin-top: 10px; display: flex; gap: 14px; flex-wrap: wrap; color: var(--muted); font-size: 12px; }
 .lg::before { content: "■ "; }
 .lg-stock { color: var(--green-ok); } .lg-limit { color: var(--red); }
+.lg-nooffer { color: #8a6d1a; }
 .lg-void { color: #c3cdc9; } .lg-fail { color: var(--red); }
 
 /* 商品管理 */
