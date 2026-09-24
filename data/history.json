@@ -124,10 +124,13 @@
       "asin": "B09PTH84M7",
       "realAsin": "B0HKCDLNHR",
       "title": "4-Pack Square Glass Clamps, 304 SS, Black, 1/3-1/2 Inch (LIUCHONGYANG99)",
-      "price": 9.5,
+      "price": 37.99,
       "currency": "USD",
-      "priceSource": "apex_offscreen",
-      "listPrice": null,
+      "priceSource": "buybox_json",
+      "listPrice": 39.99,
+      "unitPrice": 9.5,
+      "unitLabel": "count",
+      "savingsPct": 5,
       "rating": 4.5,
       "reviews": 67,
       "bsrSmall": {
@@ -135,7 +138,7 @@
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 78365,
+        "rank": 78364,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -148,17 +151,20 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:34:40.239Z",
-      "timingMs": 1966
+      "fetchedAt": "2026-09-24T03:32:06.308Z",
+      "timingMs": 2132
     },
     "B0C9TCZ7WC": {
       "asin": "B0C9TCZ7WC",
       "realAsin": "B0CQ4MXDHK",
       "title": "Glass Clamp－304 SS,Adjustable Fits1/3 -1/2\" Glass Thickness(Black-4pcs)",
-      "price": 9.22,
+      "price": 36.88,
       "currency": "USD",
-      "priceSource": "apex_offscreen",
-      "listPrice": null,
+      "priceSource": "buybox_json",
+      "listPrice": 36.88,
+      "unitPrice": 9.22,
+      "unitLabel": "count",
+      "savingsPct": 20,
       "rating": 4,
       "reviews": 41,
       "bsrSmall": {
@@ -179,21 +185,30 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:34:53.450Z",
-      "timingMs": 1996
+      "fetchedAt": "2026-09-24T03:32:16.251Z",
+      "timingMs": 1940
     },
     "B09MYYVC3H": {
       "asin": "B09MYYVC3H",
       "realAsin": "B0FGGSYXTZ",
       "title": "Muzata 4Pack Black Square Glass Clamp with Rubber Gaskets GA04 BP4",
-      "price": 6.75,
+      "price": 26.99,
       "currency": "USD",
-      "priceSource": "apex_offscreen",
-      "listPrice": null,
+      "priceSource": "buybox_json",
+      "listPrice": 26.99,
+      "unitPrice": 6.75,
+      "unitLabel": "count",
+      "savingsPct": 10,
       "rating": 4.4,
       "reviews": 70,
-      "bsrSmall": null,
-      "bsrLarge": null,
+      "bsrSmall": {
+        "rank": 53,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 194550,
+        "label": "Tools & Home Improvement"
+      },
       "stock": {
         "kind": "in_stock_no_qty"
       },
@@ -204,8 +219,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:35:02.579Z",
-      "timingMs": 1124
+      "fetchedAt": "2026-09-24T03:32:26.209Z",
+      "timingMs": 1953
     },
     "B0DR8RDRFM": {
       "asin": "B0DR8RDRFM",
@@ -215,6 +230,9 @@
       "currency": "USD",
       "priceSource": "buybox_json",
       "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 3.9,
       "reviews": 23,
       "bsrSmall": {
@@ -235,8 +253,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:35:15.529Z",
-      "timingMs": 1735
+      "fetchedAt": "2026-09-24T03:32:35.937Z",
+      "timingMs": 1724
     },
     "B0C6GK3KWB": {
       "asin": "B0C6GK3KWB",
@@ -246,6 +264,9 @@
       "currency": null,
       "priceSource": null,
       "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 5,
       "reviews": 1,
       "bsrSmall": {
@@ -266,8 +287,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:35:28.651Z",
-      "timingMs": 1909
+      "fetchedAt": "2026-09-24T03:32:45.680Z",
+      "timingMs": 1740
     },
     "B09F358TBV": {
       "asin": "B09F358TBV",
@@ -277,6 +298,9 @@
       "currency": "USD",
       "priceSource": "buybox_json",
       "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 4.5,
       "reviews": 179,
       "bsrSmall": {
@@ -284,7 +308,7 @@
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 49646,
+        "rank": 49645,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -297,8 +321,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:35:41.630Z",
-      "timingMs": 1712
+      "fetchedAt": "2026-09-24T03:32:55.421Z",
+      "timingMs": 1736
     },
     "B0F9WLV5CY": {
       "asin": "B0F9WLV5CY",
@@ -308,6 +332,9 @@
       "currency": "USD",
       "priceSource": "buybox_json",
       "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 4.5,
       "reviews": 2,
       "bsrSmall": {
@@ -315,7 +342,7 @@
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 220454,
+        "rank": 220458,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -328,8 +355,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:35:54.617Z",
-      "timingMs": 1779
+      "fetchedAt": "2026-09-24T03:33:05.125Z",
+      "timingMs": 1702
     },
     "B09PTSHFZZ": {
       "asin": "B09PTSHFZZ",
@@ -339,6 +366,9 @@
       "currency": "USD",
       "priceSource": "buybox_json",
       "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 4.4,
       "reviews": 73,
       "bsrSmall": {
@@ -346,7 +376,7 @@
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 393364,
+        "rank": 393380,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -359,8 +389,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:36:07.611Z",
-      "timingMs": 1781
+      "fetchedAt": "2026-09-24T03:33:14.844Z",
+      "timingMs": 1714
     },
     "B0CHR9SZ8B": {
       "asin": "B0CHR9SZ8B",
@@ -369,7 +399,10 @@
       "price": 33.99,
       "currency": "USD",
       "priceSource": "buybox_json",
-      "listPrice": null,
+      "listPrice": 33.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 50,
       "rating": 5,
       "reviews": 8,
       "bsrSmall": {
@@ -390,17 +423,20 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:36:20.614Z",
-      "timingMs": 1797
+      "fetchedAt": "2026-09-24T03:33:24.673Z",
+      "timingMs": 1825
     },
     "B07DDFMLG1": {
       "asin": "B07DDFMLG1",
       "realAsin": "B07DDFMLG1",
       "title": "KAMTOP 8 Pack Glass Clamps, 6-7mm Adjustable 304 Stainless Steel Brackets",
-      "price": 22.99,
+      "price": 21.84,
       "currency": "USD",
-      "priceSource": "apex_offscreen",
-      "listPrice": null,
+      "priceSource": "buybox_json",
+      "listPrice": 22.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 5,
       "rating": 4.5,
       "reviews": 162,
       "bsrSmall": {
@@ -421,8 +457,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:36:30.453Z",
-      "timingMs": 1839
+      "fetchedAt": "2026-09-24T03:33:34.475Z",
+      "timingMs": 1797
     },
     "B0CCRTKXXQ": {
       "asin": "B0CCRTKXXQ",
@@ -432,6 +468,9 @@
       "currency": "USD",
       "priceSource": "buybox_json",
       "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 4,
       "reviews": 1,
       "bsrSmall": {
@@ -452,8 +491,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:36:40.343Z",
-      "timingMs": 1890
+      "fetchedAt": "2026-09-24T03:33:44.215Z",
+      "timingMs": 1736
     },
     "B0CD8B2D38": {
       "asin": "B0CD8B2D38",
@@ -462,7 +501,10 @@
       "price": 19.59,
       "currency": "USD",
       "priceSource": "buybox_json",
-      "listPrice": null,
+      "listPrice": 19.59,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 10,
       "rating": 4.6,
       "reviews": 36,
       "bsrSmall": {
@@ -483,8 +525,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:36:50.241Z",
-      "timingMs": 1894
+      "fetchedAt": "2026-09-24T03:33:54.157Z",
+      "timingMs": 1941
     },
     "B0CN71KT1G": {
       "asin": "B0CN71KT1G",
@@ -493,7 +535,10 @@
       "price": 21.99,
       "currency": "USD",
       "priceSource": "buybox_json",
-      "listPrice": null,
+      "listPrice": 21.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 10,
       "rating": 4.4,
       "reviews": 41,
       "bsrSmall": {
@@ -514,17 +559,20 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:37:00.140Z",
-      "timingMs": 1896
+      "fetchedAt": "2026-09-24T03:34:03.990Z",
+      "timingMs": 1828
     },
     "B0C743SY46": {
       "asin": "B0C743SY46",
       "realAsin": "B0C742XJ4V",
       "title": "2-Pack 316 Cylindrical Glass Clamps, 8-17.52mm, Black (LIUCHONGYANG99)",
-      "price": 9.5,
+      "price": 18.99,
       "currency": "USD",
-      "priceSource": "apex_offscreen",
-      "listPrice": null,
+      "priceSource": "buybox_json",
+      "listPrice": 19.99,
+      "unitPrice": 9.5,
+      "unitLabel": "count",
+      "savingsPct": 5,
       "rating": 5,
       "reviews": 2,
       "bsrSmall": {
@@ -545,8 +593,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:37:09.876Z",
-      "timingMs": 1732
+      "fetchedAt": "2026-09-24T03:34:13.717Z",
+      "timingMs": 1727
     },
     "B07L8LDSQD": {
       "asin": "B07L8LDSQD",
@@ -556,6 +604,9 @@
       "currency": null,
       "priceSource": null,
       "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 4.4,
       "reviews": 31,
       "bsrSmall": {
@@ -576,8 +627,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:37:19.614Z",
-      "timingMs": 1737
+      "fetchedAt": "2026-09-24T03:34:23.467Z",
+      "timingMs": 1746
     },
     "B099WTYMM6": {
       "asin": "B099WTYMM6",
@@ -587,6 +638,9 @@
       "currency": null,
       "priceSource": null,
       "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 4.4,
       "reviews": 43,
       "bsrSmall": {
@@ -607,8 +661,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:37:29.397Z",
-      "timingMs": 1779
+      "fetchedAt": "2026-09-24T03:34:33.369Z",
+      "timingMs": 1899
     },
     "B0CJ8MH322": {
       "asin": "B0CJ8MH322",
@@ -618,323 +672,9 @@
       "currency": "USD",
       "priceSource": "buybox_json",
       "listPrice": null,
-      "rating": 4.7,
-      "reviews": 9,
-      "bsrSmall": {
-        "rank": 833,
-        "label": "Decking Railings"
-      },
-      "bsrLarge": {
-        "rank": 516459,
-        "label": "Tools & Home Improvement"
-      },
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/71IHqwQDRGL._SL1254_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:37:39.183Z",
-      "timingMs": 1783
-    },
-    "B0CBKGVZSW": {
-      "asin": "B0CBKGVZSW",
-      "realAsin": "B0GQML1HJX",
-      "title": "Glass Railing Post, No-Punch Glass Railing System with Spigot Slots & Base, 304 Stainless Steel Clamp Bracket for Deck Balusters, Patio, Stairs, Silver, 23.6in, 60cm Corner Post",
-      "price": 42.99,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
-      "rating": 4.4,
-      "reviews": 108,
-      "bsrSmall": {
-        "rank": 217,
-        "label": "Decking Railings"
-      },
-      "bsrLarge": {
-        "rank": 145636,
-        "label": "Tools & Home Improvement"
-      },
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/61ynjTvVcXL._SL1500_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:37:49.109Z",
-      "timingMs": 1922
-    },
-    "B0C558XRTP": {
-      "asin": "B0C558XRTP",
-      "realAsin": "B0HKD1524N",
-      "title": "1-Pack 110cm 304 Glass Railing Post, Silver (LIUCHONGYANG99)",
-      "price": 74.99,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
-      "rating": 4.8,
-      "reviews": 6,
-      "bsrSmall": {
-        "rank": 409,
-        "label": "Decking Railings"
-      },
-      "bsrLarge": {
-        "rank": 248331,
-        "label": "Tools & Home Improvement"
-      },
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/51S95elx6BL._SL1500_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:37:58.826Z",
-      "timingMs": 1713
-    },
-    "B08FB3FLF2": {
-      "asin": "B08FB3FLF2",
-      "realAsin": "B08FB3FLF2",
-      "title": "Glass Railing Post Glass Balustrade Railing Post Stainless Steel Railing Fence Pole Handrail Garden Fencing 43\" End Post",
-      "price": 39.99,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
-      "rating": 5,
-      "reviews": 5,
-      "bsrSmall": {
-        "rank": 234,
-        "label": "Decking Posts"
-      },
-      "bsrLarge": {
-        "rank": 1289373,
-        "label": "Tools & Home Improvement"
-      },
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:38:08.578Z",
-      "timingMs": 1752
-    },
-    "B08FB3987P": {
-      "asin": "B08FB3987P",
-      "realAsin": "B08FB3987P",
-      "title": "Glass Railing Post Glass Balustrade Railing Post Stainless Steel Railing Fence Pole Handrail Garden Fencing 35\" Middle Post",
-      "price": 39.99,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
-      "rating": 4.8,
-      "reviews": 10,
-      "bsrSmall": {
-        "rank": 902,
-        "label": "Decking"
-      },
-      "bsrLarge": {
-        "rank": 1315080,
-        "label": "Tools & Home Improvement"
-      },
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:38:18.295Z",
-      "timingMs": 1712
-    },
-    "B0C8B1XNTD": {
-      "asin": "B0C8B1XNTD",
-      "realAsin": "B0C8SQD2MQ",
-      "title": "Glass Railing Post, Silvery 304 Stainless Steel Clamp Post Balustrade Railing, Mid Post Railing Fence Pole Handrail Garden Fencing (Mid Post, 43.3\" H)",
-      "price": 30,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
-      "rating": 4.4,
-      "reviews": null,
-      "bsrSmall": {
-        "rank": 564,
-        "label": "Decking Railings"
-      },
-      "bsrLarge": {
-        "rank": 343200,
-        "label": "Tools & Home Improvement"
-      },
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/41ZFXOLex5L._SL1500_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:38:28.130Z",
-      "timingMs": 1830
-    },
-    "B0HJQQ59K7": {
-      "asin": "B0HJQQ59K7",
-      "realAsin": "B0HJQKL5JB",
-      "title": "Pack of 4, 304 Stainless Steel Standoff Screws, Wall Sign Standoff Mounting Hardware Advertising Glass Standoff for Acrylic Picture Frame",
-      "price": null,
-      "currency": null,
-      "priceSource": null,
-      "listPrice": null,
-      "rating": null,
-      "reviews": null,
-      "bsrSmall": null,
-      "bsrLarge": null,
-      "stock": {
-        "kind": "unknown"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/71FMh39X81L._SL1500_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:38:37.567Z",
-      "timingMs": 1432
-    },
-    "B0HHXD8SHF": {
-      "asin": "B0HHXD8SHF",
-      "realAsin": "B0HHXPSS1W",
-      "title": "42/38/in Side Mount Square Stair Baluster Posts- 270° Adjustable Metal Railing Spindles; Iron Posts are Suitable for Deck, Balcony, Stair, Indoor and Outdoor Decor，4：38inches",
-      "price": 99.99,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
-      "rating": null,
-      "reviews": null,
-      "bsrSmall": null,
-      "bsrLarge": null,
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": null,
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:38:47.300Z",
-      "timingMs": 1728
-    },
-    "B0HFWLCSCS": {
-      "asin": "B0HFWLCSCS",
-      "realAsin": "B0HFWD3VHS",
-      "title": "LIUCHONGYANG99201 Stainless Steel 2\" x 4\" (1 ½\" x 3 ½\" Actual) Deck Railing Parallel Stair (2 pc-Black)",
-      "price": 39.99,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
-      "rating": null,
-      "reviews": null,
-      "bsrSmall": null,
-      "bsrLarge": null,
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/61aTGdWsCjL._SL1254_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:38:57.115Z",
-      "timingMs": 1810
-    },
-    "B0H2PQCCVB": {
-      "asin": "B0H2PQCCVB",
-      "realAsin": "B0H2PMBRG5",
-      "title": "110cm 304 Stainless Steel Glass Railing Post, Silver (LIUCHONGYANG99)",
-      "price": 89,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
-      "rating": 4.7,
-      "reviews": null,
-      "bsrSmall": {
-        "rank": 1176,
-        "label": "Decking Railings"
-      },
-      "bsrLarge": {
-        "rank": 752993,
-        "label": "Tools & Home Improvement"
-      },
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/61dSmPFF8TL._SL1254_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:39:06.913Z",
-      "timingMs": 1793
-    },
-    "B0GZVRY1N6": {
-      "asin": "B0GZVRY1N6",
-      "realAsin": "B0GZVRY1N6",
-      "title": "2-Pack 316 Stainless Steel Glass Clamps, 8-12mm (LIUCHONGYANG99)",
-      "price": 25,
-      "currency": "USD",
-      "priceSource": "apex_offscreen",
-      "listPrice": null,
-      "rating": 4,
-      "reviews": 1,
-      "bsrSmall": null,
-      "bsrLarge": null,
-      "stock": {
-        "kind": "in_stock_no_qty"
-      },
-      "purchaseLimit": null,
-      "boughtPastMonth": null,
-      "image": "https://m.media-amazon.com/images/I/61f99o-BlZL._AC_SL1252_.jpg",
-      "ok": true,
-      "error": null,
-      "captcha": false,
-      "source": "direct",
-      "fetchedAt": "2026-09-24T02:39:16.573Z",
-      "timingMs": 1655
-    },
-    "B0CJ6HD4R1": {
-      "asin": "B0CJ6HD4R1",
-      "realAsin": "B0CJ6FTGMK",
-      "title": "42-Inch Glass Railing Corner Post, 50mm, Black (LIUCHONGYANG99)",
-      "price": 59.99,
-      "currency": "USD",
-      "priceSource": "buybox_json",
-      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
       "rating": 4.7,
       "reviews": 9,
       "bsrSmall": {
@@ -955,8 +695,358 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T02:39:26.266Z",
-      "timingMs": 1690
+      "fetchedAt": "2026-09-24T03:34:43.268Z",
+      "timingMs": 1895
+    },
+    "B0CBKGVZSW": {
+      "asin": "B0CBKGVZSW",
+      "realAsin": "B0GQML1HJX",
+      "title": "Glass Railing Post, No-Punch Glass Railing System with Spigot Slots & Base, 304 Stainless Steel Clamp Bracket for Deck Balusters, Patio, Stairs, Silver, 23.6in, 60cm Corner Post",
+      "price": 42.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 42.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 10,
+      "rating": 4.4,
+      "reviews": 108,
+      "bsrSmall": {
+        "rank": 217,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 145636,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/61ynjTvVcXL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:34:53.123Z",
+      "timingMs": 1851
+    },
+    "B0C558XRTP": {
+      "asin": "B0C558XRTP",
+      "realAsin": "B0HKD1524N",
+      "title": "1-Pack 110cm 304 Glass Railing Post, Silver (LIUCHONGYANG99)",
+      "price": 74.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.8,
+      "reviews": 6,
+      "bsrSmall": {
+        "rank": 409,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 248335,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/51S95elx6BL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:35:02.908Z",
+      "timingMs": 1784
+    },
+    "B08FB3FLF2": {
+      "asin": "B08FB3FLF2",
+      "realAsin": "B08FB3FLF2",
+      "title": "Glass Railing Post Glass Balustrade Railing Post Stainless Steel Railing Fence Pole Handrail Garden Fencing 43\" End Post",
+      "price": 39.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 5,
+      "bsrSmall": {
+        "rank": 234,
+        "label": "Decking Posts"
+      },
+      "bsrLarge": {
+        "rank": 1289373,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:35:12.801Z",
+      "timingMs": 1889
+    },
+    "B08FB3987P": {
+      "asin": "B08FB3987P",
+      "realAsin": "B08FB3987P",
+      "title": "Glass Railing Post Glass Balustrade Railing Post Stainless Steel Railing Fence Pole Handrail Garden Fencing 35\" Middle Post",
+      "price": 39.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.8,
+      "reviews": 10,
+      "bsrSmall": {
+        "rank": 902,
+        "label": "Decking"
+      },
+      "bsrLarge": {
+        "rank": 1315080,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:35:22.602Z",
+      "timingMs": 1797
+    },
+    "B0C8B1XNTD": {
+      "asin": "B0C8B1XNTD",
+      "realAsin": "B0C8SQD2MQ",
+      "title": "Glass Railing Post, Silvery 304 Stainless Steel Clamp Post Balustrade Railing, Mid Post Railing Fence Pole Handrail Garden Fencing (Mid Post, 43.3\" H)",
+      "price": 30,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.4,
+      "reviews": null,
+      "bsrSmall": {
+        "rank": 564,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 343200,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/41ZFXOLex5L._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:35:32.289Z",
+      "timingMs": 1683
+    },
+    "B0HJQQ59K7": {
+      "asin": "B0HJQQ59K7",
+      "realAsin": "B0HJQKL5JB",
+      "title": "Pack of 4, 304 Stainless Steel Standoff Screws, Wall Sign Standoff Mounting Hardware Advertising Glass Standoff for Acrylic Picture Frame",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "unknown"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/71FMh39X81L._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:35:41.738Z",
+      "timingMs": 1445
+    },
+    "B0HHXD8SHF": {
+      "asin": "B0HHXD8SHF",
+      "realAsin": "B0HHXPSS1W",
+      "title": "42/38/in Side Mount Square Stair Baluster Posts- 270° Adjustable Metal Railing Spindles; Iron Posts are Suitable for Deck, Balcony, Stair, Indoor and Outdoor Decor，4：38inches",
+      "price": 99.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": null,
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:35:51.276Z",
+      "timingMs": 1534
+    },
+    "B0HFWLCSCS": {
+      "asin": "B0HFWLCSCS",
+      "realAsin": "B0HFWD3VHS",
+      "title": "LIUCHONGYANG99201 Stainless Steel 2\" x 4\" (1 ½\" x 3 ½\" Actual) Deck Railing Parallel Stair (2 pc-Black)",
+      "price": 39.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/61aTGdWsCjL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:36:00.995Z",
+      "timingMs": 1715
+    },
+    "B0H2PQCCVB": {
+      "asin": "B0H2PQCCVB",
+      "realAsin": "B0H2PMBRG5",
+      "title": "110cm 304 Stainless Steel Glass Railing Post, Silver (LIUCHONGYANG99)",
+      "price": 89,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.7,
+      "reviews": null,
+      "bsrSmall": {
+        "rank": 1176,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 752993,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/61dSmPFF8TL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:36:10.667Z",
+      "timingMs": 1668
+    },
+    "B0GZVRY1N6": {
+      "asin": "B0GZVRY1N6",
+      "realAsin": "B0GZVRY1N6",
+      "title": "2-Pack 316 Stainless Steel Glass Clamps, 8-12mm (LIUCHONGYANG99)",
+      "price": 49.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 25,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 4,
+      "reviews": 1,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/61f99o-BlZL._AC_SL1252_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:36:20.316Z",
+      "timingMs": 1644
+    },
+    "B0CJ6HD4R1": {
+      "asin": "B0CJ6HD4R1",
+      "realAsin": "B0CJ6FTGMK",
+      "title": "42-Inch Glass Railing Corner Post, 50mm, Black (LIUCHONGYANG99)",
+      "price": 59.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.7,
+      "reviews": 9,
+      "bsrSmall": {
+        "rank": 833,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 516485,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "in_stock_no_qty"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "image": "https://m.media-amazon.com/images/I/71IHqwQDRGL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-24T03:36:29.913Z",
+      "timingMs": 1593
     }
   }
 }
