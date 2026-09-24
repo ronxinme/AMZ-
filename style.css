@@ -102,6 +102,31 @@ td.num-cell { font-family: Consolas, monospace; font-size: 13.5px; }
 .badge-manual { background: #fff6e0; color: #8a6d1a; }
 .tip { margin-top: 8px; color: var(--muted); }
 
+/* 库存预警 */
+.alert-box { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--green); border-radius: 10px; padding: 10px 14px; margin-bottom: 12px; }
+.alert-box.has-danger { border-left-color: var(--red); background: #fffbfa; }
+.alert-box.has-warn { border-left-color: #d98800; background: #fffdf7; }
+.alert-box.all-clear { border-left-color: var(--green-ok); }
+.alert-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-weight: 700; color: var(--green-dark); font-size: 13.5px; }
+.alert-head .alert-meta { font-weight: 400; color: var(--muted); font-size: 12px; }
+.alert-head select { padding: 3px 6px; font-size: 12px; }
+.alert-group { display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.ag-label { flex: none; font-size: 11.5px; border-radius: 8px; padding: 2px 9px; white-space: nowrap; margin-top: 2px; }
+.ag-red { background: #fdeae7; color: var(--red); font-weight: 700; }
+.ag-amber { background: #fff2d9; color: #a06a00; font-weight: 700; }
+.ag-gray { background: #eef2f1; color: var(--muted); }
+.alert-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.alert-chip { border-radius: 14px; padding: 3px 10px; font-size: 12px; border: 1px solid transparent; white-space: nowrap; }
+.alert-chip a { color: inherit; text-decoration: none; font-weight: 600; }
+.alert-chip a:hover { text-decoration: underline; }
+.alert-chip .chg { font-size: 11px; opacity: .8; }
+.chip-red { background: #fdeae7; border-color: #f2c4bd; color: #8e2b20; }
+.chip-amber { background: #fff2d9; border-color: #ecce93; color: #8a6208; }
+.chip-gray { background: #f2f5f4; border-color: var(--line); color: var(--muted); }
+.alert-clear { color: var(--green-ok); margin-top: 6px; }
+.alert-foot { margin-top: 8px; color: var(--muted); font-size: 12px; }
+.alert-foot b { color: var(--red); }
+
 /* 历史对比：前两列固定（商品信息 + 指标名），日期列只显示数值 */
 .hist-table { table-layout: fixed; min-width: 0; border-collapse: separate; border-spacing: 0; }
 .hist-table th, .hist-table td { padding: 4px 8px; }
