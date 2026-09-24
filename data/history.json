@@ -221,11 +221,11 @@
       "rating": 3.9,
       "reviews": 23,
       "bsrSmall": {
-        "rank": 207,
+        "rank": 215,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 652795,
+        "rank": 689549,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -237,8 +237,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-23T18:02:51.108Z",
-      "timingMs": 2084
+      "fetchedAt": "2026-09-24T01:17:24.243Z",
+      "timingMs": 1734
     },
     "B0C6GK3KWB": {
       "asin": "B0C6GK3KWB",
