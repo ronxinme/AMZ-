@@ -222,5 +222,13 @@
     "shop": "TOPdicoration",
     "type": "own",
     "parentId": ""
+  },
+  {
+    "id": "own_B0TEST0001",
+    "asin": "B0TEST0001",
+    "name": "__临时__",
+    "shop": "TEST",
+    "type": "own",
+    "parentId": ""
   }
 ]
