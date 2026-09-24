@@ -15,7 +15,7 @@
     </div>
     <div class="topbar-right">
       <span id="runInfo" class="server-date"></span>
-      <a id="btnActions" class="btn-ghost" href="https://github.com/你的用户名/你的仓库名/actions" target="_blank" rel="noopener">运行记录</a>
+      <a id="btnActions" class="btn-ghost" href="https://github.com/" target="_blank" rel="noopener">运行记录</a>
       <button id="btnExportCsv" class="btn-collect" title="导出当天数据为 CSV">↓ 导出当天 CSV</button>
     </div>
   </div>
@@ -48,7 +48,7 @@
   <nav class="tabs">
     <button class="tab active" data-tab="today">📋 当天数据</button>
     <button class="tab" data-tab="history">📅 历史对比</button>
-    <button class="tab" data-tab="products">🗂 商品清单</button>
+    <button class="tab" data-tab="products">🗂 商品管理</button>
   </nav>
 
   <section id="tab-today" class="tab-panel">
@@ -86,18 +86,27 @@
     </div>
     <div class="table-wrap" id="historyTable"></div>
     <div class="legend">
-      <span class="lg lg-stock">库存 N</span>
+      <span class="lg lg-stock">仅剩 N 件 / 库存 N</span>
       <span class="lg lg-limit">限购 N（红字）</span>
-      <span class="lg lg-noqty">有货，数量未显示</span>
-      <span class="lg lg-na">不可购买 / 缺货</span>
-      <span class="lg lg-unknown">库存未获取</span>
+      <span class="lg lg-noqty">有货（数量未显示）</span>
+      <span class="lg lg-na">缺货</span>
+      <span class="lg lg-unknown">未知（未获取）</span>
+      <span class="lg lg-void">—（当天无记录）</span>
+      <span class="lg lg-fail">✕（当天采集失败，悬浮看原因）</span>
     </div>
   </section>
 
   <section id="tab-products" class="tab-panel hidden">
     <div class="filter-row">
-      <span class="filter-label">商品清单由仓库的 <span class="mono">data/products.json</span> 维护：在 GitHub 上编辑该文件即可增删改 ASIN，次日自动生效。</span>
+      <span class="filter-label">在这里直接增删改商品，点「保存」会写入仓库的 <span class="mono">data/products.json</span>，下一次采集自动生效。</span>
+      <span class="spacer"></span>
+      <button id="btnReloadProducts" class="btn-mini">↻ 从仓库重新读取</button>
+      <button id="btnAddProduct" class="btn-primary">＋ 新增商品</button>
     </div>
+
+    <div id="ghTokenBox" class="gh-box"></div>
+    <p id="ghMsg" class="gh-msg"></p>
+
     <div class="table-wrap" id="productsTable"></div>
   </section>
 
@@ -106,6 +115,45 @@
     每天定时由 GitHub Actions 自动采集（免费额度内）
   </footer>
 </main>
+
+<div id="prodMask" class="modal-mask hidden">
+  <div class="modal">
+    <h3 id="prodModalTitle">新增商品</h3>
+    <div class="form-grid">
+      <label>ASIN（10 位）
+        <input id="fAsin" maxlength="10" placeholder="B0XXXXXXXX" autocomplete="off" spellcheck="false">
+      </label>
+      <label>类型
+        <select id="fType">
+          <option value="own">自有商品</option>
+          <option value="compete">竞品</option>
+        </select>
+      </label>
+      <label id="wrapParent" class="hidden">关联自有商品
+        <select id="fParent"></select>
+      </label>
+      <label>店铺（选填）
+        <input id="fShop" placeholder="例如 TOPdicoration" autocomplete="off">
+      </label>
+      <label class="col-2">显示名称（选填，留空则在采集时自动抓取亚马逊标题）
+        <input id="fName" placeholder="例如 505黑-4pcs" autocomplete="off">
+      </label>
+      <label>最低预期价 USD（选填）
+        <input id="fMin" type="number" step="0.01" min="0" placeholder="低于此价会标「价格异常」">
+      </label>
+      <label>最高预期价 USD（选填）
+        <input id="fMax" type="number" step="0.01" min="0" placeholder="高于此价会标「价格异常」">
+      </label>
+    </div>
+    <label class="chk"><input type="checkbox" id="fDispatch" checked> 保存后立即在云端采集一次（后台跑，约 3–5 分钟，不用等）</label>
+    <p class="err" id="prodErr"></p>
+    <div class="modal-actions">
+      <button class="btn-mini" id="btnProdCancel">取消</button>
+      <button class="btn-primary" id="btnProdSave">保存到仓库</button>
+    </div>
+  </div>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>
