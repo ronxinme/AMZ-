@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: 拉取仓库
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # 需要完整历史，下面的 pull --rebase 才不会出错
 
       - name: 安装 Node
         uses: actions/setup-node@v4
@@ -60,6 +62,8 @@ jobs:
           if git diff --quiet && git diff --staged --quiet; then
             echo "本次无数据变化，跳过提交"
           else
-            git commit -m "每日采集更新 $(date -u +'%Y-%m-%d')"
+            git commit -m "每日采集更新 $(date -u +'%Y-%m-%dT%H:%MZ')"
+            # 采集期间你可能在网页上改过商品清单，先 rebase 再推，避免冲突丢数据
+            git pull --rebase --autostash origin main
             git push
           fi
