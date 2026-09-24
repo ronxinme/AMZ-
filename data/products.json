@@ -222,5 +222,15 @@
     "shop": "TOPdicoration",
     "type": "own",
     "parentId": ""
+  },
+  {
+    "id": "own_B0TEST0001",
+    "asin": "B0TEST0001",
+    "name": "__CDP临时测试商品__",
+    "shop": "TEST",
+    "type": "own",
+    "parentId": "",
+    "priceMin": 1,
+    "priceMax": 9999
   }
 ]
