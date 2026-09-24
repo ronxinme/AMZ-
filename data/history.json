@@ -147,7 +147,7 @@
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 78364,
+        "rank": 81320,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -160,8 +160,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:32:06.308Z",
-      "timingMs": 2132
+      "fetchedAt": "2026-09-24T05:39:21.256Z",
+      "timingMs": 2160
     },
     "B0C9TCZ7WC": {
       "asin": "B0C9TCZ7WC",
@@ -181,7 +181,7 @@
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 69409,
+        "rank": 70625,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -194,8 +194,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:32:16.251Z",
-      "timingMs": 1940
+      "fetchedAt": "2026-09-24T05:39:31.270Z",
+      "timingMs": 2012
     },
     "B09MYYVC3H": {
       "asin": "B09MYYVC3H",
@@ -211,11 +211,11 @@
       "rating": 4.4,
       "reviews": 70,
       "bsrSmall": {
-        "rank": 53,
+        "rank": 51,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 194550,
+        "rank": 193615,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -228,8 +228,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:32:26.209Z",
-      "timingMs": 1953
+      "fetchedAt": "2026-09-24T05:39:41.183Z",
+      "timingMs": 1908
     },
     "B0DR8RDRFM": {
       "asin": "B0DR8RDRFM",
@@ -262,8 +262,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:32:35.937Z",
-      "timingMs": 1724
+      "fetchedAt": "2026-09-24T05:39:51.088Z",
+      "timingMs": 1900
     },
     "B0C6GK3KWB": {
       "asin": "B0C6GK3KWB",
@@ -279,11 +279,11 @@
       "rating": 5,
       "reviews": 1,
       "bsrSmall": {
-        "rank": 485,
+        "rank": 476,
         "label": "Fixturing Clamps"
       },
       "bsrLarge": {
-        "rank": 617739,
+        "rank": 608249,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -296,8 +296,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:32:45.680Z",
-      "timingMs": 1740
+      "fetchedAt": "2026-09-24T05:40:00.923Z",
+      "timingMs": 1830
     },
     "B09F358TBV": {
       "asin": "B09F358TBV",
@@ -330,8 +330,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:32:55.421Z",
-      "timingMs": 1736
+      "fetchedAt": "2026-09-24T05:40:10.675Z",
+      "timingMs": 1752
     },
     "B0F9WLV5CY": {
       "asin": "B0F9WLV5CY",
@@ -364,8 +364,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:33:05.125Z",
-      "timingMs": 1702
+      "fetchedAt": "2026-09-24T05:40:20.418Z",
+      "timingMs": 1739
     },
     "B09PTSHFZZ": {
       "asin": "B09PTSHFZZ",
@@ -381,11 +381,11 @@
       "rating": 4.4,
       "reviews": 73,
       "bsrSmall": {
-        "rank": 633,
+        "rank": 578,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 393380,
+        "rank": 352466,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -398,8 +398,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:33:14.844Z",
-      "timingMs": 1714
+      "fetchedAt": "2026-09-24T05:40:30.201Z",
+      "timingMs": 1778
     },
     "B0CHR9SZ8B": {
       "asin": "B0CHR9SZ8B",
@@ -419,7 +419,7 @@
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 300809,
+        "rank": 305299,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -432,8 +432,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:33:24.673Z",
-      "timingMs": 1825
+      "fetchedAt": "2026-09-24T05:40:40.102Z",
+      "timingMs": 1897
     },
     "B07DDFMLG1": {
       "asin": "B07DDFMLG1",
@@ -449,11 +449,11 @@
       "rating": 4.5,
       "reviews": 162,
       "bsrSmall": {
-        "rank": 178,
+        "rank": 171,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 573864,
+        "rank": 561897,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -466,8 +466,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:33:34.475Z",
-      "timingMs": 1797
+      "fetchedAt": "2026-09-24T05:40:50.042Z",
+      "timingMs": 1935
     },
     "B0CCRTKXXQ": {
       "asin": "B0CCRTKXXQ",
@@ -483,11 +483,11 @@
       "rating": 4,
       "reviews": 1,
       "bsrSmall": {
-        "rank": 2390,
+        "rank": 2422,
         "label": "Hardware Brackets"
       },
       "bsrLarge": {
-        "rank": 210764,
+        "rank": 214935,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -500,8 +500,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:33:44.215Z",
-      "timingMs": 1736
+      "fetchedAt": "2026-09-24T05:40:59.857Z",
+      "timingMs": 1810
     },
     "B0CD8B2D38": {
       "asin": "B0CD8B2D38",
@@ -534,8 +534,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:33:54.157Z",
-      "timingMs": 1941
+      "fetchedAt": "2026-09-24T05:41:09.824Z",
+      "timingMs": 1962
     },
     "B0CN71KT1G": {
       "asin": "B0CN71KT1G",
@@ -551,11 +551,11 @@
       "rating": 4.4,
       "reviews": 41,
       "bsrSmall": {
-        "rank": 12,
+        "rank": 13,
         "label": "Fixturing Clamps"
       },
       "bsrLarge": {
-        "rank": 53655,
+        "rank": 54908,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -568,8 +568,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:34:03.990Z",
-      "timingMs": 1828
+      "fetchedAt": "2026-09-24T05:41:19.622Z",
+      "timingMs": 1793
     },
     "B0C743SY46": {
       "asin": "B0C743SY46",
@@ -585,11 +585,11 @@
       "rating": 5,
       "reviews": 2,
       "bsrSmall": {
-        "rank": 129,
+        "rank": 132,
         "label": "Fixturing Clamps"
       },
       "bsrLarge": {
-        "rank": 193897,
+        "rank": 200581,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -602,8 +602,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:34:13.717Z",
-      "timingMs": 1727
+      "fetchedAt": "2026-09-24T05:41:29.328Z",
+      "timingMs": 1705
     },
     "B07L8LDSQD": {
       "asin": "B07L8LDSQD",
@@ -619,11 +619,11 @@
       "rating": 4.4,
       "reviews": 31,
       "bsrSmall": {
-        "rank": 226,
+        "rank": 221,
         "label": "Standoffs"
       },
       "bsrLarge": {
-        "rank": 472888,
+        "rank": 457315,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -636,8 +636,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:34:23.467Z",
-      "timingMs": 1746
+      "fetchedAt": "2026-09-24T05:41:39.137Z",
+      "timingMs": 1805
     },
     "B099WTYMM6": {
       "asin": "B099WTYMM6",
@@ -653,11 +653,11 @@
       "rating": 4.4,
       "reviews": 43,
       "bsrSmall": {
-        "rank": 97,
+        "rank": 88,
         "label": "Standoffs"
       },
       "bsrLarge": {
-        "rank": 207329,
+        "rank": 181329,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -670,8 +670,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:34:33.369Z",
-      "timingMs": 1899
+      "fetchedAt": "2026-09-24T05:41:49.012Z",
+      "timingMs": 1871
     },
     "B0CJ8MH322": {
       "asin": "B0CJ8MH322",
@@ -687,11 +687,11 @@
       "rating": 4.7,
       "reviews": 9,
       "bsrSmall": {
-        "rank": 833,
+        "rank": 835,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 516485,
+        "rank": 518022,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -704,8 +704,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:34:43.268Z",
-      "timingMs": 1895
+      "fetchedAt": "2026-09-24T05:41:58.786Z",
+      "timingMs": 1769
     },
     "B0CBKGVZSW": {
       "asin": "B0CBKGVZSW",
@@ -738,8 +738,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:34:53.123Z",
-      "timingMs": 1851
+      "fetchedAt": "2026-09-24T05:42:08.615Z",
+      "timingMs": 1829
     },
     "B0C558XRTP": {
       "asin": "B0C558XRTP",
@@ -755,11 +755,11 @@
       "rating": 4.8,
       "reviews": 6,
       "bsrSmall": {
-        "rank": 409,
+        "rank": 433,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 248335,
+        "rank": 259794,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -772,8 +772,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:35:02.908Z",
-      "timingMs": 1784
+      "fetchedAt": "2026-09-24T05:42:18.478Z",
+      "timingMs": 1859
     },
     "B08FB3FLF2": {
       "asin": "B08FB3FLF2",
@@ -789,11 +789,11 @@
       "rating": 5,
       "reviews": 5,
       "bsrSmall": {
-        "rank": 234,
+        "rank": 236,
         "label": "Decking Posts"
       },
       "bsrLarge": {
-        "rank": 1289373,
+        "rank": 1288165,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -806,8 +806,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:35:12.801Z",
-      "timingMs": 1889
+      "fetchedAt": "2026-09-24T05:42:28.218Z",
+      "timingMs": 1736
     },
     "B08FB3987P": {
       "asin": "B08FB3987P",
@@ -840,8 +840,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:35:22.602Z",
-      "timingMs": 1797
+      "fetchedAt": "2026-09-24T05:42:38.081Z",
+      "timingMs": 1859
     },
     "B0C8B1XNTD": {
       "asin": "B0C8B1XNTD",
@@ -857,11 +857,11 @@
       "rating": 4.4,
       "reviews": null,
       "bsrSmall": {
-        "rank": 564,
+        "rank": 575,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 343200,
+        "rank": 351453,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -874,8 +874,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:35:32.289Z",
-      "timingMs": 1683
+      "fetchedAt": "2026-09-24T05:42:47.770Z",
+      "timingMs": 1687
     },
     "B0HJQQ59K7": {
       "asin": "B0HJQQ59K7",
@@ -888,7 +888,7 @@
       "unitPrice": null,
       "unitLabel": null,
       "savingsPct": null,
-      "rating": null,
+      "rating": 5,
       "reviews": null,
       "bsrSmall": null,
       "bsrLarge": null,
@@ -902,8 +902,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:35:41.738Z",
-      "timingMs": 1445
+      "fetchedAt": "2026-09-24T05:42:57.247Z",
+      "timingMs": 1472
     },
     "B0HHXD8SHF": {
       "asin": "B0HHXD8SHF",
@@ -916,7 +916,7 @@
       "unitPrice": null,
       "unitLabel": null,
       "savingsPct": null,
-      "rating": null,
+      "rating": 5,
       "reviews": null,
       "bsrSmall": null,
       "bsrLarge": null,
@@ -930,8 +930,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:35:51.276Z",
-      "timingMs": 1534
+      "fetchedAt": "2026-09-24T05:43:06.890Z",
+      "timingMs": 1641
     },
     "B0HFWLCSCS": {
       "asin": "B0HFWLCSCS",
@@ -944,7 +944,7 @@
       "unitPrice": null,
       "unitLabel": null,
       "savingsPct": null,
-      "rating": null,
+      "rating": 5,
       "reviews": null,
       "bsrSmall": null,
       "bsrLarge": null,
@@ -958,8 +958,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:36:00.995Z",
-      "timingMs": 1715
+      "fetchedAt": "2026-09-24T05:43:16.737Z",
+      "timingMs": 1843
     },
     "B0H2PQCCVB": {
       "asin": "B0H2PQCCVB",
@@ -975,11 +975,11 @@
       "rating": 4.7,
       "reviews": null,
       "bsrSmall": {
-        "rank": 1176,
+        "rank": 1205,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 752993,
+        "rank": 764304,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -992,8 +992,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:36:10.667Z",
-      "timingMs": 1668
+      "fetchedAt": "2026-09-24T05:43:26.639Z",
+      "timingMs": 1898
     },
     "B0GZVRY1N6": {
       "asin": "B0GZVRY1N6",
@@ -1020,8 +1020,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:36:20.316Z",
-      "timingMs": 1644
+      "fetchedAt": "2026-09-24T05:43:36.266Z",
+      "timingMs": 1622
     },
     "B0CJ6HD4R1": {
       "asin": "B0CJ6HD4R1",
@@ -1037,11 +1037,11 @@
       "rating": 4.7,
       "reviews": 9,
       "bsrSmall": {
-        "rank": 833,
+        "rank": 835,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 516485,
+        "rank": 518022,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -1054,8 +1054,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T03:36:29.913Z",
-      "timingMs": 1593
+      "fetchedAt": "2026-09-24T05:43:45.923Z",
+      "timingMs": 1654
     }
   }
 }
