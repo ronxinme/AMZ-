@@ -162,8 +162,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:04:24.709Z",
-      "timingMs": 1764
+      "fetchedAt": "2026-09-24T07:54:27.180Z",
+      "timingMs": 1973
     },
     "B0C9TCZ7WC": {
       "asin": "B0C9TCZ7WC",
@@ -198,8 +198,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:04:37.633Z",
-      "timingMs": 1823
+      "fetchedAt": "2026-09-24T07:54:37.125Z",
+      "timingMs": 1943
     },
     "B09MYYVC3H": {
       "asin": "B09MYYVC3H",
@@ -234,8 +234,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:04:50.399Z",
-      "timingMs": 1673
+      "fetchedAt": "2026-09-24T07:54:46.949Z",
+      "timingMs": 1823
     },
     "B0DR8RDRFM": {
       "asin": "B0DR8RDRFM",
@@ -251,11 +251,11 @@
       "rating": 3.9,
       "reviews": 23,
       "bsrSmall": {
-        "rank": 215,
+        "rank": 208,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 689609,
+        "rank": 670277,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -270,8 +270,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:05:03.030Z",
-      "timingMs": 1530
+      "fetchedAt": "2026-09-24T07:54:56.615Z",
+      "timingMs": 1662
     },
     "B0C6GK3KWB": {
       "asin": "B0C6GK3KWB",
@@ -306,8 +306,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:05:15.671Z",
-      "timingMs": 1540
+      "fetchedAt": "2026-09-24T07:55:06.250Z",
+      "timingMs": 1630
     },
     "B09F358TBV": {
       "asin": "B09F358TBV",
@@ -342,8 +342,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:05:28.360Z",
-      "timingMs": 1532
+      "fetchedAt": "2026-09-24T07:55:15.924Z",
+      "timingMs": 1669
     },
     "B0F9WLV5CY": {
       "asin": "B0F9WLV5CY",
@@ -359,11 +359,11 @@
       "rating": 4.5,
       "reviews": 2,
       "bsrSmall": {
-        "rank": 64,
+        "rank": 65,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 220458,
+        "rank": 221387,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -378,8 +378,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:05:41.047Z",
-      "timingMs": 1592
+      "fetchedAt": "2026-09-24T07:55:25.559Z",
+      "timingMs": 1631
     },
     "B09PTSHFZZ": {
       "asin": "B09PTSHFZZ",
@@ -414,8 +414,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:05:53.831Z",
-      "timingMs": 1531
+      "fetchedAt": "2026-09-24T07:55:35.285Z",
+      "timingMs": 1722
     },
     "B0CHR9SZ8B": {
       "asin": "B0CHR9SZ8B",
@@ -450,8 +450,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:06:06.534Z",
-      "timingMs": 1619
+      "fetchedAt": "2026-09-24T07:55:45.052Z",
+      "timingMs": 1763
     },
     "B07DDFMLG1": {
       "asin": "B07DDFMLG1",
@@ -486,8 +486,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:06:19.194Z",
-      "timingMs": 1574
+      "fetchedAt": "2026-09-24T07:55:54.736Z",
+      "timingMs": 1679
     },
     "B0CCRTKXXQ": {
       "asin": "B0CCRTKXXQ",
@@ -522,8 +522,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:06:31.833Z",
-      "timingMs": 1549
+      "fetchedAt": "2026-09-24T07:56:04.413Z",
+      "timingMs": 1673
     },
     "B0CD8B2D38": {
       "asin": "B0CD8B2D38",
@@ -558,8 +558,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:06:44.730Z",
-      "timingMs": 1811
+      "fetchedAt": "2026-09-24T07:56:14.316Z",
+      "timingMs": 1899
     },
     "B0CN71KT1G": {
       "asin": "B0CN71KT1G",
@@ -594,8 +594,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:06:57.550Z",
-      "timingMs": 1655
+      "fetchedAt": "2026-09-24T07:56:24.087Z",
+      "timingMs": 1766
     },
     "B0C743SY46": {
       "asin": "B0C743SY46",
@@ -632,8 +632,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:07:10.211Z",
-      "timingMs": 1570
+      "fetchedAt": "2026-09-24T07:56:33.737Z",
+      "timingMs": 1650
     },
     "B07L8LDSQD": {
       "asin": "B07L8LDSQD",
@@ -668,8 +668,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:07:22.861Z",
-      "timingMs": 1554
+      "fetchedAt": "2026-09-24T07:56:43.390Z",
+      "timingMs": 1648
     },
     "B099WTYMM6": {
       "asin": "B099WTYMM6",
@@ -704,8 +704,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:07:35.421Z",
-      "timingMs": 1458
+      "fetchedAt": "2026-09-24T07:56:53.002Z",
+      "timingMs": 1607
     },
     "B0CJ8MH322": {
       "asin": "B0CJ8MH322",
@@ -742,8 +742,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:07:48.005Z",
-      "timingMs": 1482
+      "fetchedAt": "2026-09-24T07:57:02.621Z",
+      "timingMs": 1614
     },
     "B0CBKGVZSW": {
       "asin": "B0CBKGVZSW",
@@ -780,8 +780,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:08:00.756Z",
-      "timingMs": 1630
+      "fetchedAt": "2026-09-24T07:57:12.390Z",
+      "timingMs": 1765
     },
     "B0C558XRTP": {
       "asin": "B0C558XRTP",
@@ -816,8 +816,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:08:13.361Z",
-      "timingMs": 1504
+      "fetchedAt": "2026-09-24T07:57:22.030Z",
+      "timingMs": 1636
     },
     "B08FB3FLF2": {
       "asin": "B08FB3FLF2",
@@ -854,8 +854,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:08:25.946Z",
-      "timingMs": 1495
+      "fetchedAt": "2026-09-24T07:57:31.686Z",
+      "timingMs": 1651
     },
     "B08FB3987P": {
       "asin": "B08FB3987P",
@@ -890,8 +890,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:08:38.809Z",
-      "timingMs": 1767
+      "fetchedAt": "2026-09-24T07:57:41.310Z",
+      "timingMs": 1620
     },
     "B0C8B1XNTD": {
       "asin": "B0C8B1XNTD",
@@ -926,8 +926,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:08:51.368Z",
-      "timingMs": 1437
+      "fetchedAt": "2026-09-24T07:57:50.956Z",
+      "timingMs": 1642
     },
     "B0HJQQ59K7": {
       "asin": "B0HJQQ59K7",
@@ -956,8 +956,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:09:03.778Z",
-      "timingMs": 1322
+      "fetchedAt": "2026-09-24T07:58:00.339Z",
+      "timingMs": 1379
     },
     "B0HHXD8SHF": {
       "asin": "B0HHXD8SHF",
@@ -986,8 +986,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:09:16.229Z",
-      "timingMs": 1360
+      "fetchedAt": "2026-09-24T07:58:09.896Z",
+      "timingMs": 1553
     },
     "B0HFWLCSCS": {
       "asin": "B0HFWLCSCS",
@@ -1016,8 +1016,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:09:28.858Z",
-      "timingMs": 1539
+      "fetchedAt": "2026-09-24T07:58:19.765Z",
+      "timingMs": 1865
     },
     "B0H2PQCCVB": {
       "asin": "B0H2PQCCVB",
@@ -1030,7 +1030,7 @@
       "unitPrice": null,
       "unitLabel": null,
       "savingsPct": null,
-      "rating": 4.7,
+      "rating": 4.5,
       "reviews": null,
       "bsrSmall": {
         "rank": 1205,
@@ -1052,8 +1052,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:09:41.475Z",
-      "timingMs": 1510
+      "fetchedAt": "2026-09-24T07:58:29.501Z",
+      "timingMs": 1732
     },
     "B0GZVRY1N6": {
       "asin": "B0GZVRY1N6",
@@ -1082,19 +1082,19 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:09:54.248Z",
-      "timingMs": 1628
+      "fetchedAt": "2026-09-24T07:58:39.119Z",
+      "timingMs": 1613
     },
     "B0CJ6HD4R1": {
       "asin": "B0CJ6HD4R1",
       "realAsin": "B0CJ6FTGMK",
-      "title": "42-Inch Glass Railing Corner Post, 50mm, Black (LIUCHONGYANG99)",
-      "price": 59.99,
+      "title": "2-Pack 42-Inch Glass Railing End Posts, 50mm, Satin (LIUCHONGYANG99)",
+      "price": 82.99,
       "currency": "USD",
       "priceSource": "buybox_json",
       "listPrice": null,
-      "unitPrice": null,
-      "unitLabel": null,
+      "unitPrice": 41.5,
+      "unitLabel": "count",
       "savingsPct": null,
       "rating": 4.7,
       "reviews": 9,
@@ -1108,20 +1108,20 @@
       },
       "stock": {
         "kind": "stock",
-        "qty": 12,
+        "qty": 5,
         "source": "amazon_page",
         "note": "亚马逊页面原话「Only N left in stock」"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
-      "availabilityText": "Only 12 left in stock - order soon.",
-      "image": "https://m.media-amazon.com/images/I/71IHqwQDRGL._SL1254_.jpg",
+      "availabilityText": "Only 5 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/7182TZEJbZL._SL1254_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T06:10:06.829Z",
-      "timingMs": 1490
+      "fetchedAt": "2026-09-24T07:58:48.750Z",
+      "timingMs": 1627
     }
   }
 }
