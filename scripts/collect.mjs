@@ -225,6 +225,82 @@ function decodeEntities(s) {
     .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&#(\d+);/g, (m, d) => String.fromCharCode(+d));
 }
 
+function moneyOf(s) {
+  const n = parseFloat(String(s == null ? '' : s).replace(/[^\d.]/g, ''));
+  return isFinite(n) ? n : null;
+}
+
+/*
+ * 售价提取：多级回退，并且**显式避开「单价 / 每件价」陷阱**。
+ *
+ * 背景（2026-09 实测 B09PTH84M7，4 件装真价 $37.99）：
+ *   价格主区块 #corePriceDisplay_desktop_feature_div 里，priceToPay 的
+ *   <span class="a-offscreen"></span> 是**空的**，紧随其后的第一个非空
+ *   a-offscreen 其实是单价 apex-priceperunit-value（$9.50 = 37.99/4）。
+ *   早期版本「取区块里第一个非空 a-offscreen」会把 $37.99 抓成 $9.50。
+ *   因此这里只认「价签型」来源，绝不取裸 a-offscreen。
+ */
+function extractPrice(html) {
+  const res = { price: null, src: null, unitPrice: null, unitLabel: null, savingsPct: null };
+
+  // ① 买箱价格 JSON（Twister 数据块）—— 只含当前选中变体的成交价，最权威
+  let m = html.match(/twister-plus-buying-options-price-data[^>]*>\s*(\{[\s\S]{0,8000}?\})\s*<\//);
+  if (m) {
+    try {
+      const j = JSON.parse(m[1]);
+      const key = Object.keys(j).find(k => /buybox_group/i.test(k)) || Object.keys(j)[0];
+      const arr = j[key];
+      const first = Array.isArray(arr) ? arr[0] : arr;
+      if (first) {
+        if (first.priceAmount != null && isFinite(Number(first.priceAmount))) { res.price = Number(first.priceAmount); res.src = 'buybox_json'; }
+        else if (first.displayPrice) { res.price = moneyOf(first.displayPrice); res.src = 'buybox_json'; }
+      }
+    } catch (e) {}
+  }
+
+  // ② 加购表单里的「顾客实际支付价」
+  if (res.price == null) {
+    m = html.match(/customerVisiblePrice\]\[amount\]"\s+value="([\d.]+)"/);
+    if (m) { res.price = parseFloat(m[1]); res.src = 'cart_form'; }
+  }
+
+  // ③ 价格主区块：只认价签（priceToPay / accessibility label）
+  const idx = html.indexOf('corePriceDisplay_desktop_feature_div');
+  const seg = idx >= 0 ? html.slice(idx, idx + 16000) : html;
+  if (res.price == null) {
+    m = seg.match(/apex-pricetopay-accessibility-label[^>]*>\s*(?:US)?\s*\$([\d,]+\.\d{2})/);
+    if (m) { res.price = moneyOf(m[1]); res.src = 'apex_pricetopay_label'; }
+  }
+  if (res.price == null) {
+    m = seg.match(/class="a-price[^"]*priceToPay[^"]*"[\s\S]{0,1200}?class="a-price-whole">\s*([\d,]+)[\s\S]{0,300}?class="a-price-fraction">\s*(\d{1,2})/);
+    if (m) { res.price = moneyOf(m[1] + '.' + String(m[2]).padEnd(2, '0')); res.src = 'apex_pricetopay_value'; }
+  }
+
+  // ④ 全局 JSON 兜底
+  if (res.price == null) {
+    m = html.match(/"priceAmount"\s*:\s*([\d,]+\.\d{2})/);
+    if (m) { res.price = moneyOf(m[1]); res.src = 'json_priceAmount'; }
+  }
+  if (res.price == null) {
+    m = html.match(/"displayPrice"\s*:\s*"(?:US)?\s*\$([\d,]+\.\d{2})"/);
+    if (m) { res.price = moneyOf(m[1]); res.src = 'json_displayPrice'; }
+  }
+
+  // 单价（每件 / 每盎司）：只作参考展示，绝不当作售价
+  m = html.match(/apex-priceperunit-value[\s\S]{0,300}?a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})/);
+  if (m) {
+    res.unitPrice = moneyOf(m[1]);
+    const l = html.match(/pricePerUnit">\s*\([\s\S]{0,300}?<\/span>\s*\/\s*([^)<]{1,24})\)/);
+    res.unitLabel = l ? l[1].trim() : 'unit';
+  }
+
+  // 折扣百分比（如 -5%）
+  m = html.match(/apex-savings-percentage">\s*-?\s*([\d.]+)\s*%/);
+  if (m) res.savingsPct = Number(m[1]);
+
+  return res;
+}
+
 function parseAmazon(html, asin) {
   const out = { ok: true, price: null, currency: null, rating: null, reviews: null, bsr: [], bsrSmall: null, bsrLarge: null, stock: { kind: 'unknown' }, purchaseLimit: null, title: null, image: null, realAsin: asin, captcha: false };
   if (/Enter the characters you see below|api-services-support@amazon\.com|Robot Check/i.test(html)) {
@@ -237,29 +313,21 @@ function parseAmazon(html, asin) {
   m = html.match(/"hiRes"\s*:\s*"(https:[^"]+\.(?:jpg|png))"/i) || html.match(/id="landingImage"[^>]*data-old-hires="(https:[^"]+)"/);
   if (m) out.image = m[1];
 
-  let priceStr = null, priceSrc = null;
-  const apexIdx = html.indexOf('corePriceDisplay_desktop_feature_div');
-  if (apexIdx >= 0) {
-    const seg = html.slice(apexIdx, apexIdx + 12000);
-    const mm = seg.match(/class="a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})\s*</);
-    if (mm) { priceStr = mm[1]; priceSrc = 'apex_offscreen'; }
-  }
-  if (priceStr == null) {
-    const ctx = (html.match(/api_buybox_group_1[\s\S]{0,900}/) || [])[0] || '';
-    const mm = ctx.match(/"displayPrice"\s*:\s*"(?:US)?\$([\d,]+\.\d{2})"/) || ctx.match(/"priceAmount"\s*:\s*([\d,]+\.\d{2})/);
-    if (mm) { priceStr = mm[1]; priceSrc = 'buybox_json'; }
-  }
-  if (priceStr == null) {
-    const mm = html.match(/"displayPrice"\s*:\s*"(?:US)?\$([\d,]+\.\d{2})"/);
-    if (mm) { priceStr = mm[1]; priceSrc = 'buybox_json'; }
-  }
-  if (priceStr != null) { out.price = parseFloat(priceStr.replace(/,/g, '')); out.currency = 'USD'; out.priceSource = priceSrc; }
+  // 售价：多级回退 + 显式避开「单价 / 每件价」陷阱（详见 extractPrice 注释）
+  const pr = extractPrice(html);
+  out.price = pr.price;
+  out.priceSource = pr.src;
+  out.unitPrice = pr.unitPrice;
+  out.unitLabel = pr.unitLabel;
+  out.savingsPct = pr.savingsPct;
+  if (out.price != null) out.currency = 'USD';
+
   // 划线价（List Price）用于对照当前售价是否处于促销
-  const lp = html.match(/"basisPrice"\s*:\s*"?(?:US)?\$([\d,]+\.\d{2})/);
-  if (lp || html.match(/class="a-text-price"[\s\S]{0,200}?a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})/)) {
-    const mm2 = lp || html.match(/class="a-text-price"[\s\S]{0,200}?a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})/);
-    out.listPrice = parseFloat(String(mm2[1]).replace(/,/g, ''));
-  }
+  let lp = html.match(/apex-basisprice-offscreen-label[^>]*>\s*List Price:\s*(?:US)?\$([\d,]+\.\d{2})/);
+  if (!lp) lp = html.match(/"basisPrice"\s*:\s*"?(?:US)?\$([\d,]+\.\d{2})/);
+  if (!lp) lp = html.match(/apex-basisprice-value[\s\S]{0,300}?a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})/);
+  if (!lp) lp = html.match(/class="a-text-price"[\s\S]{0,300}?a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})/);
+  if (lp) out.listPrice = moneyOf(lp[1]);
 
   m = html.match(/id="acrPopover"[^>]*title="([\d.]+) out of 5 stars"/) || html.match(/([\d.]+) out of 5 stars/);
   if (m) out.rating = parseFloat(m[1]);
@@ -311,6 +379,7 @@ const date = todayStr();
 if (!history[date]) history[date] = {};
 
 let list = products;
+let productsMetaDirty = false;   // 采集过程中若有自动补全的名称，需要回写 products.json
 if (ONLY_ASIN) list = list.filter(p => p.asin.toUpperCase() === ONLY_ASIN.toUpperCase());
 if (LIMIT) list = list.slice(0, LIMIT);
 
@@ -341,6 +410,8 @@ for (const p of list) {
         asin: p.asin, realAsin: parsed.realAsin, title: parsed.title,
         price: parsed.price, currency: parsed.currency,
         priceSource: parsed.priceSource || null, listPrice: parsed.listPrice ?? null,
+        unitPrice: parsed.unitPrice ?? null, unitLabel: parsed.unitLabel || null,
+        savingsPct: parsed.savingsPct ?? null,
         rating: parsed.rating, reviews: parsed.reviews,
         bsrSmall: parsed.bsrSmall, bsrLarge: parsed.bsrLarge,
         stock: parsed.stock, purchaseLimit: parsed.purchaseLimit, boughtPastMonth: parsed.boughtPastMonth ?? null,
@@ -382,11 +453,15 @@ for (const p of list) {
     }
   }
 
-  if (rec.ok) { ok++; if (p.name && rec.title && !rec.title.includes('（')) p.latestTitle = rec.title; }
-  else fail++;
+  if (rec.ok) {
+    ok++;
+    if (rec.title && !rec.title.includes('（')) p.latestTitle = rec.title;
+    // 商品名称为空时，用抓到的亚马逊标题自动补全（方便在网页端直接新增商品，无需手填名称）
+    if (!p.name && rec.title) { p.name = rec.title.slice(0, 80); productsMetaDirty = true; }
+  } else fail++;
   history[date][p.asin] = rec;
-  lines.push(`| ${rec.ok ? '成功' : '失败'} | ${p.asin} | ${rec.price != null ? '$' + rec.price : '—'} | ${rec.rating ?? '—'} | ${rec.reviews ?? '—'} | ${rec.bsrSmall ? '#' + rec.bsrSmall.rank : '—'} | ${rec.error || '—'} |`);
-  console.log(`  ${rec.ok ? 'OK ' : 'ERR'} ${p.asin} price=${rec.price} rating=${rec.rating} reviews=${rec.reviews} bsr=${rec.bsrSmall ? rec.bsrSmall.rank : '-'} ${rec.error || ''}`);
+  lines.push(`| ${rec.ok ? '成功' : '失败'} | ${p.asin} | ${rec.price != null ? '$' + rec.price : '—'} | ${rec.rating ?? '—'} | ${rec.reviews ?? '—'} | ${rec.bsrSmall ? '#' + rec.bsrSmall.rank : '—'} | ${rec.error || (rec.priceSource ? '价源:' + rec.priceSource : '—')} |`);
+  console.log(`  ${rec.ok ? 'OK ' : 'ERR'} ${p.asin} price=${rec.price} (src=${rec.priceSource || '-'}${rec.unitPrice ? ', 单价$' + rec.unitPrice + '/' + (rec.unitLabel || 'unit') : ''}) rating=${rec.rating} reviews=${rec.reviews} bsr=${rec.bsrSmall ? rec.bsrSmall.rank : '-'} ${rec.error || ''}`);
   await new Promise(s => setTimeout(s, Math.max(2000, INTERVAL_MS)));
 }
 
@@ -395,6 +470,10 @@ for (const d of Object.keys(history)) {
   if (Date.now() - new Date(d + 'T00:00:00Z').getTime() > 3650 * 86400000) delete history[d];
 }
 fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2));
+if (productsMetaDirty) {
+  fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2) + '\n');
+  console.log('已回写 products.json（补全了缺失的商品名称）');
+}
 fs.writeFileSync(SUMMARY_FILE, JSON.stringify({ lastRun: { date, finishedAt: new Date(Date.now()).toISOString(), total: list.length, ok, fail, ms: Date.now() - t0 }, historyDates: Object.keys(history).sort() }, null, 2));
 
 // 输出到 Actions 摘要面板
