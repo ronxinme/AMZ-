@@ -59,6 +59,7 @@ const fmtPrice = r => r.price != null
   : '<span class="stock-unknown">—</span>';
 const fmtRating = r => r.rating != null ? `<span class="rating">★${r.rating}</span>` : '—';
 const fmtReviews = r => r.reviews != null ? `<span class="reviews">${r.reviews}</span>` : '—';
+const fmtBought = r => r.boughtPastMonth != null ? `<span class="reviews">${r.boughtPastMonth}+</span>` : '<span class="stock-unknown">—</span>';
 const fmtBsrS = r => r.bsrSmall ? `<span class="bsr-small">#${r.bsrSmall.rank.toLocaleString()}</span> <span class="pmeta">${esc(r.bsrSmall.label)}</span>` : '<span class="stock-unknown">未获取</span>';
 const fmtBsrL = r => r.bsrLarge ? `<span class="bsr-large">#${r.bsrLarge.rank.toLocaleString()} ${esc(r.bsrLarge.label)}</span>` : '—';
 function fmtStock(r) {
@@ -143,7 +144,7 @@ function renderToday() {
   const td = todayData();
   const rows = visibleRows().filter(([p]) => statusMatch(td[p.asin]));
   let html = `<table><thead><tr>
-    <th style="min-width:270px">商品</th><th>采集售价</th><th>星级</th><th>评论数</th><th>小类 BSR</th><th>大类 BSR</th><th>库存 / 限购</th><th>状态</th><th>采集时间</th>
+    <th style="min-width:270px">商品</th><th>采集售价</th><th>星级</th><th>评论数</th><th>近月销量</th><th>小类 BSR</th><th>大类 BSR</th><th>库存 / 限购</th><th>状态</th><th>采集时间</th>
   </tr></thead><tbody>`;
   for (const [p, isOwn] of rows) {
     const rec = td[p.asin];
@@ -156,6 +157,7 @@ function renderToday() {
       <td class="num-cell">${fmtPrice(rec || {})}${rec && prev ? deltaHtml(rec.price, prev.price) : ''}</td>
       <td class="num-cell">${fmtRating(rec || {})}</td>
       <td class="num-cell">${fmtReviews(rec || {})}${rec && prev ? deltaHtml(rec.reviews, prev.reviews) : ''}</td>
+      <td class="num-cell">${fmtBought(rec || {})}${rec && prev ? deltaHtml(rec.boughtPastMonth, prev.boughtPastMonth) : ''}</td>
       <td class="num-cell">${fmtBsrS(rec || {})}${rec && prev && rec.bsrSmall && prev.bsrSmall ? deltaHtml(rec.bsrSmall.rank, prev.bsrSmall.rank, null, true) : ''}</td>
       <td class="num-cell">${fmtBsrL(rec || {})}</td>
       <td class="num-cell">${fmtStock(rec || {})}</td>
@@ -193,6 +195,7 @@ function metricBlock(r) {
   return `<div class="hist-block">
     <div class="metric-name">售价</div><div class="num-cell">${fmtPrice(r)}</div>
     <div class="metric-name">星级</div><div class="num-cell">${fmtRating(r)} <span class="reviews">(${r.reviews ?? '—'})</span></div>
+    <div class="metric-name">近月销量</div><div class="num-cell">${fmtBought(r)}</div>
     <div class="metric-name">小类BSR</div><div class="num-cell">${r.bsrSmall ? '#' + r.bsrSmall.rank.toLocaleString() : '<span class="stock-unknown">—</span>'}</div>
     <div class="metric-name">库存</div><div class="num-cell">${fmtStock(r)}</div>
   </div>`;
