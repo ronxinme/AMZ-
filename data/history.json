@@ -151,17 +151,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/71wtQ4XjazL._AC_SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:39:21.256Z",
-      "timingMs": 2160
+      "fetchedAt": "2026-09-24T06:04:24.709Z",
+      "timingMs": 1764
     },
     "B0C9TCZ7WC": {
       "asin": "B0C9TCZ7WC",
@@ -185,17 +187,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": 50,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/712eaVJo-ZL._AC_SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:39:31.270Z",
-      "timingMs": 2012
+      "fetchedAt": "2026-09-24T06:04:37.633Z",
+      "timingMs": 1823
     },
     "B09MYYVC3H": {
       "asin": "B09MYYVC3H",
@@ -219,17 +223,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/71+VLD2nV7L._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:39:41.183Z",
-      "timingMs": 1908
+      "fetchedAt": "2026-09-24T06:04:50.399Z",
+      "timingMs": 1673
     },
     "B0DR8RDRFM": {
       "asin": "B0DR8RDRFM",
@@ -253,17 +259,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/71u86A-GuzL._AC_SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:39:51.088Z",
-      "timingMs": 1900
+      "fetchedAt": "2026-09-24T06:05:03.030Z",
+      "timingMs": 1530
     },
     "B0C6GK3KWB": {
       "asin": "B0C6GK3KWB",
@@ -287,17 +295,19 @@
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "unknown"
+        "kind": "unavailable",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "Currently unavailable.",
       "image": "https://m.media-amazon.com/images/I/71BX86nTjFL._AC_SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:40:00.923Z",
-      "timingMs": 1830
+      "fetchedAt": "2026-09-24T06:05:15.671Z",
+      "timingMs": 1540
     },
     "B09F358TBV": {
       "asin": "B09F358TBV",
@@ -313,25 +323,27 @@
       "rating": 4.5,
       "reviews": 179,
       "bsrSmall": {
-        "rank": 55,
+        "rank": 57,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 49645,
+        "rank": 51139,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/712ueTTROdL._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:40:10.675Z",
-      "timingMs": 1752
+      "fetchedAt": "2026-09-24T06:05:28.360Z",
+      "timingMs": 1532
     },
     "B0F9WLV5CY": {
       "asin": "B0F9WLV5CY",
@@ -355,17 +367,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/71bWliuy8XL._AC_SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:40:20.418Z",
-      "timingMs": 1739
+      "fetchedAt": "2026-09-24T06:05:41.047Z",
+      "timingMs": 1592
     },
     "B09PTSHFZZ": {
       "asin": "B09PTSHFZZ",
@@ -389,17 +403,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/61lT+KR06WL._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:40:30.201Z",
-      "timingMs": 1778
+      "fetchedAt": "2026-09-24T06:05:53.831Z",
+      "timingMs": 1531
     },
     "B0CHR9SZ8B": {
       "asin": "B0CHR9SZ8B",
@@ -423,17 +439,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/61W9mhKDhCL._AC_SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:40:40.102Z",
-      "timingMs": 1897
+      "fetchedAt": "2026-09-24T06:06:06.534Z",
+      "timingMs": 1619
     },
     "B07DDFMLG1": {
       "asin": "B07DDFMLG1",
@@ -457,17 +475,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/614N8TvD2bL._AC_SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:40:50.042Z",
-      "timingMs": 1935
+      "fetchedAt": "2026-09-24T06:06:19.194Z",
+      "timingMs": 1574
     },
     "B0CCRTKXXQ": {
       "asin": "B0CCRTKXXQ",
@@ -491,17 +511,19 @@
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": null,
       "image": "https://m.media-amazon.com/images/I/51gEnANou+L._AC_SL1254_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:40:59.857Z",
-      "timingMs": 1810
+      "fetchedAt": "2026-09-24T06:06:31.833Z",
+      "timingMs": 1549
     },
     "B0CD8B2D38": {
       "asin": "B0CD8B2D38",
@@ -517,25 +539,27 @@
       "rating": 4.6,
       "reviews": 36,
       "bsrSmall": {
-        "rank": 43,
+        "rank": 45,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 50575,
+        "rank": 51352,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/716aT7Qmu4L._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:41:09.824Z",
-      "timingMs": 1962
+      "fetchedAt": "2026-09-24T06:06:44.730Z",
+      "timingMs": 1811
     },
     "B0CN71KT1G": {
       "asin": "B0CN71KT1G",
@@ -559,17 +583,19 @@
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/71EvD9c80VL._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:41:19.622Z",
-      "timingMs": 1793
+      "fetchedAt": "2026-09-24T06:06:57.550Z",
+      "timingMs": 1655
     },
     "B0C743SY46": {
       "asin": "B0C743SY46",
@@ -593,17 +619,21 @@
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "stock",
+        "qty": 17,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "Only 17 left in stock - order soon.",
       "image": "https://m.media-amazon.com/images/I/61fpxRvvoNL._AC_SL1254_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:41:29.328Z",
-      "timingMs": 1705
+      "fetchedAt": "2026-09-24T06:07:10.211Z",
+      "timingMs": 1570
     },
     "B07L8LDSQD": {
       "asin": "B07L8LDSQD",
@@ -627,17 +657,19 @@
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "unknown"
+        "kind": "no_offer",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": null,
       "image": "https://m.media-amazon.com/images/I/61CxZ8l3a8L._AC_SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:41:39.137Z",
-      "timingMs": 1805
+      "fetchedAt": "2026-09-24T06:07:22.861Z",
+      "timingMs": 1554
     },
     "B099WTYMM6": {
       "asin": "B099WTYMM6",
@@ -661,17 +693,19 @@
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "unknown"
+        "kind": "unavailable",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "Currently unavailable.",
       "image": "https://m.media-amazon.com/images/I/71W9ckJ30gL._SL1493_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:41:49.012Z",
-      "timingMs": 1871
+      "fetchedAt": "2026-09-24T06:07:35.421Z",
+      "timingMs": 1458
     },
     "B0CJ8MH322": {
       "asin": "B0CJ8MH322",
@@ -695,17 +729,21 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "stock",
+        "qty": 12,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "Only 12 left in stock - order soon.",
       "image": "https://m.media-amazon.com/images/I/71IHqwQDRGL._SL1254_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:41:58.786Z",
-      "timingMs": 1769
+      "fetchedAt": "2026-09-24T06:07:48.005Z",
+      "timingMs": 1482
     },
     "B0CBKGVZSW": {
       "asin": "B0CBKGVZSW",
@@ -721,25 +759,29 @@
       "rating": 4.4,
       "reviews": 108,
       "bsrSmall": {
-        "rank": 217,
+        "rank": 220,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 145636,
+        "rank": 147836,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "stock",
+        "qty": 4,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "Only 4 left in stock - order soon.",
       "image": "https://m.media-amazon.com/images/I/61ynjTvVcXL._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:42:08.615Z",
-      "timingMs": 1829
+      "fetchedAt": "2026-09-24T06:08:00.756Z",
+      "timingMs": 1630
     },
     "B0C558XRTP": {
       "asin": "B0C558XRTP",
@@ -763,17 +805,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/51S95elx6BL._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:42:18.478Z",
-      "timingMs": 1859
+      "fetchedAt": "2026-09-24T06:08:13.361Z",
+      "timingMs": 1504
     },
     "B08FB3FLF2": {
       "asin": "B08FB3FLF2",
@@ -797,17 +841,21 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "stock",
+        "qty": 17,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "Only 17 left in stock - order soon.",
       "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:42:28.218Z",
-      "timingMs": 1736
+      "fetchedAt": "2026-09-24T06:08:25.946Z",
+      "timingMs": 1495
     },
     "B08FB3987P": {
       "asin": "B08FB3987P",
@@ -823,25 +871,27 @@
       "rating": 4.8,
       "reviews": 10,
       "bsrSmall": {
-        "rank": 902,
+        "rank": 901,
         "label": "Decking"
       },
       "bsrLarge": {
-        "rank": 1315080,
+        "rank": 1306651,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:42:38.081Z",
-      "timingMs": 1859
+      "fetchedAt": "2026-09-24T06:08:38.809Z",
+      "timingMs": 1767
     },
     "B0C8B1XNTD": {
       "asin": "B0C8B1XNTD",
@@ -865,17 +915,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/41ZFXOLex5L._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:42:47.770Z",
-      "timingMs": 1687
+      "fetchedAt": "2026-09-24T06:08:51.368Z",
+      "timingMs": 1437
     },
     "B0HJQQ59K7": {
       "asin": "B0HJQQ59K7",
@@ -888,22 +940,24 @@
       "unitPrice": null,
       "unitLabel": null,
       "savingsPct": null,
-      "rating": 5,
+      "rating": null,
       "reviews": null,
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "unknown"
+        "kind": "unavailable",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "Currently unavailable.",
       "image": "https://m.media-amazon.com/images/I/71FMh39X81L._SL1500_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:42:57.247Z",
-      "timingMs": 1472
+      "fetchedAt": "2026-09-24T06:09:03.778Z",
+      "timingMs": 1322
     },
     "B0HHXD8SHF": {
       "asin": "B0HHXD8SHF",
@@ -916,22 +970,24 @@
       "unitPrice": null,
       "unitLabel": null,
       "savingsPct": null,
-      "rating": 5,
+      "rating": null,
       "reviews": null,
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": null,
       "image": null,
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:43:06.890Z",
-      "timingMs": 1641
+      "fetchedAt": "2026-09-24T06:09:16.229Z",
+      "timingMs": 1360
     },
     "B0HFWLCSCS": {
       "asin": "B0HFWLCSCS",
@@ -944,22 +1000,24 @@
       "unitPrice": null,
       "unitLabel": null,
       "savingsPct": null,
-      "rating": 5,
+      "rating": null,
       "reviews": null,
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": null,
       "image": "https://m.media-amazon.com/images/I/61aTGdWsCjL._SL1254_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:43:16.737Z",
-      "timingMs": 1843
+      "fetchedAt": "2026-09-24T06:09:28.858Z",
+      "timingMs": 1539
     },
     "B0H2PQCCVB": {
       "asin": "B0H2PQCCVB",
@@ -983,17 +1041,19 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/61dSmPFF8TL._SL1254_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:43:26.639Z",
-      "timingMs": 1898
+      "fetchedAt": "2026-09-24T06:09:41.475Z",
+      "timingMs": 1510
     },
     "B0GZVRY1N6": {
       "asin": "B0GZVRY1N6",
@@ -1011,17 +1071,19 @@
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/61f99o-BlZL._AC_SL1252_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:43:36.266Z",
-      "timingMs": 1622
+      "fetchedAt": "2026-09-24T06:09:54.248Z",
+      "timingMs": 1628
     },
     "B0CJ6HD4R1": {
       "asin": "B0CJ6HD4R1",
@@ -1045,17 +1107,21 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty"
+        "kind": "stock",
+        "qty": 12,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
+      "availabilityText": "Only 12 left in stock - order soon.",
       "image": "https://m.media-amazon.com/images/I/71IHqwQDRGL._SL1254_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-24T05:43:45.923Z",
-      "timingMs": 1654
+      "fetchedAt": "2026-09-24T06:10:06.829Z",
+      "timingMs": 1490
     }
   }
 }
