@@ -321,12 +321,13 @@ const lines = [];
 const BACKOFF = [3000, 9000, 18000];
 
 for (const p of list) {
-  let lastErr = null, rec = null;
+  let lastErr = null, rec = null, pageHtml = '';
   for (let attempt = 0; attempt < 3 && !rec; attempt++) {
     const ts = Date.now();
     const r = await fetchHtml(p.asin, attempt);
     const blocked = !r.ok || !r.text || /Enter the characters you see below|api-services-support@amazon\.com|Robot Check/i.test(r.text);
     if (!blocked) {
+      pageHtml = r.text || '';
       const parsed = parseAmazon(r.text, p.asin);
       rec = {
         asin: p.asin, realAsin: parsed.realAsin, title: parsed.title,
@@ -353,7 +354,7 @@ for (const p of list) {
 
   // 库存探针（匿名购物车，读完即清空）：补充在售数量 / 限购数量
   if (rec.ok && process.env.STOCK_PROBE !== '0' && ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind)) {
-    const pr = await probeStock(p.asin, 0, r.text || '');
+    const pr = await probeStock(p.asin, 0, pageHtml);
     console.log(`    [库存探针] ${p.asin} probed=${pr.probed} kind=${pr.kind || '-'} qty=${pr.qty ?? '-'} err=${pr.error || '-'}`);
     if (pr.debug) console.log(`      addLen=${pr.debug.addLen} cartLen=${pr.debug.cartLen} status=${pr.debug.cartStatus} hits=${JSON.stringify(pr.debug.hits)} qty=${JSON.stringify(pr.debug.qtySnippets)}`);
     if (pr.probed) {
