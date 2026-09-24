@@ -1,10 +1,21 @@
 /* 亚马逊每日竞品记录工具 · GitHub Pages 静态版 */
 'use strict';
 
-/* ===== 需要你改的两个地方 ===== */
+/* ===== 需要你改的地方 ===== */
 const ACCESS_CODE_SHA256 = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9'; // 默认口令 admin123，改口令见 README
-const REPO_URL = 'https://github.com/你的用户名/你的仓库名';   // 改成你的仓库地址
-/* ============================== */
+/* ========================== */
+
+/* 仓库信息自动识别：只要页面是通过 GitHub Pages 打开的，就不用手填 */
+const GH = (() => {
+  const host = location.hostname || '';
+  const seg = location.pathname.split('/').filter(Boolean);
+  const forced = new URLSearchParams(location.search).get('repo') || '';
+  let owner = '', repo = '';
+  if (/^[\w.-]+\/[\w.-]+$/.test(forced)) { const t = forced.split('/'); owner = t[0]; repo = t[1]; }
+  else if (/\.github\.io$/i.test(host)) { owner = host.split('.')[0]; repo = seg[0] || ''; }
+  return { owner, repo, branch: 'main', file: 'data/products.json', workflow: 'daily-collect.yml' };
+})();
+const REPO_URL = GH.owner && GH.repo ? `https://github.com/${GH.owner}/${GH.repo}` : 'https://github.com/';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -19,7 +30,11 @@ async function sha256(text) {
   return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+/* 本机预览（localhost）时跳过口令，方便自己检查页面 */
+const IS_LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/i.test(location.hostname);
+
 function checkGate() {
+  if (IS_LOCAL) return true;
   if (sessionStorage.getItem('tracker_ok') === '1') return true;
   $('loginMask').classList.remove('hidden');
   return false;
@@ -49,7 +64,9 @@ async function boot() {
   dates = Object.keys(historyData).sort();
   todayKey = dates.length ? dates[dates.length - 1] : new Date().toISOString().slice(0, 10);
   $('emptyTip').classList.toggle('hidden', dates.length > 0);
+  renderTokenBox();
   renderAll();
+  activateTab((location.hash || '').slice(1) || 'today');
 }
 
 /* ---------- 渲染工具 ---------- */
@@ -190,15 +207,49 @@ function renderChanges() {
     : (Object.keys(td).length ? '较上一次成功采集：本次没有检测到价格 / 评论数 / BSR 变化。' : '');
 }
 
-function metricBlock(r) {
-  if (!r) return '<div class="hist-empty">— 无记录 —</div>';
-  return `<div class="hist-block">
-    <div class="metric-name">售价</div><div class="num-cell">${fmtPrice(r)}</div>
-    <div class="metric-name">星级</div><div class="num-cell">${fmtRating(r)} <span class="reviews">(${r.reviews ?? '—'})</span></div>
-    <div class="metric-name">近月销量</div><div class="num-cell">${fmtBought(r)}</div>
-    <div class="metric-name">小类BSR</div><div class="num-cell">${r.bsrSmall ? '#' + r.bsrSmall.rank.toLocaleString() : '<span class="stock-unknown">—</span>'}</div>
-    <div class="metric-name">库存</div><div class="num-cell">${fmtStock(r)}</div>
-  </div>`;
+/* 历史表格列很窄，这里用紧凑写法 + 悬浮提示，避免折行 */
+function histStock(r) {
+  const s = r.stock || { kind: 'unknown' };
+  const manual = s.source === 'manual' ? '（手工补录）' : '';
+  switch (s.kind) {
+    case 'stock': return s.source === 'amazon_page'
+      ? `<span class="stock-qty" title="页面提示仅剩 ${s.qty} 件">仅剩 ${s.qty} 件</span>`
+      : `<span class="stock-qty" title="库存 ${s.qty}${manual}">库存 ${s.qty}</span>`;
+    case 'purchase_limit': return `<span class="stock-limit" title="限购 ${s.qty} 件${manual}">限购 ${s.qty}</span>`;
+    case 'in_stock_no_qty': return '<span class="stock-noqty" title="有货，但亚马逊未显示数量">有货</span>';
+    case 'unavailable': return '<span class="stock-na" title="不可购买 / 缺货">缺货</span>';
+    default: return '<span class="stock-unknown" title="库存未获取">未知</span>';
+  }
+}
+const histPrice = r => r.price != null
+  ? `$${r.price.toFixed(2)}${r.priceOutOfRange ? ` <span class="hist-fail" title="${esc(r.priceNote || '超出预期价格区间')}">⚠</span>` : ''}`
+  : '<span class="stock-unknown">—</span>';
+
+/* 历史对比：每个指标占一行，指标名固定在左侧，日期列只显示数值 */
+const HIST_METRICS = [
+  { key: 'price',   label: '售价',     cell: histPrice },
+  { key: 'rating',  label: '星级',     cell: r => r.rating != null ? `<span class="rating">★${r.rating}</span>` : '<span class="stock-unknown">—</span>' },
+  { key: 'reviews', label: '评论数',   cell: r => r.reviews != null ? `<span class="reviews">${r.reviews}</span>` : '<span class="stock-unknown">—</span>' },
+  { key: 'bought',  label: '近月销量', cell: r => r.boughtPastMonth != null ? `<span class="reviews" title="亚马逊「过去一个月已购买 N+」">${r.boughtPastMonth}+</span>` : '<span class="stock-unknown">—</span>' },
+  { key: 'bsr',     label: '小类BSR',  cell: r => r.bsrSmall
+      ? `<span class="bsr-small" title="${esc(r.bsrSmall.label || '')}">#${r.bsrSmall.rank.toLocaleString()}</span>`
+      : '<span class="stock-unknown">—</span>' },
+  { key: 'stock',   label: '库存',     cell: histStock }
+];
+const HIST_COL_W = 252, HIST_MET_W = 76, HIST_DATE_MIN = 140;
+
+function histCell(r, mt) {
+  if (!r) return '<span class="hist-void">—</span>';
+  if (r.ok === false) return `<span class="hist-fail" title="${esc(r.error || '采集失败')}">✕</span>`;
+  return mt.cell(r);
+}
+
+/* 量一下历史表格可用宽度，好让日期列自动撑满容器 */
+function histAvailableWidth() {
+  const el = $('historyTable');
+  let w = el ? el.clientWidth : 0;
+  if (!w) { const c = document.querySelector('.container'); w = c ? c.clientWidth - 28 : 1200; }
+  return Math.max(640, w);
 }
 
 function renderHistory() {
@@ -214,14 +265,32 @@ function renderHistory() {
     if (histExpanded.has(o.id)) for (const c of kids(o.id)) { rows.push([c, false]); seen.add(c.id); }
   }
   for (const p of products) if (p.type === 'compete' && !seen.has(p.id) && !owns().some(o => o.id === p.parentId)) rows.push([p, false]);
-  let html = '<table class="hist-table"><thead><tr><th class="fixed-col">商品信息 / 指标</th>';
+
+  // 列宽：前两列固定，日期列均分剩余宽度（至少 HIST_DATE_MIN，不够就横向滚动）
+  const wrapW = histAvailableWidth();
+  const fixedW = HIST_COL_W + HIST_MET_W;
+  const base = Math.max(HIST_DATE_MIN, Math.floor((wrapW - fixedW) / ds.length));
+  const total = fixedW + base * ds.length;
+  const width = Math.max(total, wrapW);
+  const lastColW = base + (width - total);
+
+  let html = `<table class="hist-table" style="width:${width}px"><colgroup>`
+    + `<col style="width:${HIST_COL_W}px"><col style="width:${HIST_MET_W}px">`
+    + ds.map((d, i) => `<col style="width:${i === ds.length - 1 ? lastColW : base}px">`).join('')
+    + `</colgroup><thead><tr><th class="prod-col">商品信息</th><th class="metric-col">指标</th>`;
   for (const d of ds) html += `<th class="date-col">${d.slice(5).replace('-', '月')}日${d === tKey ? '（预）' : ''}</th>`;
   html += '</tr></thead><tbody>';
+
   for (const [p, isOwn] of rows) {
     const caret = isOwn ? `<span class="caret" data-htoggle="${p.id}">${histExpanded.has(p.id) ? '▾' : '▸'}</span>` : '<span class="caret"></span>';
-    html += `<tr class="${isOwn ? 'group-own' : 'row-compete'}"><td class="fixed-col">${caret}${productCell(p)}</td>`;
-    for (const d of ds) html += `<td class="date-col">${metricBlock((historyData[d] || {})[p.asin])}</td>`;
-    html += '</tr>';
+    HIST_METRICS.forEach((mt, mi) => {
+      const pos = mi === 0 ? 'pr-first' : (mi === HIST_METRICS.length - 1 ? 'pr-last' : 'pr-mid');
+      html += `<tr class="${isOwn ? 'group-own' : 'row-compete'} ${pos}">`;
+      if (mi === 0) html += `<td class="prod-col" rowspan="${HIST_METRICS.length}">${caret}${productCell(p)}</td>`;
+      html += `<td class="metric-col">${mt.label}</td>`;
+      for (const d of ds) html += `<td class="date-col num-cell">${histCell((historyData[d] || {})[p.asin], mt)}</td>`;
+      html += '</tr>';
+    });
   }
   html += '</tbody></table>';
   $('historyTable').innerHTML = html;
@@ -231,15 +300,254 @@ function renderHistory() {
 }
 
 function renderProducts() {
-  let html = `<table><thead><tr><th style="min-width:260px">商品</th><th>ASIN</th><th>店铺</th><th>类型</th><th>关联自有</th></tr></thead><tbody>`;
+  let html = `<table><thead><tr><th style="min-width:260px">商品</th><th>ASIN</th><th>店铺</th><th>类型</th><th>关联自有</th><th>预期价区间</th><th>操作</th></tr></thead><tbody>`;
   for (const p of products) {
     const parent = products.find(x => x.id === p.parentId);
+    const rng = (p.priceMin != null || p.priceMax != null)
+      ? `${p.priceMin != null ? '$' + p.priceMin : ''} ~ ${p.priceMax != null ? '$' + p.priceMax : ''}`
+      : '—';
     html += `<tr><td>${productCell(p)}</td><td class="mono">${esc(p.asin)}</td><td>${esc(p.shop || '')}</td>
       <td>${p.type === 'own' ? '<span class="badge badge-ok">自有</span>' : '<span class="badge badge-none">竞品</span>'}</td>
-      <td>${parent ? esc(parent.name) : '—'}</td></tr>`;
+      <td>${parent ? esc(parent.name) : '—'}</td>
+      <td class="mono pmeta">${esc(rng)}</td>
+      <td class="nowrap">
+        <button class="btn-mini" data-pedit="${esc(p.id)}">编辑</button>
+        <button class="btn-mini btn-danger" data-pdel="${esc(p.id)}">删除</button>
+      </td></tr>`;
   }
   html += '</tbody></table>';
   $('productsTable').innerHTML = html;
+  $('productsTable').querySelectorAll('[data-pedit]').forEach(b => b.onclick = () => openProductModal(b.dataset.pedit));
+  $('productsTable').querySelectorAll('[data-pdel]').forEach(b => b.onclick = () => deleteProduct(b.dataset.pdel));
+}
+
+/* ==================== 商品管理（直连 GitHub 写入 products.json） ==================== */
+const TOKEN_KEY = 'tracker_gh_token';
+const getToken = () => localStorage.getItem(TOKEN_KEY) || '';
+const GH_READY = () => !!(GH.owner && GH.repo);
+
+function ghMsg(text, kind) {
+  const el = $('ghMsg');
+  el.className = 'gh-msg ' + (kind || '');
+  el.textContent = text || '';
+}
+
+async function ghFetch(path, opts = {}) {
+  const res = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/${path}`, Object.assign({}, opts, {
+    headers: Object.assign({
+      Authorization: 'Bearer ' + getToken(),
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    }, opts.headers || {})
+  }));
+  const txt = await res.text();
+  let data = null;
+  try { data = txt ? JSON.parse(txt) : null; } catch (e) { data = txt; }
+  if (!res.ok) {
+    const err = new Error((data && data.message) || ('HTTP ' + res.status));
+    err.status = res.status;
+    throw err;
+  }
+  return data;
+}
+
+const b64enc = str => {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin);
+};
+const b64dec = b64 => {
+  const bin = atob(String(b64).replace(/\s/g, ''));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+};
+
+async function ghLoadProducts() {
+  const cur = await ghFetch(`contents/${GH.file}?ref=${GH.branch}&_=${Date.now()}`);
+  return { list: JSON.parse(b64dec(cur.content)), sha: cur.sha };
+}
+
+/* 先拉最新文件，再在最新文件上做改动，避免覆盖别处的修改 */
+async function commitProducts(mutate, message) {
+  if (!GH_READY()) throw new Error('无法识别仓库地址，请通过 GitHub Pages 网址打开本页');
+  if (!getToken()) throw new Error('还没填 GitHub 令牌，请先在上方「令牌」区填写并保存');
+  const { list, sha } = await ghLoadProducts();
+  if (!Array.isArray(list)) throw new Error('仓库里的 products.json 格式不对（不是数组）');
+  mutate(list);
+  await ghFetch(`contents/${GH.file}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message, branch: GH.branch, sha,
+      content: b64enc(JSON.stringify(list, null, 2) + '\n')
+    })
+  });
+  products = list;
+}
+
+async function ghDispatchCollect() {
+  await ghFetch(`actions/workflows/${GH.workflow}/dispatches`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ref: GH.branch })
+  });
+}
+
+function renderTokenBox() {
+  const box = $('ghTokenBox');
+  if (!GH_READY()) {
+    box.className = 'gh-box';
+    box.innerHTML = '⚠️ 当前不是从 GitHub Pages 打开的页面，无法写入仓库。请访问你的线上网址（例如 <span class="mono">https://你的用户名.github.io/仓库名/</span>）后再编辑商品。';
+    return;
+  }
+  const tk = getToken();
+  if (tk) {
+    box.className = 'gh-box gh-ok';
+    box.innerHTML = `<b>✅ 已连接仓库</b> <span class="mono">${esc(GH.owner + '/' + GH.repo)}</span> · 令牌末尾 <span class="mono">…${esc(tk.slice(-4))}</span>
+      <div class="gh-row">
+        <button class="btn-mini" id="btnTestToken">测试连接</button>
+        <button class="btn-mini" id="btnChangeToken">更换令牌</button>
+        <button class="btn-mini btn-danger" id="btnClearToken">清除令牌</button>
+      </div>`;
+    $('btnTestToken').onclick = async () => {
+      ghMsg('正在测试令牌…', 'busy');
+      try {
+        const cur = await ghFetch(`contents/${GH.file}?ref=${GH.branch}&_=${Date.now()}`);
+        const n = (JSON.parse(b64dec(cur.content)) || []).length;
+        ghMsg(`连接正常，仓库里现在有 ${n} 个商品。`, 'ok');
+      } catch (e) {
+        ghMsg('连接失败：' + e.message + (e.status === 401 ? '（令牌无效或已过期）' : e.status === 403 ? '（令牌权限不足，需 Contents: Read and write）' : e.status === 404 ? '（仓库/文件路径不对，或令牌没勾这个仓库）' : ''), 'bad');
+      }
+    };
+    $('btnChangeToken').onclick = () => { localStorage.removeItem(TOKEN_KEY); renderTokenBox(); };
+    $('btnClearToken').onclick = () => { localStorage.removeItem(TOKEN_KEY); ghMsg('已清除本机保存的令牌。', 'ok'); renderTokenBox(); };
+  } else {
+    box.className = 'gh-box';
+    box.innerHTML = `<b>🔑 首次使用请填写 GitHub 令牌</b>（只保存在你自己这台设备的浏览器里，不会上传到任何服务器）
+      <div class="gh-row">
+        <input type="password" id="ghTokenInput" placeholder="粘贴 GitHub 令牌（github_pat_… 或 ghp_…）" autocomplete="off">
+        <button class="btn-primary" id="btnSaveToken">保存令牌</button>
+      </div>
+      <p class="pmeta" style="margin:8px 0 0">
+        建议用 <b>Fine-grained token</b>，只勾选本仓库，权限给 <span class="mono">Contents: Read and write</span> + <span class="mono">Actions: Read and write</span>，并设置一个到期日。
+        生成入口：GitHub → Settings → Developer settings → Personal access tokens。
+      </p>`;
+    $('btnSaveToken').onclick = () => {
+      const v = $('ghTokenInput').value.trim();
+      if (!v) { ghMsg('请先粘贴令牌', 'bad'); return; }
+      localStorage.setItem(TOKEN_KEY, v);
+      ghMsg('令牌已保存在本机浏览器。', 'ok');
+      renderTokenBox();
+    };
+  }
+}
+
+/* ---------- 商品新增 / 编辑弹窗 ---------- */
+let editingId = null;
+
+function openProductModal(id) {
+  editingId = id || null;
+  const p = id ? products.find(x => x.id === id) : null;
+  $('prodModalTitle').textContent = p ? '编辑商品' : '新增商品';
+  $('fAsin').value = p ? p.asin : '';
+  $('fAsin').disabled = !!p;
+  $('fName').value = p ? (p.name || '') : '';
+  $('fShop').value = p ? (p.shop || '') : '';
+  $('fType').value = p ? p.type : 'own';
+  $('fMin').value = p && p.priceMin != null ? p.priceMin : '';
+  $('fMax').value = p && p.priceMax != null ? p.priceMax : '';
+  $('prodErr').textContent = '';
+  fillParentSelect(p ? p.parentId : '');
+  syncParentVisibility();
+  $('prodMask').classList.remove('hidden');
+  setTimeout(() => { if (!p) $('fAsin').focus(); else $('fName').focus(); }, 30);
+}
+
+function fillParentSelect(sel) {
+  const owns_ = products.filter(x => x.type === 'own');
+  $('fParent').innerHTML = owns_.map(o => `<option value="${esc(o.id)}" ${o.id === sel ? 'selected' : ''}>${esc(o.name || o.asin)}</option>`).join('');
+}
+
+function syncParentVisibility() {
+  $('wrapParent').classList.toggle('hidden', $('fType').value !== 'compete');
+}
+
+function closeProductModal() { $('prodMask').classList.add('hidden'); editingId = null; }
+
+async function saveProduct() {
+  const asin = $('fAsin').value.trim().toUpperCase();
+  const type = $('fType').value;
+  const name = $('fName').value.trim();
+  const shop = $('fShop').value.trim();
+  const parentId = type === 'compete' ? $('fParent').value : '';
+  const minV = $('fMin').value.trim(), maxV = $('fMax').value.trim();
+  const id = editingId || (type === 'own' ? 'own_' : 'cmp_') + asin;
+
+  if (!/^[A-Z0-9]{10}$/.test(asin)) { $('prodErr').textContent = 'ASIN 必须是 10 位字母数字'; return; }
+  if (type === 'compete' && !parentId) { $('prodErr').textContent = '竞品必须选择一个「关联自有商品」'; return; }
+  if (!editingId && products.some(x => x.id === id || x.asin === asin)) { $('prodErr').textContent = '这个 ASIN 已经在清单里了'; return; }
+
+  const item = {
+    id, asin, name, shop, type, parentId,
+    ...(minV !== '' ? { priceMin: Number(minV) } : {}),
+    ...(maxV !== '' ? { priceMax: Number(maxV) } : {})
+  };
+
+  const btn = $('btnProdSave');
+  btn.disabled = true; btn.textContent = '正在写入仓库…';
+  try {
+    await commitProducts(list => {
+      const i = list.findIndex(x => x.id === id);
+      if (i >= 0) list[i] = Object.assign({}, list[i], item);
+      else list.push(item);
+    }, (editingId ? 'Update product ' : 'Add product ') + asin);
+    closeProductModal();
+    renderAll();
+    ghMsg(`✅ 已保存 ${asin} 到仓库，页面用的是最新清单。`, 'ok');
+    if ($('fDispatch').checked) {
+      try { await ghDispatchCollect(); ghMsg(`✅ 已保存 ${asin}，并已触发云端采集（约 3–5 分钟后刷新可见数据）。`, 'ok'); }
+      catch (e) { ghMsg(`已保存 ${asin}，但触发采集失败：${e.message}（可在 GitHub Actions 页面手动运行）`, 'bad'); }
+    }
+  } catch (e) {
+    $('prodErr').textContent = '写入失败：' + e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = '保存到仓库';
+  }
+}
+
+async function deleteProduct(id) {
+  const p = products.find(x => x.id === id);
+  const asin = p ? p.asin : id.replace(/^(own_|cmp_)/, '');
+  const label = p ? (p.name || p.asin) : asin;
+  const children = p && p.type === 'own' ? products.filter(x => x.parentId === id) : [];
+  const extra = children.length ? `\n\n它下面还有 ${children.length} 个竞品，会一起删除：\n· ` + children.map(c => c.name || c.asin).join('\n· ') : '';
+  if (!confirm(`确定删除「${label}」（${asin}）？${extra}\n\n（只影响仓库里的商品清单，已采集的历史数据会保留）`)) return;
+  ghMsg('正在写入仓库…', 'busy');
+  try {
+    await commitProducts(list => {
+      for (let i = list.length - 1; i >= 0; i--) {
+        if (list[i].id === id || list[i].parentId === id) list.splice(i, 1);
+      }
+    }, 'Remove product ' + asin);
+    renderAll();
+    ghMsg(`✅ 已从仓库删除 ${asin}${children.length ? ' 及其 ' + children.length + ' 个竞品' : ''}。`, 'ok');
+  } catch (e) {
+    ghMsg('删除失败：' + e.message, 'bad');
+  }
+}
+
+async function reloadProductsFromRepo() {
+  ghMsg('正在从仓库读取…', 'busy');
+  try {
+    const { list } = await ghLoadProducts();
+    products = list;
+    renderAll();
+    ghMsg(`✅ 已从仓库读取最新清单（${list.length} 个商品）。`, 'ok');
+  } catch (e) {
+    ghMsg('读取失败：' + e.message, 'bad');
+  }
 }
 
 function renderFoot() {
@@ -267,17 +575,40 @@ $('btnExportCsv').onclick = () => {
 };
 
 /* ---------- 交互 ---------- */
-document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
+function activateTab(name) {
+  const t = document.querySelector(`.tab[data-tab="${name}"]`);
+  if (!t) return;
   document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
   t.classList.add('active');
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-  $('tab-' + t.dataset.tab).classList.remove('hidden');
+  $('tab-' + name).classList.remove('hidden');
+  if (name === 'history') renderHistory();   // 显示后再量一次宽度，让日期列撑满
+}
+document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
+  activateTab(t.dataset.tab);
+  history.replaceState(null, '', '#' + t.dataset.tab);
 });
+window.addEventListener('hashchange', () => activateTab((location.hash || '#today').slice(1)));
 $('statusFilter').onchange = e => { curStatus = e.target.value; renderToday(); };
 $('histRange').onchange = e => { histRange = Number(e.target.value); renderHistory(); };
 $('btnExpandAll').onclick = () => { owns().forEach(o => expanded.add(o.id)); renderToday(); };
 $('btnCollapseAll').onclick = () => { expanded.clear(); renderToday(); };
 $('btnExpandAll2').onclick = () => { owns().forEach(o => histExpanded.add(o.id)); renderHistory(); };
 $('btnCollapseAll2').onclick = () => { histExpanded.clear(); renderHistory(); };
+
+/* 商品管理 */
+$('btnAddProduct').onclick = () => openProductModal(null);
+$('btnReloadProducts').onclick = reloadProductsFromRepo;
+$('fType').onchange = syncParentVisibility;
+$('btnProdCancel').onclick = closeProductModal;
+$('btnProdSave').onclick = saveProduct;
+$('prodMask').addEventListener('click', e => { if (e.target === $('prodMask')) closeProductModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('prodMask').classList.contains('hidden')) closeProductModal(); });
+
+let rsTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(rsTimer);
+  rsTimer = setTimeout(() => { if (!$('tab-history').classList.contains('hidden')) renderHistory(); }, 180);
+});
 
 if (checkGate()) boot();
