@@ -221,9 +221,11 @@ function histStock(r) {
     default: return '<span class="stock-unknown" title="库存未获取">未知</span>';
   }
 }
-const histPrice = r => r.price != null
-  ? `$${r.price.toFixed(2)}${r.priceOutOfRange ? ` <span class="hist-fail" title="${esc(r.priceNote || '超出预期价格区间')}">⚠</span>` : ''}`
-  : '<span class="stock-unknown">—</span>';
+const histPrice = r => {
+  if (r.price != null) return `$${r.price.toFixed(2)}${r.priceOutOfRange ? ` <span class="hist-fail" title="${esc(r.priceNote || '超出预期价格区间')}">⚠</span>` : ''}`;
+  if (r.priceVoided) return `<span class="stock-unknown" title="${esc(r.priceNote || '该日价格已作废')}">作废</span>`;
+  return '<span class="stock-unknown">—</span>';
+};
 
 /* 历史对比：每个指标占一行，指标名固定在左侧，日期列只显示数值 */
 const HIST_METRICS = [
