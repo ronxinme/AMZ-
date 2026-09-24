@@ -76,24 +76,42 @@ async function warmSession(idx) {
 /* --------- 库存探针：匿名会话加购 999，读取亚马逊给的最大可购买量 --------- */
 /* 说明：全程使用一次性匿名购物车，不会触碰你登录账号的购物车；探针后尽力清空 */
 const PROBE_QTY = Number(process.env.PROBE_QTY || 999);
-async function probeStock(asin, idx) {
+async function probeStock(asin, idx, productHtml) {
   const out = { probed: false };
   try {
     const h = chromeHeaders(idx);
     h['Cookie'] = cookieHeader();
     h['Referer'] = `https://www.amazon.com/dp/${asin}`;
 
-    // 1) 尝试加入 999 件（两种入口都试，取第一个成功响应）
-    const addUrls = [
-      `https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=${asin}&Quantity.1=${PROBE_QTY}`,
-      `https://www.amazon.com/gp/cart/desktop/add-to-cart.html?ASIN=${asin}&Quantity=${PROBE_QTY}&submit.addToCart=1`
-    ];
+    // 从商品页取加购所需的表单字段
+    const html = productHtml || '';
+    let offerListingID = (html.match(/name="offerListingID"[^>]*value="([^"]+)"/) || html.match(/"offerListingID"\s*:\s*"([^"]+)"/) || [])[1] || '';
+    let offeringID = (html.match(/"offeringID"\s*:\s*"([^"]+)"/) || [])[1] || '';
+    const sid = COOKIE_JAR['session-id'] || COOKIE_JAR['session-id-time'] ? COOKIE_JAR['session-id'] : '';
+    out.fields = { offerListingID: !!offerListingID, offeringID: !!offeringID, sid: !!sid };
+
+    // 1) 加购 999：优先 POST 真实表单，失败再退回 GET 入口
+    const addEndpoint = 'https://www.amazon.com/gp/cart/desktop/add-to-cart.html';
+    const form = new URLSearchParams({
+      ASIN: asin, Quantity: String(PROBE_QTY), submit_addToCart: 'Add to Cart',
+      'submit.addToCart': 'Add to Cart', offerListingID, offeringID: offeringID, 'session-id': sid
+    });
+    const postH = Object.assign({}, h, { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Site': 'same-origin' });
     let addText = '';
-    for (const u of addUrls) {
-      const r = await http(u, { headers: h, redirect: 'follow' }, 25000);
-      absorbCookies(r.res);
-      if (r.text) { addText += r.text; if (r.ok) break; }
+    const p1 = await http(addEndpoint, { method: 'POST', headers: postH, body: form.toString(), redirect: 'follow' }, 25000);
+    absorbCookies(p1.res);
+    addText += p1.text || '';
+    if (!p1.ok || !addText) {
+      for (const u of [
+        `https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=${asin}&Quantity.1=${PROBE_QTY}`,
+        `https://www.amazon.com/gp/cart/desktop/add-to-cart.html?ASIN=${asin}&Quantity=${PROBE_QTY}&submit.addToCart=1`
+      ]) {
+        const r = await http(u, { headers: h, redirect: 'follow' }, 25000);
+        absorbCookies(r.res);
+        if (r.text) { addText += r.text; if (r.ok) break; }
+      }
     }
+    out.addStatus = p1.status;
     // 2) 读购物车页面确认实际数量
     const cart = await http('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart', { headers: h, redirect: 'follow' }, 25000);
     absorbCookies(cart.res);
@@ -130,7 +148,8 @@ async function probeStock(asin, idx) {
       cartStatus: cart.status,
       hits: hits.slice(0, 8),
       qtySnippets: qm,
-      addStatus: (addText || '').length,
+      addStatus: p1.status,
+      fields: out.fields,
       snippet: ct.slice(0, 200)
     };
     // 4) 尽力清空匿名购物车
@@ -334,7 +353,7 @@ for (const p of list) {
 
   // 库存探针（匿名购物车，读完即清空）：补充在售数量 / 限购数量
   if (rec.ok && process.env.STOCK_PROBE !== '0' && ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind)) {
-    const pr = await probeStock(p.asin, 0);
+    const pr = await probeStock(p.asin, 0, r.text || '');
     console.log(`    [库存探针] ${p.asin} probed=${pr.probed} kind=${pr.kind || '-'} qty=${pr.qty ?? '-'} err=${pr.error || '-'}`);
     if (pr.debug) console.log(`      addLen=${pr.debug.addLen} cartLen=${pr.debug.cartLen} status=${pr.debug.cartStatus} hits=${JSON.stringify(pr.debug.hits)} qty=${JSON.stringify(pr.debug.qtySnippets)}`);
     if (pr.probed) {
