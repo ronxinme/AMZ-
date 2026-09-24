@@ -293,6 +293,14 @@ function parseAmazon(html, asin) {
   m = html.match(/limit (\d+) (?:units )?per (?:customer|order)/i);
   if (m) out.purchaseLimit = { qty: parseInt(m[1], 10), source: 'amazon_page' };
 
+  // 近一月销量：亚马逊公开的动销信号，用来替代「靠库存推算竞品销量」
+  m = html.match(/([\d,.]+)\s*(K)?\+?\s*bought in past month/i) || html.match(/"boughtInPastMonth"\s*:\s*"?(\d+)/i);
+  if (m) {
+    let v = parseFloat(String(m[1]).replace(/,/g, ''));
+    if (m[2]) v = v * 1000;
+    out.boughtPastMonth = Math.round(v);
+  }
+
   return out;
 }
 
@@ -335,7 +343,7 @@ for (const p of list) {
         priceSource: parsed.priceSource || null, listPrice: parsed.listPrice ?? null,
         rating: parsed.rating, reviews: parsed.reviews,
         bsrSmall: parsed.bsrSmall, bsrLarge: parsed.bsrLarge,
-        stock: parsed.stock, purchaseLimit: parsed.purchaseLimit,
+        stock: parsed.stock, purchaseLimit: parsed.purchaseLimit, boughtPastMonth: parsed.boughtPastMonth ?? null,
         image: parsed.image, ok: parsed.ok, error: parsed.error || null,
         captcha: parsed.captcha, source: r.via, fetchedAt: new Date().toISOString(),
         timingMs: Date.now() - ts
