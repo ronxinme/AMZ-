@@ -16,9 +16,9 @@ on:
         required: false
         default: ''
       stock_probe:
-        description: '库存探针（匿名购物车）：1=开启 0=关闭'
+        description: '库存探针（匿名购物车加购）：0=关闭 1=开启。云端数据中心 IP 下加购多数被拒，默认关闭'
         required: false
-        default: '1'
+        default: '0'
 
 permissions:
   contents: write
@@ -45,7 +45,7 @@ jobs:
           INTERVAL_MS: '8000'
           # 手动点 Run workflow 时强制重采；定时任务不覆盖当天已成功的数据
           FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
-          STOCK_PROBE: ${{ github.event_name == 'workflow_dispatch' && inputs.stock_probe || '1' }}
+          STOCK_PROBE: ${{ github.event_name == 'workflow_dispatch' && inputs.stock_probe || '0' }}
         run: |
           ARGS=""
           [ -n "${{ inputs.only_asin }}" ] && ARGS="$ARGS --asin ${{ inputs.only_asin }}"
