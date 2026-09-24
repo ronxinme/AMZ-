@@ -28,16 +28,51 @@ https://你的用户名.github.io/仓库名/
 
 ## 日常使用
 
+### 在网页上直接增删改商品（推荐）
+
+打开网页 → 顶部 **🗂 商品管理** 标签页 → 就能新增 / 编辑 / 删除商品，无需再动 GitHub。
+
+第一次用需要填一次 **GitHub 令牌**（只存在你自己的浏览器里，不会上传到任何服务器）：
+
+1. GitHub 右上头像 → **Settings** → 左下 **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**
+2. **Repository access** 选 `Only select repositories` → 勾选你这个仓库
+3. **Permissions → Repository permissions**：
+   - `Contents` → **Read and write**（读写 products.json）
+   - `Actions` → **Read and write**（保存后自动触发一次采集）
+4. 建议设置 **Expiration**（如 90 天），生成后复制 `github_pat_…` 开头的字符串
+5. 回到网页「商品管理」页粘进输入框 → 保存令牌。之后可点「测试连接」确认通了
+
+> 令牌等于把仓库的写入权限给了这个浏览器。请只在**你自己的设备**上保存，公用电脑上用完点「清除令牌」。担心安全也可以继续用老办法：直接在 GitHub 上编辑 `data/products.json`。
+
+### 其他操作对照表
+
 | 想做什么 | 怎么做 |
 |---|---|
-| 增删改跟踪的 ASIN | 编辑仓库里的 `data/products.json`（自有商品 `type:"own"`，竞品 `type:"compete"` + `parentId` 指向自有商品 id），保存即生效，下次采集生效 |
+| 增删改跟踪的 ASIN | 网页「🗂 商品管理」页直接操作；或编辑仓库 `data/products.json`（自有商品 `type:"own"`，竞品 `type:"compete"` + `parentId` 指向自有商品 id） |
 | 改采集时间 | 编辑 `.github/workflows/daily-collect.yml` 的 cron（UTC） |
-| 手动补跑一次 | Actions 页 → Run workflow |
+| 手动补跑一次 | Actions 页 → Run workflow，或网页商品管理页保存时勾选「保存后立即采集」 |
 | 看每次采集结果明细 | Actions 页点开对应那次运行，底部有完整结果表格 |
 | 导出当天 CSV | 网页右上角按钮 |
+| 查看某天跟另一天的对比 | 网页「📅 历史对比」页：左边固定「商品信息 + 指标名」，右边每列是一天的数值 |
 | 修改访问口令 | 计算 `sha256(新口令)`（任意在线 SHA-256 工具），替换 `app.js` 顶部 `ACCESS_CODE_SHA256` 后提交 |
-| 给商品设预期价格区间 | 在 `data/products.json` 给该商品加 `"priceMin": 30, "priceMax": 60`；采到区间外的价格时网页标红「价格异常」（用于识别买箱轮换到变体/其他卖家报价） |
-| 核对价格来源 | 每条记录带 `priceSource`（apex_offscreen = 页面核心价格区 / buybox_json = 买箱数据）和 `listPrice`（划线价，若页面有） |
+| 给商品设预期价格区间 | 商品管理页填「最低/最高预期价」，或直接改 `data/products.json` 的 `priceMin` / `priceMax`；采到区间外的价格时网页标 ⚠「价格异常」 |
+| 核对价格来源 | 每条记录带 `priceSource`：`buybox_json`（买箱 Twister 数据，最可靠）/ `cart_form`（加购表单成交价）/ `apex_pricetopay_label`、`apex_pricetopay_value`（价格主区块）；`listPrice` 是划线价，`unitPrice` 是每件单价（如 `$9.50/count`），**单价永远不会被当成售价** |
+
+## 售价是怎么取的（避免踩坑）
+
+亚马逊商品页里同一个页面会有很多价格数字：主价、划线价、**每件单价**、搭配购、推荐位、其他卖家报价……
+
+本工具的取价优先级（从高到低）：
+
+1. `twister-plus-buying-options-price-data` 买箱 JSON —— 只含当前选中变体的成交价
+2. 加购表单里的 `customerVisiblePrice` —— 顾客实际支付价
+3. 价格主区块的 `priceToPay`（价签 / 无障碍标签）
+4. 全局 JSON 兜底 `priceAmount` / `displayPrice`
+
+**关键点：绝不取裸 `a-offscreen`。** 曾经踩过的坑——页面里 `priceToPay` 的 `a-offscreen` 是空的，紧随其后的第一个非空 `a-offscreen` 其实是「每件单价」：4 件装 $37.99 会被误读成 $9.50（= 37.99 ÷ 4）。现在单价单独存到 `unitPrice`，只作参考。
+
+若某商品当天取不到价（页面显示「Available from these sellers」没有主报价），价格记为空并在历史表里显示 `—`，不会瞎猜。
+
 
 ## 验证码问题（重要，如实说明）
 
