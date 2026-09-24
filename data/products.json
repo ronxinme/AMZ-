@@ -1,226 +1,37 @@
 [
-  {
-    "id": "own_B09PTH84M7",
-    "asin": "B09PTH84M7",
-    "name": "505黑-4pcs",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "cmp_B0C9TCZ7WC",
-    "asin": "B0C9TCZ7WC",
-    "name": "竞品1 GOSURE（待核实）",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B09PTH84M7"
-  },
-  {
-    "id": "cmp_B09MYYVC3H",
-    "asin": "B09MYYVC3H",
-    "name": "竞品2 Muzata（待核实）",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B09PTH84M7"
-  },
-  {
-    "id": "cmp_B0DR8RDRFM",
-    "asin": "B0DR8RDRFM",
-    "name": "竞品3 LukLoy 银色8件装（待核实）",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B09PTH84M7"
-  },
-  {
-    "id": "own_B0C6GK3KWB",
-    "asin": "B0C6GK3KWB",
-    "name": "双边玻璃夹 2-Pack",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "cmp_B09F358TBV",
-    "asin": "B09F358TBV",
-    "name": "LukLoy 4 Pack 玻璃对夹 180°",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0C6GK3KWB"
-  },
-  {
-    "id": "cmp_B0F9WLV5CY",
-    "asin": "B0F9WLV5CY",
-    "name": "Railing Glass Clamps 4 Pack 304",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0C6GK3KWB"
-  },
-  {
-    "id": "cmp_B09PTSHFZZ",
-    "asin": "B09PTSHFZZ",
-    "name": "LukLoy 1 Pack 180° 玻璃夹 SS316",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0C6GK3KWB"
-  },
-  {
-    "id": "own_B0CHR9SZ8B",
-    "asin": "B0CHR9SZ8B",
-    "name": "4-Pack 304 圆形玻璃夹 黑色",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "cmp_B07DDFMLG1",
-    "asin": "B07DDFMLG1",
-    "name": "KAMTOP 8 Pack Glass Clamps",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0CHR9SZ8B"
-  },
-  {
-    "id": "own_B0CCRTKXXQ",
-    "asin": "B0CCRTKXXQ",
-    "name": "2-Pack 304 玻璃夹 8-12mm 黑色 0°",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "cmp_B0CD8B2D38",
-    "asin": "B0CD8B2D38",
-    "name": "Zsovo 2 Pack F型 墙至玻璃夹",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0CCRTKXXQ"
-  },
-  {
-    "id": "cmp_B0CN71KT1G",
-    "asin": "B0CN71KT1G",
-    "name": "Muzata 2Pack GA09 90° 玻璃夹",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0CCRTKXXQ"
-  },
-  {
-    "id": "own_B0C743SY46",
-    "asin": "B0C743SY46",
-    "name": "2-Pack 316 圆柱玻璃夹 黑色",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "cmp_B07L8LDSQD",
-    "asin": "B07L8LDSQD",
-    "name": "不锈钢玻璃夹 Standoff 2英寸",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0C743SY46"
-  },
-  {
-    "id": "cmp_B099WTYMM6",
-    "asin": "B099WTYMM6",
-    "name": "LukLoy 4 Pack SS316 Standoff",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0C743SY46"
-  },
-  {
-    "id": "own_B0CJ8MH322",
-    "asin": "B0CJ8MH322",
-    "name": "42寸 玻璃栏杆转角立柱 黑色",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "cmp_B0CBKGVZSW",
-    "asin": "B0CBKGVZSW",
-    "name": "免打孔玻璃栏杆立柱系统",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0CJ8MH322"
-  },
-  {
-    "id": "own_B0C558XRTP",
-    "asin": "B0C558XRTP",
-    "name": "110cm 304 玻璃栏杆立柱 银色 1-Pack",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "cmp_B08FB3FLF2",
-    "asin": "B08FB3FLF2",
-    "name": "Glass Railing Post Balustrade（A）",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0C558XRTP"
-  },
-  {
-    "id": "cmp_B08FB3987P",
-    "asin": "B08FB3987P",
-    "name": "Glass Railing Post Balustrade（B）",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0C558XRTP"
-  },
-  {
-    "id": "cmp_B0C8B1XNTD",
-    "asin": "B0C8B1XNTD",
-    "name": "CHEAA 304 玻璃夹立柱 银色",
-    "shop": "",
-    "type": "compete",
-    "parentId": "own_B0C558XRTP"
-  },
-  {
-    "id": "own_B0HJQQ59K7",
-    "asin": "B0HJQQ59K7",
-    "name": "304 不锈钢招牌螺丝 4只装",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "own_B0HHXD8SHF",
-    "asin": "B0HHXD8SHF",
-    "name": "42/38寸 侧装方形楼梯立柱 270°",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "own_B0HFWLCSCS",
-    "asin": "B0HFWLCSCS",
-    "name": "201 2x4 甲板栏杆支架",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "own_B0H2PQCCVB",
-    "asin": "B0H2PQCCVB",
-    "name": "110cm 304 玻璃栏杆立柱 银色（新款）",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "own_B0GZVRY1N6",
-    "asin": "B0GZVRY1N6",
-    "name": "2-Pack 316 玻璃夹 8-12mm",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  },
-  {
-    "id": "own_B0CJ6HD4R1",
-    "asin": "B0CJ6HD4R1",
-    "name": "2-Pack 42寸 玻璃栏杆端柱 缎面",
-    "shop": "TOPdicoration",
-    "type": "own",
-    "parentId": ""
-  }
+  { "id": "own_B09PTH84M7", "asin": "B09PTH84M7", "name": "505黑-4pcs", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "cmp_B0C9TCZ7WC", "asin": "B0C9TCZ7WC", "name": "竞品1 GOSURE（待核实）", "shop": "", "type": "compete", "parentId": "own_B09PTH84M7" },
+  { "id": "cmp_B09MYYVC3H", "asin": "B09MYYVC3H", "name": "竞品2 Muzata（待核实）", "shop": "", "type": "compete", "parentId": "own_B09PTH84M7" },
+  { "id": "cmp_B0DR8RDRFM", "asin": "B0DR8RDRFM", "name": "竞品3 LukLoy 银色8件装（待核实）", "shop": "", "type": "compete", "parentId": "own_B09PTH84M7" },
+
+  { "id": "own_B0C6GK3KWB", "asin": "B0C6GK3KWB", "name": "双边玻璃夹 2-Pack", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "cmp_B09F358TBV", "asin": "B09F358TBV", "name": "LukLoy 4 Pack 玻璃对夹 180°", "shop": "", "type": "compete", "parentId": "own_B0C6GK3KWB" },
+  { "id": "cmp_B0F9WLV5CY", "asin": "B0F9WLV5CY", "name": "Railing Glass Clamps 4 Pack 304", "shop": "", "type": "compete", "parentId": "own_B0C6GK3KWB" },
+  { "id": "cmp_B09PTSHFZZ", "asin": "B09PTSHFZZ", "name": "LukLoy 1 Pack 180° 玻璃夹 SS316", "shop": "", "type": "compete", "parentId": "own_B0C6GK3KWB" },
+
+  { "id": "own_B0CHR9SZ8B", "asin": "B0CHR9SZ8B", "name": "4-Pack 304 圆形玻璃夹 黑色", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "cmp_B07DDFMLG1", "asin": "B07DDFMLG1", "name": "KAMTOP 8 Pack Glass Clamps", "shop": "", "type": "compete", "parentId": "own_B0CHR9SZ8B" },
+
+  { "id": "own_B0CCRTKXXQ", "asin": "B0CCRTKXXQ", "name": "2-Pack 304 玻璃夹 8-12mm 黑色 0°", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "cmp_B0CD8B2D38", "asin": "B0CD8B2D38", "name": "Zsovo 2 Pack F型 墙至玻璃夹", "shop": "", "type": "compete", "parentId": "own_B0CCRTKXXQ" },
+  { "id": "cmp_B0CN71KT1G", "asin": "B0CN71KT1G", "name": "Muzata 2Pack GA09 90° 玻璃夹", "shop": "", "type": "compete", "parentId": "own_B0CCRTKXXQ" },
+
+  { "id": "own_B0C743SY46", "asin": "B0C743SY46", "name": "2-Pack 316 圆柱玻璃夹 黑色", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "cmp_B07L8LDSQD", "asin": "B07L8LDSQD", "name": "不锈钢玻璃夹 Standoff 2英寸", "shop": "", "type": "compete", "parentId": "own_B0C743SY46" },
+  { "id": "cmp_B099WTYMM6", "asin": "B099WTYMM6", "name": "LukLoy 4 Pack SS316 Standoff", "shop": "", "type": "compete", "parentId": "own_B0C743SY46" },
+
+  { "id": "own_B0CJ8MH322", "asin": "B0CJ8MH322", "name": "42寸 玻璃栏杆转角立柱 黑色", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "cmp_B0CBKGVZSW", "asin": "B0CBKGVZSW", "name": "免打孔玻璃栏杆立柱系统", "shop": "", "type": "compete", "parentId": "own_B0CJ8MH322" },
+
+  { "id": "own_B0C558XRTP", "asin": "B0C558XRTP", "name": "110cm 304 玻璃栏杆立柱 银色 1-Pack", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "cmp_B08FB3FLF2", "asin": "B08FB3FLF2", "name": "Glass Railing Post Balustrade（A）", "shop": "", "type": "compete", "parentId": "own_B0C558XRTP" },
+  { "id": "cmp_B08FB3987P", "asin": "B08FB3987P", "name": "Glass Railing Post Balustrade（B）", "shop": "", "type": "compete", "parentId": "own_B0C558XRTP" },
+  { "id": "cmp_B0C8B1XNTD", "asin": "B0C8B1XNTD", "name": "CHEAA 304 玻璃夹立柱 银色", "shop": "", "type": "compete", "parentId": "own_B0C558XRTP" },
+
+  { "id": "own_B0HJQQ59K7", "asin": "B0HJQQ59K7", "name": "304 不锈钢招牌螺丝 4只装", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "own_B0HHXD8SHF", "asin": "B0HHXD8SHF", "name": "42/38寸 侧装方形楼梯立柱 270°", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "own_B0HFWLCSCS", "asin": "B0HFWLCSCS", "name": "201 2x4 甲板栏杆支架", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "own_B0H2PQCCVB", "asin": "B0H2PQCCVB", "name": "110cm 304 玻璃栏杆立柱 银色（新款）", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "own_B0GZVRY1N6", "asin": "B0GZVRY1N6", "name": "2-Pack 316 玻璃夹 8-12mm", "shop": "TOPdicoration", "type": "own", "parentId": "" },
+  { "id": "own_B0CJ6HD4R1", "asin": "B0CJ6HD4R1", "name": "2-Pack 42寸 玻璃栏杆端柱 缎面", "shop": "TOPdicoration", "type": "own", "parentId": "" }
 ]
