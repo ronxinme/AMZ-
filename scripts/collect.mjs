@@ -45,28 +45,81 @@ function chromeHeaders(idx) {
   return h;
 }
 
+/* 会话级 Cookie：整轮采集复用同一个匿名会话，降低验证码、并支撑购物车探针 */
+let COOKIE_JAR = { 'i18n-prefs': 'USD', 'lc-main': 'en_US' };
+function cookieHeader() {
+  return Object.entries(COOKIE_JAR).map(([k, v]) => `${k}=${v}`).join('; ');
+}
+function absorbCookies(res) {
+  if (!res || !res.headers) return;
+  let setCookies = [];
+  try { setCookies = res.headers.getSetCookie ? res.headers.getSetCookie() : []; } catch (e) {}
+  if (!setCookies.length) { const raw = res.headers.get('set-cookie'); if (raw) setCookies = [raw]; }
+  for (const c of setCookies) {
+    const kv = c.split(';')[0];
+    const i = kv.indexOf('=');
+    if (i > 0) COOKIE_JAR[kv.slice(0, i).trim()] = kv.slice(i + 1).trim();
+  }
+}
+
 /* 会话预热：先访问首页拿 Cookie，再带 Cookie 抓商品页，显著降低验证码概率 */
 async function warmSession(idx) {
   try {
     const r = await http('https://www.amazon.com/', { headers: chromeHeaders(idx), redirect: 'follow' }, 25000);
-    let setCookies = [];
-    try { setCookies = r.res.headers.getSetCookie ? r.res.headers.getSetCookie() : []; } catch (e) {}
-    if (!setCookies.length) {
-      const raw = r.res.headers.get('set-cookie');
-      if (raw) setCookies = [raw];
+    absorbCookies(r.res);
+    COOKIE_JAR['i18n-prefs'] = 'USD';
+    COOKIE_JAR['lc-main'] = 'en_US';
+  } catch (e) {}
+  return cookieHeader();
+}
+
+/* --------- 库存探针：匿名会话加购 999，读取亚马逊给的最大可购买量 --------- */
+/* 说明：全程使用一次性匿名购物车，不会触碰你登录账号的购物车；探针后尽力清空 */
+const PROBE_QTY = Number(process.env.PROBE_QTY || 999);
+async function probeStock(asin, idx) {
+  const out = { probed: false };
+  try {
+    const h = chromeHeaders(idx);
+    h['Cookie'] = cookieHeader();
+    h['Referer'] = `https://www.amazon.com/dp/${asin}`;
+
+    // 1) 尝试加入 999 件（两种入口都试，取第一个成功响应）
+    const addUrls = [
+      `https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=${asin}&Quantity.1=${PROBE_QTY}`,
+      `https://www.amazon.com/gp/cart/desktop/add-to-cart.html?ASIN=${asin}&Quantity=${PROBE_QTY}&submit.addToCart=1`
+    ];
+    let addText = '';
+    for (const u of addUrls) {
+      const r = await http(u, { headers: h, redirect: 'follow' }, 25000);
+      absorbCookies(r.res);
+      if (r.text) { addText += r.text; if (r.ok) break; }
     }
-    const jar = {};
-    for (const c of setCookies) {
-      const kv = c.split(';')[0];
-      const i = kv.indexOf('=');
-      if (i > 0) jar[kv.slice(0, i).trim()] = kv.slice(i + 1).trim();
+    // 2) 读购物车页面确认实际数量
+    const cart = await http('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart', { headers: h, redirect: 'follow' }, 25000);
+    absorbCookies(cart.res);
+    const t = addText + '\n' + (cart.text || '');
+
+    // 3) 解析数量信号
+    let m = t.match(/only\s+([\d,]+)\s+of\s+these\s+available/i) || t.match(/only\s+([\d,]+)\s+left\s+in\s+stock/i);
+    if (m) { out.probed = true; out.kind = 'stock'; out.qty = parseInt(m[1].replace(/,/g, ''), 10); out.raw = m[0]; }
+    if (!out.probed) {
+      m = t.match(/limit\s+(?:of\s+)?([\d,]+)\s+(?:units\s+)?per\s+customer/i) || t.match(/maximum\s+(?:order\s+)?quantity\s+of\s+([\d,]+)/i);
+      if (m) { out.probed = true; out.kind = 'purchase_limit'; out.qty = parseInt(m[1].replace(/,/g, ''), 10); out.raw = m[0]; }
     }
-    jar['i18n-prefs'] = 'USD';
-    jar['lc-main'] = 'en_US';
-    return Object.entries(jar).map(([k, v]) => `${k}=${v}`).join('; ');
-  } catch (e) {
-    return 'i18n-prefs=USD; lc-main=en_US';
-  }
+    if (!out.probed) {
+      // 购物车里的数量输入框：若被压到 N（< 999），说明可购买上限就是 N
+      const qty = [...t.matchAll(/name="quantity[^"]*"[^>]*value="([\d,]+)"/g)].map(x => parseInt(x[1].replace(/,/g, ''), 10));
+      const capped = qty.filter(v => v > 0 && v < PROBE_QTY);
+      if (capped.length) { out.probed = true; out.kind = 'stock'; out.qty = Math.max(...capped); out.raw = 'cart quantity input'; }
+      else if (qty.some(v => v >= PROBE_QTY)) { out.probed = true; out.kind = 'stock'; out.qty = PROBE_QTY; out.ge = true; out.raw = `可接受 ${PROBE_QTY} 件，实际库存 ≥ ${PROBE_QTY}`; }
+    }
+    if (!out.probed && /not enough inventory|out of stock|currently unavailable/i.test(t)) {
+      out.probed = true; out.kind = 'unavailable';
+    }
+    // 4) 尽力清空匿名购物车
+    await http('https://www.amazon.com/gp/cart/view.html?action=clear-all', { headers: h, redirect: 'follow' }, 15000).catch(() => {});
+  } catch (e) { out.error = String(e && e.message || e); }
+  return out;
 }
 
 const args = process.argv.slice(2);
@@ -126,6 +179,7 @@ async function fetchHtml(asin, idx) {
   h['Referer'] = 'https://www.amazon.com/';
   h['Sec-Fetch-Site'] = 'same-origin';
   const r = await http(url, { headers: h, redirect: 'follow' }, 30000);
+  absorbCookies(r.res);
   return Object.assign({ via: 'direct', url }, r);
 }
 
@@ -260,6 +314,17 @@ for (const p of list) {
   // 保留手工补录库存（需在 data/manual-stock.json 维护，或直接编辑 history.json）
   const prev = history[date][p.asin];
   if (prev && prev.stock && prev.stock.source === 'manual' && rec.stock.kind === 'unknown') rec.stock = prev.stock;
+
+  // 库存探针（匿名购物车，读完即清空）：补充在售数量 / 限购数量
+  if (rec.ok && process.env.STOCK_PROBE !== '0' && ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind)) {
+    const pr = await probeStock(p.asin, 0);
+    if (pr.probed) {
+      if (pr.kind === 'unavailable') rec.stock = { kind: 'unavailable', source: 'cart_probe' };
+      else rec.stock = { kind: pr.kind, qty: pr.qty, source: 'cart_probe', note: pr.ge ? `库存 ≥ ${pr.qty}（探针加购 ${PROBE_QTY} 件被接受）` : '最大可购买量（匿名购物车探针）' };
+      rec.stockProbeRaw = pr.raw || null;
+    }
+    await new Promise(s => setTimeout(s, 2000));
+  }
 
   // 价格合理性校验：products.json 里可给每个 ASIN 设 priceMin / priceMax
   if (rec.ok && rec.price != null) {
