@@ -301,6 +301,89 @@ function extractPrice(html) {
   return res;
 }
 
+/*
+ * 库存 / 限购提取：**只看「买箱」和「availability」两块官方区域**。
+ *
+ * 为什么不能全文搜索「Only N left in stock」：
+ *   页面下方有「Customers who viewed this item also viewed」等推荐轮播，
+ *   里面每个邻居商品都可能带「Only 13 left in stock - order soon」，
+ *   全文搜会把邻居的库存当成这个商品的库存。
+ *
+ * 为什么不能再用 indexOf('add-to-cart-button') 当锚点：
+ *   页面里第一个 add-to-cart-button 出现在**导航栏的键盘快捷键面板**
+ *   （"Add to cart  shift+alt+K"），真正的加购按钮在 16 万字符之后。
+ *   老写法等于在菜单里找库存，实际从未命中过。
+ */
+const STOCK_STOP = ['p13n-sc-', 'a-carousel-card', 'id="similarities_feature_div"', 'id="sp_detail', 'id="HLCXComparisonWidget'];
+
+/* 精确找 id="xxx" 元素：前一个字符必须是空白。
+   直接 indexOf('id="availability"') 会命中标签属性里的 data-csa-c-content-id="availability"，
+   切片会从属性中间开始，导致后续去标签全部失效。 */
+function findByIdAttr(html, id) {
+  const needle = 'id="' + id + '"';
+  for (let i = html.indexOf(needle); i >= 0; i = html.indexOf(needle, i + 1)) {
+    if (i === 0 || /\s/.test(html[i - 1])) return i;
+  }
+  return -1;
+}
+function sliceFrom(html, start, maxLen) {
+  if (start == null || start < 0) return '';
+  let end = Math.min(html.length, start + maxLen);
+  for (const s of STOCK_STOP) {
+    const j = html.indexOf(s, start);
+    if (j >= 0 && j < end) end = j;
+  }
+  return html.slice(start, end);
+}
+function stripTags(s) {
+  return String(s)
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;|&#160;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/[a-z-]+="[^"]*"/gi, ' ')   // 兜底：清掉残留的属性文本
+    .replace(/\s+/g, ' ').trim();
+}
+
+function extractStock(html, price) {
+  const out = { stock: { kind: 'unknown' }, purchaseLimit: null, availabilityText: null };
+
+  // 真实的 availability 元素（亚马逊官方放「仅剩 N 件」的地方）
+  const avRaw = sliceFrom(html, findByIdAttr(html, 'availability'), 3000);
+  const avMsgRaw = (avRaw.match(/primary-availability-message[^>]*>([^<]{1,80})</) || [])[1];
+  const avText = (avMsgRaw || stripTags(avRaw)).replace(/\s+/g, ' ').trim().replace(/^[>》»·•\s-]+/, '');
+  out.availabilityText = (/^[\w-]+=/.test(avText) || avText.length < 3) ? null : (avText.slice(0, 90) || null);
+
+  // 真实的买箱容器（不能用 indexOf('add-to-cart-button')，页面第一个是导航栏快捷键面板）
+  let bbStart = findByIdAttr(html, 'desktop_buybox');
+  if (bbStart < 0) bbStart = findByIdAttr(html, 'qualifiedBuybox');
+  const bbText = stripTags(sliceFrom(html, bbStart, 60000));
+
+  const hay = (avText + ' ' + bbText).replace(/\s+/g, ' ');
+
+  // ① 仅剩 N 件（亚马逊官方文案，最高优先）
+  let m = hay.match(/Only\s+([\d,]+)\s+left in stock/i);
+  if (m) {
+    out.stock = { kind: 'stock', qty: parseInt(m[1].replace(/,/g, ''), 10), source: 'amazon_page', note: '亚马逊页面原话「Only N left in stock」' };
+  } else if (/Currently unavailable|Temporarily out of stock/i.test(hay)) {
+    out.stock = { kind: 'unavailable', source: 'amazon_page' };
+  } else if (/In Stock|Usually ships within/i.test(hay)) {
+    out.stock = { kind: 'in_stock_no_qty', source: 'amazon_page' };
+  } else if (price == null && /all-offers-display/.test(avRaw)) {
+    // availability 容器是空的，又没有主报价 → 亚马逊根本没展示购买框
+    out.stock = { kind: 'no_offer', source: 'amazon_page' };
+  } else if (price != null) {
+    out.stock = { kind: 'in_stock_no_qty', source: 'amazon_page' };
+  }
+
+  // 限购（同样限定在官方两个区域内，避免误取推荐位）
+  m = hay.match(/limit\s+([\d,]+)\s+(?:units\s+)?per\s+(?:customer|order)/i);
+  if (m) out.purchaseLimit = { qty: parseInt(m[1].replace(/,/g, ''), 10), source: 'amazon_page' };
+
+  return out;
+}
+
 function parseAmazon(html, asin) {
   const out = { ok: true, price: null, currency: null, rating: null, reviews: null, bsr: [], bsrSmall: null, bsrLarge: null, stock: { kind: 'unknown' }, purchaseLimit: null, title: null, image: null, realAsin: asin, captcha: false };
   if (/Enter the characters you see below|api-services-support@amazon\.com|Robot Check/i.test(html)) {
@@ -349,17 +432,11 @@ function parseAmazon(html, asin) {
     out.bsrSmall = list.reduce((a, b) => (b.rank < a.rank ? b : a), list[0]);
   }
 
-  const avail = (html.match(/id="availability"[\s\S]{0,1200}/) || [])[0] || '';
-  if (/Currently unavailable|out of stock/i.test(avail)) out.stock = { kind: 'unavailable' };
-  else if (/In Stock/i.test(avail) || out.price != null) out.stock = { kind: 'in_stock_no_qty' };
-  // 「仅剩 N 件」只在购物车按钮附近取，避免误取侧栏/推荐商品的提示
-  let anchor = html.indexOf('add-to-cart-button');
-  let region = anchor > 0 ? html.slice(Math.max(0, anchor - 6000), anchor + 2500) : '';
-  if (!region) region = (html.match(/id="qualifiedBuybox"[\s\S]{0,6000}/) || [])[0] || '';
-  m = region.match(/Only (\d+) left in stock/i);
-  if (m) out.stock = { kind: 'stock', qty: parseInt(m[1], 10), source: 'amazon_page', note: '页面提示仅剩 N 件，非卖家精灵库存' };
-  m = html.match(/limit (\d+) (?:units )?per (?:customer|order)/i);
-  if (m) out.purchaseLimit = { qty: parseInt(m[1], 10), source: 'amazon_page' };
+  // ---- 库存 / 限购：只看「买箱」和「availability」两块官方区域 ----
+  const st = extractStock(html, out.price);
+  out.stock = st.stock;
+  out.purchaseLimit = st.purchaseLimit;
+  out.availabilityText = st.availabilityText;
 
   // 近一月销量：亚马逊公开的动销信号，用来替代「靠库存推算竞品销量」
   m = html.match(/([\d,.]+)\s*(K)?\+?\s*bought in past month/i) || html.match(/"boughtInPastMonth"\s*:\s*"?(\d+)/i);
@@ -415,6 +492,7 @@ for (const p of list) {
         rating: parsed.rating, reviews: parsed.reviews,
         bsrSmall: parsed.bsrSmall, bsrLarge: parsed.bsrLarge,
         stock: parsed.stock, purchaseLimit: parsed.purchaseLimit, boughtPastMonth: parsed.boughtPastMonth ?? null,
+        availabilityText: parsed.availabilityText ?? null,
         image: parsed.image, ok: parsed.ok, error: parsed.error || null,
         captcha: parsed.captcha, source: r.via, fetchedAt: new Date().toISOString(),
         timingMs: Date.now() - ts
@@ -431,8 +509,10 @@ for (const p of list) {
   const prev = history[date][p.asin];
   if (prev && prev.stock && prev.stock.source === 'manual' && rec.stock.kind === 'unknown') rec.stock = prev.stock;
 
-  // 库存探针（匿名购物车，读完即清空）：补充在售数量 / 限购数量
-  if (rec.ok && process.env.STOCK_PROBE !== '0' && ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind)) {
+  // 库存探针（匿名购物车加购 999）：**已确认失效，默认关闭**，仅在 STOCK_PROBE=1 时尝试
+  // 2026-09 实测：本机住宅 IP 与云端数据中心 IP 均返回「Your Amazon Cart is empty」，
+  // 亚马逊已封掉匿名会话的加购通道。代码保留备查，等哪天通道恢复可直接打开。
+  if (rec.ok && process.env.STOCK_PROBE === '1' && ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind)) {
     const pr = await probeStock(p.asin, 0, pageHtml);
     console.log(`    [库存探针] ${p.asin} probed=${pr.probed} kind=${pr.kind || '-'} qty=${pr.qty ?? '-'} err=${pr.error || '-'}`);
     if (pr.debug) console.log(`      addLen=${pr.debug.addLen} cartLen=${pr.debug.cartLen} status=${pr.debug.cartStatus} hits=${JSON.stringify(pr.debug.hits)} qty=${JSON.stringify(pr.debug.qtySnippets)}`);
