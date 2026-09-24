@@ -6,6 +6,19 @@ on:
     - cron: '0 1 * * *'    # 北京时间 09:00（主采集）
     - cron: '0 13 * * *'   # 北京时间 21:00（补采：早上没采到的再试一次）
   workflow_dispatch:      # 允许在网页上手动点「Run workflow」立即跑一次
+    inputs:
+      only_asin:
+        description: '只采集某个 ASIN（留空=全部）'
+        required: false
+        default: ''
+      limit:
+        description: '最多采集前 N 个（留空=全部）'
+        required: false
+        default: ''
+      stock_probe:
+        description: '库存探针（匿名购物车）：1=开启 0=关闭'
+        required: false
+        default: '1'
 
 permissions:
   contents: write
@@ -32,7 +45,12 @@ jobs:
           INTERVAL_MS: '8000'
           # 手动点 Run workflow 时强制重采；定时任务不覆盖当天已成功的数据
           FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
-        run: node scripts/collect.mjs
+          STOCK_PROBE: ${{ github.event_name == 'workflow_dispatch' && inputs.stock_probe || '1' }}
+        run: |
+          ARGS=""
+          [ -n "${{ inputs.only_asin }}" ] && ARGS="$ARGS --asin ${{ inputs.only_asin }}"
+          [ -n "${{ inputs.limit }}" ] && ARGS="$ARGS --limit ${{ inputs.limit }}"
+          node scripts/collect.mjs $ARGS
 
       - name: 保存数据到仓库
         run: |
