@@ -136,7 +136,7 @@ function visibleRows() {
 }
 const statusMatch = r => curStatus === 'all' || (curStatus === 'ok' && r && r.ok) || (curStatus === 'fail' && r && !r.ok) || (curStatus === 'none' && !r);
 
-function renderAll() { renderStats(); renderShopTabs(); renderToday(); renderChanges(); renderHistory(); renderProducts(); renderFoot(); }
+function renderAll() { renderStockAlert(); renderStats(); renderShopTabs(); renderToday(); renderChanges(); renderHistory(); renderProducts(); renderFoot(); }
 
 function renderStats() {
   const td = todayData();
@@ -223,6 +223,102 @@ function renderChanges() {
   $('changesBox').innerHTML = changes.length
     ? '<b>较上一次成功采集的变化：</b><br>' + changes.join('<br>')
     : (Object.keys(td).length ? '较上一次成功采集：本次没有检测到价格 / 评论数 / BSR / 库存 变化。' : '');
+}
+
+/* ==================== 库存预警 ==================== */
+/* 亚马逊只在库存偏低时才肯露出数字，所以「仅剩 N 件」本身就是信号。
+   分三档呈现：
+     1 = 自有商品出问题（断货 / 无主报价 / 仅剩很少）→ 需要立刻处理
+     2 = 竞品的库存信号（断货 / 仅剩很少）→ 抢排名的机会窗口
+     3 = 其他拿到精确数字的（仅剩较多 / 限购）→ 仅供参考
+   「有货，数量未显示」不列出来 —— 亚马逊本来就不给数字，占了绝大多数，列了会淹没重点。 */
+const LOW_KEY = 'tracker_low_stock';
+const LOW_OPTS = [3, 5, 10, 20, 30, 50];
+let lowStockQty = Number(localStorage.getItem(LOW_KEY)) || 10;
+if (LOW_OPTS.indexOf(lowStockQty) < 0) lowStockQty = 10;
+const ALERT_CLS = { 1: 'chip-red', 2: 'chip-amber', 3: 'chip-gray' };
+
+function stockAlerts() {
+  const td = todayData();
+  const g = { 1: [], 2: [], 3: [] };
+  let fail = 0, pending = 0;
+
+  for (const p of products) {
+    const r = td[p.asin];
+    if (!r) { pending++; continue; }
+    if (!r.ok) { fail++; continue; }
+    const isOwn = p.type === 'own';
+    const s = r.stock || { kind: 'unknown' };
+    const nowL = stockLabel(s);
+    const prev = prevRecord(p.asin);
+    const prevL = prev ? stockLabel(prev.stock) : '';
+    const item = {
+      nm: p.name || p.asin,
+      asin: p.asin,
+      chg: prevL && prevL !== nowL ? prevL : '',
+      tip: r.availabilityText || ''
+    };
+    if (s.kind === 'unavailable') g[isOwn ? 1 : 2].push(Object.assign(item, { tag: '已断货 / 不可购买' }));
+    else if (s.kind === 'no_offer') g[isOwn ? 1 : 2].push(Object.assign(item, { tag: '无主报价（无购买框）' }));
+    else if (s.kind === 'stock' && s.qty != null && s.qty <= lowStockQty) g[isOwn ? 1 : 2].push(Object.assign(item, { tag: '仅剩 ' + s.qty + ' 件' }));
+    else if (s.kind === 'stock') g[3].push(Object.assign(item, { tag: '仅剩 ' + s.qty + ' 件' }));
+    else if (s.kind === 'purchase_limit') g[3].push(Object.assign(item, { tag: '限购 ' + s.qty + ' 件' }));
+  }
+
+  /* 组内排序：断货/无主报价（没有数字）排最前，其余按数量从小到大 */
+  const num = it => { const m = String(it.tag).match(/\d+/); return m ? parseInt(m[0], 10) : -1; };
+  const bySev = (a, b) => num(a) - num(b);
+  g[1].sort(bySev); g[2].sort(bySev); g[3].sort(bySev);
+  return { g, fail, pending };
+}
+
+function alertChip(it, lv) {
+  const tip = it.tip ? ' title="亚马逊页面原话：' + esc(it.tip) + '"' : '';
+  const chg = it.chg ? ' <span class="chg">（上次「' + esc(it.chg) + '」）</span>' : '';
+  return '<span class="alert-chip ' + ALERT_CLS[lv] + '"' + tip + '>'
+    + '<a href="https://www.amazon.com/dp/' + esc(it.asin) + '" target="_blank" rel="noopener">' + esc(it.nm) + '</a>'
+    + ' · ' + esc(it.tag) + chg + '</span>';
+}
+
+function renderStockAlert() {
+  const box = $('stockAlert');
+  if (!box) return;
+  if (!dates.length) { box.classList.add('hidden'); return; }
+  const { g, fail, pending } = stockAlerts();
+  const hot = g[1].length + g[2].length;
+  box.className = 'alert-box ' + (g[1].length ? 'has-danger' : (hot ? 'has-warn' : 'all-clear'));
+
+  const group = (label, cls, arr, lv) => arr.length
+    ? '<div class="alert-group"><span class="ag-label ' + cls + '">' + label + ' ' + arr.length + '</span>'
+      + '<span class="alert-chips">' + arr.map(x => alertChip(x, lv)).join('') + '</span></div>'
+    : '';
+
+  const opt = LOW_OPTS.map(v => '<option value="' + v + '"' + (v === lowStockQty ? ' selected' : '') + '>≤' + v + ' 件</option>').join('');
+  const head = '<div class="alert-head"><span>⚠️ 库存预警</span>'
+    + '<span class="alert-meta">数据日期 ' + esc(todayKey) + ' · 低库存阈值</span>'
+    + '<select id="lowStockSel" title="「仅剩 N 件」的 N 不超过这个值，就当成低库存列出来">' + opt + '</select>'
+    + '<span class="alert-meta">· 自有需处理 ' + g[1].length + ' · 竞品信号 ' + g[2].length + '</span></div>';
+
+  let body = group('自有商品·需处理', 'ag-red', g[1], 1)
+    + group('竞品·机会窗口', 'ag-amber', g[2], 2)
+    + group('其他精确数量', 'ag-gray', g[3], 3);
+  if (!body) body = '<div class="alert-clear">✅ 今天没有需要关注的库存异常：没有商品断货，也没有商品的「仅剩 N 件」低到阈值以下。</div>';
+
+  let foot = '';
+  if (fail || pending) {
+    foot = '<div class="alert-foot">另有'
+      + (fail ? ' <b>' + fail + '</b> 个商品采集异常' : '')
+      + (fail && pending ? '、' : '')
+      + (pending ? ' ' + pending + ' 个商品未采集' : '')
+      + ' —— 到「📋 当天数据」页把「状态」筛成「异常/未采到」就能看到具体是哪些。</div>';
+  }
+
+  box.innerHTML = head + body + foot;
+  $('lowStockSel').onchange = e => {
+    lowStockQty = Number(e.target.value) || 10;
+    localStorage.setItem(LOW_KEY, String(lowStockQty));
+    renderStockAlert();
+  };
 }
 
 /* 历史表格列很窄，这里用紧凑写法 + 悬浮提示，避免折行 */
