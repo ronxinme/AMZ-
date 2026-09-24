@@ -117,11 +117,21 @@ async function probeStock(asin, idx) {
       out.probed = true; out.kind = 'unavailable';
     }
     // 调试信息（写入 Actions 日志，便于定位探针命中情况）
+    const ct = (cart.text || '').replace(/\s+/g, ' ');
+    const hits = [];
+    for (const re of [/only [\d,]+ of these available/i, /only [\d,]+ left in stock/i, /limit [\d,]+ per customer/i, /There is not enough inventory/i, /Your Amazon Cart is empty/i, /your cart is empty/i, /quantity/i]) {
+      const mm = ct.match(re);
+      if (mm) hits.push(mm[0] + ' @' + ct.indexOf(mm[0]));
+    }
+    const qm = [...ct.matchAll(/quantity[^>]{0,120}/gi)].slice(0, 3).map(x => x[0].slice(0, 110));
     out.debug = {
       addLen: addText.length,
       cartLen: (cart.text || '').length,
       cartStatus: cart.status,
-      snippet: (cart.text || '').replace(/\s+/g, ' ').slice(0, 300)
+      hits: hits.slice(0, 8),
+      qtySnippets: qm,
+      addStatus: (addText || '').length,
+      snippet: ct.slice(0, 200)
     };
     // 4) 尽力清空匿名购物车
     await http('https://www.amazon.com/gp/cart/view.html?action=clear-all', { headers: h, redirect: 'follow' }, 15000).catch(() => {});
@@ -326,7 +336,7 @@ for (const p of list) {
   if (rec.ok && process.env.STOCK_PROBE !== '0' && ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind)) {
     const pr = await probeStock(p.asin, 0);
     console.log(`    [库存探针] ${p.asin} probed=${pr.probed} kind=${pr.kind || '-'} qty=${pr.qty ?? '-'} err=${pr.error || '-'}`);
-    if (pr.debug) console.log(`      addLen=${pr.debug.addLen} cartLen=${pr.debug.cartLen} status=${pr.debug.cartStatus} 片段: ${(pr.debug.snippet || '').slice(0, 160)}`);
+    if (pr.debug) console.log(`      addLen=${pr.debug.addLen} cartLen=${pr.debug.cartLen} status=${pr.debug.cartStatus} hits=${JSON.stringify(pr.debug.hits)} qty=${JSON.stringify(pr.debug.qtySnippets)}`);
     if (pr.probed) {
       if (pr.kind === 'unavailable') rec.stock = { kind: 'unavailable', source: 'cart_probe' };
       else rec.stock = { kind: pr.kind, qty: pr.qty, source: 'cart_probe', note: pr.ge ? `库存 ≥ ${pr.qty}（探针加购 ${PROBE_QTY} 件被接受）` : '最大可购买量（匿名购物车探针）' };
