@@ -100,6 +100,7 @@ td.num-cell { font-family: Consolas, monospace; font-size: 13.5px; }
 .badge-fail { background: #fdeae7; color: var(--red); }
 .badge-none { background: #eee; color: #888; }
 .badge-manual { background: #fff6e0; color: #8a6d1a; }
+.badge-probe { background: #e6f1fb; color: #185fa5; cursor: help; }
 .tip { margin-top: 8px; color: var(--muted); }
 
 /* 库存预警 */
@@ -169,6 +170,7 @@ td.num-cell { font-family: Consolas, monospace; font-size: 13.5px; }
 .legend { margin-top: 10px; display: flex; gap: 14px; flex-wrap: wrap; color: var(--muted); font-size: 12px; }
 .lg::before { content: "■ "; }
 .lg-stock { color: var(--green-ok); } .lg-limit { color: var(--red); }
+.lg-probe { color: #185fa5; }
 .lg-nooffer { color: #8a6d1a; }
 .lg-void { color: #c3cdc9; } .lg-fail { color: var(--red); }
 
