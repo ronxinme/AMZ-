@@ -76,7 +76,7 @@ const fmtPrice = r => r.price != null
   : '<span class="stock-unknown">—</span>';
 const fmtRating = r => r.rating != null ? `<span class="rating">★${r.rating}</span>` : '—';
 const fmtReviews = r => r.reviews != null ? `<span class="reviews">${r.reviews}</span>` : '—';
-const fmtBought = r => r.boughtPastMonth != null ? `<span class="reviews">${r.boughtPastMonth}+</span>` : '<span class="stock-unknown">—</span>';
+/* 2026-09-25 用户要求：删掉「近月销量」这个数据项（当天表 + 历史对比表都去掉，保持两边一致） */
 const fmtBsrS = r => r.bsrSmall ? `<span class="bsr-small">#${r.bsrSmall.rank.toLocaleString()}</span> <span class="pmeta">${esc(r.bsrSmall.label)}</span>` : '<span class="stock-unknown">未获取</span>';
 const fmtBsrL = r => r.bsrLarge ? `<span class="bsr-large">#${r.bsrLarge.rank.toLocaleString()} ${esc(r.bsrLarge.label)}</span>` : '—';
 
@@ -85,16 +85,18 @@ function stockLabel(s) {
   const k = (s || {}).kind;
   if (k === 'stock') {
     /* 口径按来源分层，绝不把「加购上限」冒充成「库存」：
-       amazon_page        → 亚马逊页面原话 Only N left
-       cart_only_n_left   → 购物车里亚马逊原话 Only N left（同样是库存）
-       probe_ge           → 加购 999 被接受，只能说 ≥999
-       max_purchasable    → 被夹到 N，N 是「一次最多能买 N 件」，可能是库存也可能是单笔上限 */
+       amazon_page          → 亚马逊页面原话 Only N left
+       cart_only_n_left     → 购物车里亚马逊原话 Only N left（同样是库存）
+       atc_seller_available → 亚马逊加购响应原话「the N available from the seller」→ 就是卖家的可售库存
+       probe_ge             → 加购 999 被接受，只能说 ≥999
+       max_purchasable      → 被夹到 N，亚马逊没说原因，只说「一次最多能买 N 件」 */
     if (s.source === 'amazon_page' || s.basis === 'cart_only_n_left') return `仅剩 ${s.qty} 件`;
+    if (s.basis === 'atc_seller_available') return `库存 ${s.qty} 件`;
     if (s.ge || s.basis === 'probe_ge') return `≥ ${s.qty} 件`;
     if (s.basis === 'max_purchasable' || s.confidence === 'medium') return `最多 ${s.qty} 件`;
     return `库存 ${s.qty} 件`;
   }
-  if (k === 'purchase_limit') return s.basis === 'inferred_limit' ? `限购 ${s.qty}（推断）` : `限购 ${s.qty}`;
+  if (k === 'purchase_limit') return `限购 ${s.qty}`;
   if (k === 'in_stock_no_qty') return '有货';
   if (k === 'unavailable') return '缺货';
   if (k === 'no_offer') return '无主报价';
@@ -107,13 +109,6 @@ function noteAlreadyShown(s) {
     || (s.kind === 'stock' && (s.source === 'amazon_page' || s.source === 'cart_probe'));
 }
 
-/* 推断限购的完整说明，当天页与历史页共用一套措辞 */
-function inferredLimitTip(qty) {
-  return `推断为单笔限购：加购探针最多只被允许买 ${qty} 件，而亚马逊既没写「Only N left in stock」`
-    + `（库存偏低时一定会打印这句），也没写任何 limit per customer 文案 ——`
-    + `说明真实库存高于 ${qty}，这个 ${qty} 来自购买数量限制，不是库存`;
-}
-
 function fmtStock(r) {
   const s = r.stock || { kind: 'unknown' };
   let inner;
@@ -123,28 +118,30 @@ function fmtStock(r) {
         inner = `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="pmeta">（亚马逊页面原话）</span>`;
       } else if (s.basis === 'cart_only_n_left') {
         inner = `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="badge badge-probe" title="加购探针：购物车条目里亚马逊原话 Only N left in stock">加购实测</span>`;
+      } else if (s.basis === 'atc_seller_available') {
+        inner = `<span class="stock-qty stock-probe">库存 ${s.qty} 件</span>`
+          + ` <span class="badge badge-probe" title="加购探针：请求 999 件时亚马逊的加购响应里原话写着「than the ${s.qty} available from the seller you've selected」——这是亚马逊自己说出的卖家可售数量，就是库存">加购实测</span>`;
       } else {
         const badge = s.source === 'cart_probe'
           ? ' <span class="badge badge-probe" title="加购探针：把数量设成 999 加入匿名购物车，读取亚马逊夹紧后的数量">加购实测</span>'
           : (s.source === 'manual' ? ' <span class="badge badge-manual">手工</span>' : '');
-        /* 夹紧值只能说明「一次最多能买 N 件」，不敢写成「库存 N 件」——N 也可能是单笔上限 */
+        /* 夹紧值只能说明「一次最多能买 N 件」，不敢写成「库存 N 件」——亚马逊这次没给出任何说明 */
         const isClamp = s.basis === 'max_purchasable' || s.confidence === 'medium';
         const text = s.basis === 'probe_ge' || s.ge ? '≥ ' + s.qty + ' 件'
           : isClamp ? '最多 ' + s.qty + ' 件'
             : '库存 ' + s.qty + ' 件';
         const own = isClamp
-          ? ` title="加购实测：把数量设成 999 加入匿名购物车，亚马逊把它夹到 ${s.qty}。即「一次最多能买 ${s.qty} 件」——可能是库存，也可能是单笔订单上限，亚马逊没明示"`
+          ? ` title="加购实测：把数量设成 999 加入匿名购物车，亚马逊把它夹到 ${s.qty}。即「一次最多能买 ${s.qty} 件」——亚马逊这次没有给出任何说明文字，所以无法确定它是库存还是单笔上限"`
           : (s.basis === 'probe_ge' ? ` title="加购实测：请求 999 件被亚马逊接受，只能确定库存 ≥ ${s.qty}"` : '');
         inner = `<span class="stock-qty${s.source === 'cart_probe' ? ' stock-probe' : ''}"${own}>${text}</span>${badge}`;
       }
       break;
     case 'purchase_limit': {
-      /* 限购有两种来源，措辞必须区分，别让用户以为都是亚马逊明写的 */
-      const inf = s.basis === 'inferred_limit';
-      const t = inf
-        ? ` title="${inferredLimitTip(s.qty)}"`
-        : ` title="亚马逊明示的单笔限购上限：${s.basis === 'per_customer_limit' ? '页面或购物车里的 limit per customer 文案' : '限购文案'}。这是「一次最多能买多少」，不是库存"`;
-      inner = `<span class="stock-limit"${t}>限购 ${s.qty}</span>${inf ? ' <span class="badge badge-probe" title="由加购实测推断得出">推断</span>' : ''}`;
+      /* 限购的来源一定是亚马逊自己写的（页面 / 购物车 / 加购响应），不再做任何推断 */
+      const where = s.basis === 'per_customer_limit' ? '商品页或购物车'
+        : s.basis === 'atc_limit' ? '加购响应' : '亚马逊页面';
+      const t = ` title="亚马逊自己写明的单笔限购上限（来自${where}的 limit N per customer 文案）。这是「一次最多能买多少」，不是库存"`;
+      inner = `<span class="stock-limit"${t}>限购 ${s.qty}</span>`;
       break;
     }
     case 'in_stock_no_qty': inner = '<span class="stock-noqty">有货，数量未显示</span>'; break;
@@ -229,7 +226,7 @@ function renderToday() {
   const td = todayData();
   const rows = visibleRows().filter(([p]) => statusMatch(td[p.asin]));
   let html = `<table><thead><tr>
-    <th style="min-width:270px">商品</th><th>采集售价</th><th>星级</th><th>评论数</th><th>近月销量</th><th>小类 BSR</th><th>大类 BSR</th><th>库存 / 限购</th><th>状态</th><th>采集时间</th>
+    <th style="min-width:270px">商品</th><th>采集售价</th><th>星级</th><th>评论数</th><th>小类 BSR</th><th>大类 BSR</th><th>库存 / 限购</th><th>状态</th><th>采集时间</th>
   </tr></thead><tbody>`;
   for (const [p, isOwn] of rows) {
     const rec = td[p.asin];
@@ -242,7 +239,6 @@ function renderToday() {
       <td class="num-cell">${fmtPrice(rec || {})}${rec && prev ? deltaHtml(rec.price, prev.price) : ''}</td>
       <td class="num-cell">${fmtRating(rec || {})}</td>
       <td class="num-cell">${fmtReviews(rec || {})}${rec && prev ? deltaHtml(rec.reviews, prev.reviews) : ''}</td>
-      <td class="num-cell">${fmtBought(rec || {})}${rec && prev ? deltaHtml(rec.boughtPastMonth, prev.boughtPastMonth) : ''}</td>
       <td class="num-cell">${fmtBsrS(rec || {})}${rec && prev && rec.bsrSmall && prev.bsrSmall ? deltaHtml(rec.bsrSmall.rank, prev.bsrSmall.rank, null, true) : ''}</td>
       <td class="num-cell">${fmtBsrL(rec || {})}</td>
       <td class="num-cell">${fmtStock(rec || {})}</td>
@@ -418,13 +414,16 @@ function histStock(r) {
     case 'stock':
       if (s.source === 'amazon_page') return `<span class="stock-qty" title="亚马逊页面原话「Only ${s.qty} left in stock」">仅剩 ${s.qty} 件</span>`;
       if (s.basis === 'cart_only_n_left') return `<span class="stock-qty stock-probe" title="加购实测：购物车条目里亚马逊原话 Only ${s.qty} left in stock${tip}">仅剩 ${s.qty} 件</span>`;
+      if (s.basis === 'atc_seller_available') return `<span class="stock-qty stock-probe" title="加购实测：请求 999 件时亚马逊的加购响应里原话写着「than the ${s.qty} available from the seller you've selected」—— 亚马逊自己说出的卖家可售数量，就是库存${tip}">库存 ${s.qty} 件</span>`;
       if (s.basis === 'probe_ge' || s.ge) return `<span class="stock-qty stock-probe" title="加购实测：请求 999 件被接受，只能确定 ≥${s.qty}${tip}">≥${s.qty} 件</span>`;
-      if (s.basis === 'max_purchasable' || s.confidence === 'medium') return `<span class="stock-qty stock-probe" title="加购实测：亚马逊把数量夹到 ${s.qty}，即一次最多能买 ${s.qty} 件（可能是库存，也可能是单笔上限）${tip}">最多 ${s.qty} 件</span>`;
+      if (s.basis === 'max_purchasable' || s.confidence === 'medium') return `<span class="stock-qty stock-probe" title="加购实测：亚马逊把数量夹到 ${s.qty}，即一次最多能买 ${s.qty} 件（亚马逊这次没给出任何说明文字，无法确定是库存还是单笔上限）${tip}">最多 ${s.qty} 件</span>`;
       return `<span class="stock-qty stock-probe" title="加购实测${tip}">${s.qty} 件</span>`;
-    case 'purchase_limit':
-      return s.basis === 'inferred_limit'
-        ? `<span class="stock-limit" title="${esc(inferredLimitTip(s.qty))}${tip}">限购 ${s.qty}</span>`
-        : `<span class="stock-limit" title="亚马逊明示的单笔限购上限 ${s.qty} 件（不是库存）${tip}">限购 ${s.qty}</span>`;
+    case 'purchase_limit': {
+      /* 限购一律来自亚马逊自己写的文案，不再有任何推断；但仍如实标出它写在哪一处 */
+      const where = s.basis === 'per_customer_limit' ? '商品页或购物车'
+        : s.basis === 'atc_limit' ? '加购响应' : '亚马逊页面';
+      return `<span class="stock-limit" title="亚马逊自己写明的单笔限购上限 ${s.qty} 件（来自${where}里的 limit N per customer 文案）。这是「一次最多能买多少」，不是库存${tip}">限购 ${s.qty}</span>`;
+    }
     case 'in_stock_no_qty': return `<span class="stock-noqty" title="有货，但亚马逊没给数量${tip}">有货</span>`;
     case 'unavailable': return `<span class="stock-na" title="不可购买 / 缺货${tip}">缺货</span>`;
     case 'no_offer': return `<span class="stock-nooffer" title="亚马逊没有展示购买框（可能只剩第三方卖家，或该 ASIN 已下架）${tip}">无主报价</span>`;
@@ -442,13 +441,16 @@ const HIST_METRICS = [
   { key: 'price',   label: '售价',     cell: histPrice },
   { key: 'rating',  label: '星级',     cell: r => r.rating != null ? `<span class="rating">★${r.rating}</span>` : '<span class="stock-unknown">—</span>' },
   { key: 'reviews', label: '评论数',   cell: r => r.reviews != null ? `<span class="reviews">${r.reviews}</span>` : '<span class="stock-unknown">—</span>' },
-  { key: 'bought',  label: '近月销量', cell: r => r.boughtPastMonth != null ? `<span class="reviews" title="亚马逊「过去一个月已购买 N+」">${r.boughtPastMonth}+</span>` : '<span class="stock-unknown">—</span>' },
   { key: 'bsr',     label: '小类BSR',  cell: r => r.bsrSmall
       ? `<span class="bsr-small" title="${esc(r.bsrSmall.label || '')}">#${r.bsrSmall.rank.toLocaleString()}</span>`
       : '<span class="stock-unknown">—</span>' },
   { key: 'stock',   label: '库存',     cell: histStock }
 ];
-const HIST_COL_W = 252, HIST_MET_W = 76, HIST_DATE_MIN = 140;
+/* 日期列宽：按「(可用宽度 − 固定两列) ÷ 日期数」均分，但限制在 [MIN, MAX] 之间。
+   2026-09-25 用户反馈「日期下面的数据左右间距太大」：以前没有上限，
+   日期只有 2–3 列时每列被撑到 250px 以上，数字孤零零悬在列中间、左右全是空白。
+   加上限之后列就贴着数字了；日期多时超出容器会自然横向滚动，不受影响。 */
+const HIST_COL_W = 252, HIST_MET_W = 76, HIST_DATE_MIN = 128, HIST_DATE_MAX = 158;
 
 function histCell(r, mt) {
   if (!r) return '<span class="hist-void">—</span>';
@@ -478,17 +480,15 @@ function renderHistory() {
   }
   for (const p of products) if (p.type === 'compete' && !seen.has(p.id) && !owns().some(o => o.id === p.parentId)) rows.push([p, false]);
 
-  // 列宽：前两列固定，日期列均分剩余宽度（至少 HIST_DATE_MIN，不够就横向滚动）
+  // 列宽：前两列固定，日期列均分剩余宽度（限制在 MIN~MAX 之间；放不下就横向滚动）
   const wrapW = histAvailableWidth();
   const fixedW = HIST_COL_W + HIST_MET_W;
-  const base = Math.max(HIST_DATE_MIN, Math.floor((wrapW - fixedW) / ds.length));
-  const total = fixedW + base * ds.length;
-  const width = Math.max(total, wrapW);
-  const lastColW = base + (width - total);
+  const base = Math.min(HIST_DATE_MAX, Math.max(HIST_DATE_MIN, Math.floor((wrapW - fixedW) / ds.length)));
+  const width = fixedW + base * ds.length;
 
   let html = `<table class="hist-table" style="width:${width}px"><colgroup>`
     + `<col style="width:${HIST_COL_W}px"><col style="width:${HIST_MET_W}px">`
-    + ds.map((d, i) => `<col style="width:${i === ds.length - 1 ? lastColW : base}px">`).join('')
+    + ds.map(() => `<col style="width:${base}px">`).join('')
     + `</colgroup><thead><tr><th class="prod-col">商品信息</th><th class="metric-col">指标</th>`;
   for (const d of ds) html += `<th class="date-col">${d.slice(5).replace('-', '月')}日${d === tKey ? '（预）' : ''}</th>`;
   html += '</tr></thead><tbody>';
@@ -770,14 +770,14 @@ function renderFoot() {
 /* ---------- 导出 CSV ---------- */
 $('btnExportCsv').onclick = () => {
   const td = todayData();
-  const rows = [['ASIN', '名称', '店铺', '类型', '售价USD', '星级', '评论数', '小类BSR', '小类名', '大类BSR', '库存状态', '库存数量', '状态', '采集时间']];
+  const rows = [['ASIN', '名称', '店铺', '类型', '售价USD', '星级', '评论数', '小类BSR', '小类名', '大类BSR', '库存状态', '库存数量', '判定依据', '状态', '采集时间']];
   for (const p of products) {
     const r = td[p.asin] || {};
     const st = r.stock || {};
     rows.push([p.asin, p.name || '', p.shop || '', p.type === 'own' ? '自有' : '竞品',
       r.price ?? '', r.rating ?? '', r.reviews ?? '',
       r.bsrSmall ? r.bsrSmall.rank : '', r.bsrSmall ? r.bsrSmall.label : '', r.bsrLarge ? r.bsrLarge.rank : '',
-      st.kind || '', st.qty ?? '', r.ok ? '正常' : (r.captcha ? '验证码' : (r.error || '未采集')), r.fetchedAt || '']);
+      st.kind || '', st.qty ?? '', st.basis || '', r.ok ? '正常' : (r.captcha ? '验证码' : (r.error || '未采集')), r.fetchedAt || '']);
   }
   const csv = '\uFEFF' + rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
   const a = document.createElement('a');
