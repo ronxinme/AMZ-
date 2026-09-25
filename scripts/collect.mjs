@@ -92,6 +92,12 @@ async function warmSession(idx) {
    限购数而不是真实库存，所以 kind 会标成 purchase_limit。 */
 const PROBE_QTY = Number(process.env.PROBE_QTY || 999);
 const PROBE_ON = process.env.STOCK_PROBE !== '0';   // 默认开启；STOCK_PROBE=0 关闭
+/* 推断限购的阈值。亚马逊只要库存偏低，就会在商品页买箱区域**和**购物车条目里
+   同时打印「Only N left in stock - order soon.」；实测到 17 件时仍会打印，
+   21 件起就不再打印。所以「夹紧值 ≤ 这个阈值 且 两处都没有该文案」的，
+   只能是单笔限购上限，不可能是库存。
+   默认 20（观测到的边界落在 17~21 之间，取 20）。设成 0 可关闭这条推断。 */
+const LIMIT_PRINT_MAX = Number(process.env.LIMIT_PRINT_MAX || 20);
 let ZIP_DONE = false;
 
 /* 给匿名会话设美国收货邮编（不设会有商品读不到买箱） */
@@ -200,7 +206,7 @@ async function clearProbedCart(cartHtml) {
   return ids.length;
 }
 
-async function probeStock(asin, productHtml, title) {
+async function probeStock(asin, productHtml, title, pageLimit) {
   const out = { probed: false };
   try {
     await setUsZip(process.env.ZIP || '10001');
@@ -263,23 +269,44 @@ async function probeStock(asin, productHtml, title) {
       out.raw = '购物车条目里亚马逊原话 only N left in stock';
     } else if (mine) {
       out.probed = true;
-      if (mine.val >= PROBE_QTY) {
+      const N = mine.val;
+      if (N >= PROBE_QTY) {
         out.kind = 'stock'; out.qty = PROBE_QTY; out.ge = true;
         out.basis = 'probe_ge'; out.confidence = 'high';
         out.raw = `可接受 ${PROBE_QTY} 件，实际库存 ≥ ${PROBE_QTY}`;
-      } else if (mine.perCustomer != null && mine.perCustomer === mine.val) {
-        out.kind = 'purchase_limit'; out.qty = mine.val;
+      } else if (mine.perCustomer != null && mine.perCustomer === N) {
+        out.kind = 'purchase_limit'; out.qty = N;
         out.basis = 'per_customer_limit'; out.confidence = 'high';
-        out.raw = '限购数量（非库存）';
+        out.raw = '购物车里亚马逊原话「limit N per customer」';
+      } else if (pageLimit && pageLimit.qty === N) {
+        /* 商品页买箱区域里亚马逊自己写了 limit N per customer，且数字与夹紧值一致 */
+        out.kind = 'purchase_limit'; out.qty = N;
+        out.basis = 'per_customer_limit'; out.confidence = 'high';
+        out.raw = `商品页亚马逊原话「limit ${N} per customer」`;
+      } else if (pageLimit && pageLimit.qty > N) {
+        /* 页面明示限购 N 件，但这次只让买更少 —— 说明卡住它的是库存而不是限购 */
+        out.kind = 'stock'; out.qty = N;
+        out.basis = 'max_purchasable'; out.confidence = 'medium';
+        out.raw = `亚马逊写着限购 ${pageLimit.qty} 件，但本次只允许买 ${N} 件（库存比限购更少）`;
+      } else if (N <= LIMIT_PRINT_MAX) {
+        /* ---- 推断限购（2026-09-25 实测确立的规则）----
+           亚马逊只要库存偏低，就会**同时**在商品页买箱区域和购物车条目里打印
+           「Only N left in stock - order soon.」（实测 17 件时仍会打印）。
+           这条商品两处都没有这句，说明**库存高于这个数**；
+           可它加购 999 却只被允许买 N 件 —— 那 N 只能来自单笔限购上限。
+           实测对照：B0CCRTKXXQ 夹到 1、B0HHXD8SHF 夹到 2，两处文案全空。 */
+        out.kind = 'purchase_limit'; out.qty = N;
+        out.basis = 'inferred_limit'; out.confidence = 'high';
+        out.raw = `只允许买 ${N} 件，且页面与购物车都没有「Only N left」文案 → 判定为单笔限购（库存高于 ${N}）`;
       } else {
         /* 亚马逊没写「only N left」，只把数量夹到了 N。
            N 的准确含义是「这个商品一次最多能买 N 件」——
            它可能是真实库存（库存不足所以夹住），也可能是单笔订单上限（亚马逊不一定打印限购文案）。
            两种情况下 N 都是可信的硬事实，但**不能断言是库存**，所以 basis 单独标出来，
            前端显示成「最多 N 件」而不是「库存 N 件」。 */
-        out.kind = 'stock'; out.qty = mine.val;
+        out.kind = 'stock'; out.qty = N;
         out.basis = 'max_purchasable'; out.confidence = 'medium';
-        out.raw = `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${mine.val}（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）`;
+        out.raw = `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${N}（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）`;
       }
     } else {
       out.error = items.length ? 'no_match_in_cart(' + items.length + ')' : 'cart_empty_after_add';
@@ -611,9 +638,10 @@ const BACKOFF = [3000, 9000, 18000];
 /* 把探针结果落到记录上。basis 说明这个数字是怎么来的，前端据此决定措辞：
      cart_only_n_left   = 购物车里亚马逊原话（最可信，就是库存）
      probe_ge           = 加购 999 被接受，只能说 ≥999
-     per_customer_limit = 限购数，不是库存
+     per_customer_limit = 亚马逊明写 limit N per customer（页面或购物车）→ 限购
+     inferred_limit     = 没写限购也没写低库存，但只允许买 N 件（N 很小）→ 推断为限购
      max_purchasable    = 被夹到 N，N 是「一次最多能买 N 件」，可能是库存也可能是单笔上限
-   confidence：high = 亚马逊明示；medium = 只能确定上限，不能断言是库存 */
+   confidence：high = 要么亚马逊明示，要么有强证据；medium = 只能确定上限，不能断言是库存 */
 function applyProbeResult(rec, pr, asin) {
   const conf = pr.confidence || 'high';
   rec.stock = {
@@ -621,8 +649,10 @@ function applyProbeResult(rec, pr, asin) {
     basis: pr.basis || 'max_purchasable', confidence: conf,
     note: pr.basis === 'cart_only_n_left' ? '购物车里亚马逊原话「Only N left in stock」'
       : pr.basis === 'probe_ge' ? `库存 ≥ ${pr.qty}（加购 ${PROBE_QTY} 件被亚马逊接受）`
-        : pr.kind === 'purchase_limit' ? '这是亚马逊限购数，不是库存'
-          : `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限`
+        : pr.basis === 'per_customer_limit' ? '亚马逊明示的单笔限购上限（不是库存）'
+          : pr.basis === 'inferred_limit'
+            ? `推断为单笔限购：只允许买 ${pr.qty} 件，而亚马逊既没写「Only N left in stock」（有低库存一定会写），也没写限购文案 —— 说明库存高于 ${pr.qty}，${pr.qty} 来自购买数量限制`
+            : `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限`
   };
   rec.stockProbeRaw = pr.raw || null;
   if (pr.probeRetried) rec.stockProbeRetried = true;
@@ -673,7 +703,7 @@ for (const p of list) {
      no_offer / unavailable 没有买箱，探针做不了，直接跳过。 */
   const probeNeeded = ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind);
   if (rec.ok && PROBE_ON && probeNeeded && pageHtml) {
-    const pr = await probeStock(p.asin, pageHtml, rec.title || '');
+    const pr = await probeStock(p.asin, pageHtml, rec.title || '', rec.purchaseLimit || null);
     if (pr.probed) {
       const conf = applyProbeResult(rec, pr, p.asin);
       console.log(`    [库存探针] ${p.asin} → ${pr.kind} ${pr.qty} 件 [${pr.basis}/${conf}]${pr.probeRetried ? '(重试后取到)' : ''}（${pr.raw || ''}）${pr.formAsin && pr.formAsin !== p.asin ? ' · 买箱其实是变体 ' + pr.formAsin : ''}`);
@@ -723,7 +753,7 @@ if (PROBE_ON && probeRetry.length) {
       console.log(`    [补采] ${item.asin} 商品页仍被拦，放弃（保留页面口径的状态值）`);
       stillFailed++; continue;
     }
-    const pr = await probeStock(item.asin, r.text, item.title);
+    const pr = await probeStock(item.asin, r.text, item.title, rec.purchaseLimit || null);
     if (pr.probed) {
       const conf = applyProbeResult(rec, pr, item.asin);
       saved++;
