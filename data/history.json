@@ -1139,16 +1139,19 @@
       "rating": 4.5,
       "reviews": 67,
       "bsrSmall": {
-        "rank": 23,
+        "rank": 24,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 93138,
+        "rank": 95206,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 100,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 100"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1158,8 +1161,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:15:27.859Z",
-      "timingMs": 1934
+      "fetchedAt": "2026-09-25T07:09:31.540Z",
+      "timingMs": 2380,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 100"
     },
     "B0C9TCZ7WC": {
       "asin": "B0C9TCZ7WC",
@@ -1175,16 +1179,19 @@
       "rating": 4,
       "reviews": 41,
       "bsrSmall": {
-        "rank": 17,
+        "rank": 19,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 65571,
+        "rank": 66930,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 164,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 164"
       },
       "purchaseLimit": null,
       "boughtPastMonth": 50,
@@ -1194,8 +1201,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:15:38.073Z",
-      "timingMs": 2213
+      "fetchedAt": "2026-09-25T07:09:44.563Z",
+      "timingMs": 1903,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 164"
     },
     "B09MYYVC3H": {
       "asin": "B09MYYVC3H",
@@ -1211,16 +1219,19 @@
       "rating": 4.4,
       "reviews": 70,
       "bsrSmall": {
-        "rank": 62,
+        "rank": 61,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 207849,
+        "rank": 205292,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 37,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 37"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1230,8 +1241,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:15:47.960Z",
-      "timingMs": 1883
+      "fetchedAt": "2026-09-25T07:09:57.800Z",
+      "timingMs": 2181,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 37"
     },
     "B0DR8RDRFM": {
       "asin": "B0DR8RDRFM",
@@ -1247,16 +1259,19 @@
       "rating": 3.9,
       "reviews": 23,
       "bsrSmall": {
-        "rank": 213,
+        "rank": 207,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 704848,
+        "rank": 684552,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 44,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 44"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1266,8 +1281,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:15:57.713Z",
-      "timingMs": 1749
+      "fetchedAt": "2026-09-25T07:10:10.603Z",
+      "timingMs": 1745,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 44"
     },
     "B0C6GK3KWB": {
       "asin": "B0C6GK3KWB",
@@ -1283,11 +1299,11 @@
       "rating": 5,
       "reviews": 1,
       "bsrSmall": {
-        "rank": 487,
+        "rank": 475,
         "label": "Fixturing Clamps"
       },
       "bsrLarge": {
-        "rank": 619414,
+        "rank": 611446,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -1302,8 +1318,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:16:07.299Z",
-      "timingMs": 1582
+      "fetchedAt": "2026-09-25T07:10:23.168Z",
+      "timingMs": 1711
     },
     "B09F358TBV": {
       "asin": "B09F358TBV",
@@ -1319,16 +1335,19 @@
       "rating": 4.5,
       "reviews": 179,
       "bsrSmall": {
-        "rank": 79,
+        "rank": 77,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 67141,
+        "rank": 67137,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 136,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 136"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1338,8 +1357,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:16:17.179Z",
-      "timingMs": 1879
+      "fetchedAt": "2026-09-25T07:10:33.071Z",
+      "timingMs": 1898,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 136"
     },
     "B0F9WLV5CY": {
       "asin": "B0F9WLV5CY",
@@ -1355,16 +1375,19 @@
       "rating": 4.5,
       "reviews": 2,
       "bsrSmall": {
-        "rank": 52,
+        "rank": 53,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 183212,
+        "rank": 186864,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 36,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 36"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1374,8 +1397,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:16:26.742Z",
-      "timingMs": 1559
+      "fetchedAt": "2026-09-25T07:10:46.011Z",
+      "timingMs": 1799,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 36"
     },
     "B09PTSHFZZ": {
       "asin": "B09PTSHFZZ",
@@ -1391,16 +1415,19 @@
       "rating": 4.4,
       "reviews": 73,
       "bsrSmall": {
-        "rank": 359,
+        "rank": 358,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 216772,
+        "rank": 219800,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 57,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 57"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1410,8 +1437,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:16:36.461Z",
-      "timingMs": 1715
+      "fetchedAt": "2026-09-25T07:10:58.820Z",
+      "timingMs": 1794,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 57"
     },
     "B0CHR9SZ8B": {
       "asin": "B0CHR9SZ8B",
@@ -1427,16 +1455,19 @@
       "rating": 5,
       "reviews": 8,
       "bsrSmall": {
-        "rank": 87,
+        "rank": 88,
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 266990,
+        "rank": 273155,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 161,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 161"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1446,8 +1477,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:16:46.063Z",
-      "timingMs": 1598
+      "fetchedAt": "2026-09-25T07:11:11.447Z",
+      "timingMs": 1825,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 161"
     },
     "B07DDFMLG1": {
       "asin": "B07DDFMLG1",
@@ -1467,12 +1499,15 @@
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 608815,
+        "rank": 598141,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 41,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 41"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1482,8 +1517,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:16:55.611Z",
-      "timingMs": 1546
+      "fetchedAt": "2026-09-25T07:11:24.183Z",
+      "timingMs": 1782,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 41"
     },
     "B0CCRTKXXQ": {
       "asin": "B0CCRTKXXQ",
@@ -1499,16 +1535,19 @@
       "rating": 4,
       "reviews": 1,
       "bsrSmall": {
-        "rank": 3021,
+        "rank": 2882,
         "label": "Hardware Brackets"
       },
       "bsrLarge": {
-        "rank": 265042,
+        "rank": 250092,
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 1,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 1"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1518,8 +1557,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:17:05.146Z",
-      "timingMs": 1531
+      "fetchedAt": "2026-09-25T07:11:36.939Z",
+      "timingMs": 1775,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 1"
     },
     "B0CD8B2D38": {
       "asin": "B0CD8B2D38",
@@ -1535,16 +1575,19 @@
       "rating": 4.6,
       "reviews": 36,
       "bsrSmall": {
-        "rank": 30,
+        "rank": 32,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 42979,
+        "rank": 44294,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 21,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 21"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1554,8 +1597,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:17:14.930Z",
-      "timingMs": 1780
+      "fetchedAt": "2026-09-25T07:11:49.860Z",
+      "timingMs": 1982,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 21"
     },
     "B0CN71KT1G": {
       "asin": "B0CN71KT1G",
@@ -1567,7 +1611,7 @@
       "listPrice": 21.99,
       "unitPrice": null,
       "unitLabel": null,
-      "savingsPct": 10,
+      "savingsPct": 11,
       "rating": 4.4,
       "reviews": 41,
       "bsrSmall": {
@@ -1575,12 +1619,15 @@
         "label": "Fixturing Clamps"
       },
       "bsrLarge": {
-        "rank": 70840,
+        "rank": 70627,
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 30,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 30"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1590,8 +1637,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:17:24.796Z",
-      "timingMs": 1862
+      "fetchedAt": "2026-09-25T07:12:03.086Z",
+      "timingMs": 2085,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 30"
     },
     "B0C743SY46": {
       "asin": "B0C743SY46",
@@ -1607,11 +1655,11 @@
       "rating": 5,
       "reviews": 2,
       "bsrSmall": {
-        "rank": 171,
+        "rank": 182,
         "label": "Fixturing Clamps"
       },
       "bsrLarge": {
-        "rank": 249739,
+        "rank": 257850,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -1628,8 +1676,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:17:34.387Z",
-      "timingMs": 1588
+      "fetchedAt": "2026-09-25T07:12:15.942Z",
+      "timingMs": 1730
     },
     "B07L8LDSQD": {
       "asin": "B07L8LDSQD",
@@ -1645,11 +1693,11 @@
       "rating": 4.4,
       "reviews": 31,
       "bsrSmall": {
-        "rank": 228,
+        "rank": 226,
         "label": "Standoffs"
       },
       "bsrLarge": {
-        "rank": 475262,
+        "rank": 460184,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -1664,8 +1712,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:17:43.916Z",
-      "timingMs": 1524
+      "fetchedAt": "2026-09-25T07:12:25.676Z",
+      "timingMs": 1729
     },
     "B099WTYMM6": {
       "asin": "B099WTYMM6",
@@ -1681,11 +1729,11 @@
       "rating": 4.4,
       "reviews": 43,
       "bsrSmall": {
-        "rank": 71,
+        "rank": 70,
         "label": "Standoffs"
       },
       "bsrLarge": {
-        "rank": 144767,
+        "rank": 144016,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -1700,8 +1748,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:17:53.471Z",
-      "timingMs": 1550
+      "fetchedAt": "2026-09-25T07:12:35.373Z",
+      "timingMs": 1693
     },
     "B0CJ8MH322": {
       "asin": "B0CJ8MH322",
@@ -1717,11 +1765,11 @@
       "rating": 4.7,
       "reviews": 9,
       "bsrSmall": {
-        "rank": 411,
+        "rank": 423,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 242754,
+        "rank": 252355,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -1738,8 +1786,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:18:03.069Z",
-      "timingMs": 1597
+      "fetchedAt": "2026-09-25T07:12:45.197Z",
+      "timingMs": 1819
     },
     "B0CBKGVZSW": {
       "asin": "B0CBKGVZSW",
@@ -1755,11 +1803,11 @@
       "rating": 4.4,
       "reviews": 108,
       "bsrSmall": {
-        "rank": 160,
+        "rank": 168,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 116307,
+        "rank": 120022,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -1776,8 +1824,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:18:12.780Z",
-      "timingMs": 1706
+      "fetchedAt": "2026-09-25T07:12:55.077Z",
+      "timingMs": 1875
     },
     "B0C558XRTP": {
       "asin": "B0C558XRTP",
@@ -1793,11 +1841,11 @@
       "rating": 4.8,
       "reviews": 6,
       "bsrSmall": {
-        "rank": 583,
+        "rank": 595,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 347490,
+        "rank": 354744,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -1812,8 +1860,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:18:22.420Z",
-      "timingMs": 1635
+      "fetchedAt": "2026-09-25T07:13:04.801Z",
+      "timingMs": 1720,
+      "stockProbeError": "blocked"
     },
     "B08FB3FLF2": {
       "asin": "B08FB3FLF2",
@@ -1829,29 +1878,28 @@
       "rating": 5,
       "reviews": 5,
       "bsrSmall": {
-        "rank": 241,
+        "rank": 240,
         "label": "Decking Posts"
       },
       "bsrLarge": {
-        "rank": 1301672,
+        "rank": 1298722,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "stock",
-        "qty": 17,
-        "source": "amazon_page",
-        "note": "亚马逊页面原话「Only N left in stock」"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
-      "availabilityText": "Only 17 left in stock - order soon.",
+      "availabilityText": "In Stock",
       "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:18:32.059Z",
-      "timingMs": 1635
+      "fetchedAt": "2026-09-25T07:13:16.427Z",
+      "timingMs": 1669,
+      "stockProbeError": "blocked"
     },
     "B08FB3987P": {
       "asin": "B08FB3987P",
@@ -1867,16 +1915,19 @@
       "rating": 4.8,
       "reviews": 10,
       "bsrSmall": {
-        "rank": 902,
+        "rank": 897,
         "label": "Decking"
       },
       "bsrLarge": {
-        "rank": 1315946,
+        "rank": 1307895,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 179,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 179"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1886,8 +1937,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:18:41.898Z",
-      "timingMs": 1835
+      "fetchedAt": "2026-09-25T07:13:28.203Z",
+      "timingMs": 1707,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 179"
     },
     "B0C8B1XNTD": {
       "asin": "B0C8B1XNTD",
@@ -1903,16 +1955,19 @@
       "rating": 4.4,
       "reviews": null,
       "bsrSmall": {
-        "rank": 470,
+        "rank": 487,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 284461,
+        "rank": 295959,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 28,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 28"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1922,8 +1977,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:18:51.320Z",
-      "timingMs": 1418
+      "fetchedAt": "2026-09-25T07:13:41.063Z",
+      "timingMs": 1639,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 28"
     },
     "B0HJQQ59K7": {
       "asin": "B0HJQQ59K7",
@@ -1952,8 +2008,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:19:00.646Z",
-      "timingMs": 1322
+      "fetchedAt": "2026-09-25T07:13:53.590Z",
+      "timingMs": 1476
     },
     "B0HHXD8SHF": {
       "asin": "B0HHXD8SHF",
@@ -1971,8 +2027,11 @@
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 2,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 2"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1982,8 +2041,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:19:10.129Z",
-      "timingMs": 1479
+      "fetchedAt": "2026-09-25T07:14:03.264Z",
+      "timingMs": 1670,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 2"
     },
     "B0HFWLCSCS": {
       "asin": "B0HFWLCSCS",
@@ -2012,8 +2072,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:19:19.574Z",
-      "timingMs": 1441
+      "fetchedAt": "2026-09-25T07:14:15.723Z",
+      "timingMs": 1656,
+      "stockProbeError": "blocked"
     },
     "B0H2PQCCVB": {
       "asin": "B0H2PQCCVB",
@@ -2026,19 +2087,22 @@
       "unitPrice": null,
       "unitLabel": null,
       "savingsPct": null,
-      "rating": 4.7,
+      "rating": 5,
       "reviews": null,
       "bsrSmall": {
-        "rank": 1246,
+        "rank": 1254,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 791140,
+        "rank": 794130,
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 35,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 35"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -2048,8 +2112,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:19:29.211Z",
-      "timingMs": 1633
+      "fetchedAt": "2026-09-25T07:14:27.300Z",
+      "timingMs": 1729,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 35"
     },
     "B0GZVRY1N6": {
       "asin": "B0GZVRY1N6",
@@ -2067,8 +2132,11 @@
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 89,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "note": "加购探针：请求 999 件被亚马逊夹紧到 89"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -2078,8 +2146,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:19:38.702Z",
-      "timingMs": 1487
+      "fetchedAt": "2026-09-25T07:14:40.110Z",
+      "timingMs": 1793,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 89"
     },
     "B0CJ6HD4R1": {
       "asin": "B0CJ6HD4R1",
@@ -2095,11 +2164,11 @@
       "rating": 4.7,
       "reviews": 9,
       "bsrSmall": {
-        "rank": 411,
+        "rank": 423,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 242754,
+        "rank": 252355,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -2116,8 +2185,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T01:19:48.217Z",
-      "timingMs": 1511
+      "fetchedAt": "2026-09-25T07:14:52.750Z",
+      "timingMs": 1690
     }
   }
 }
