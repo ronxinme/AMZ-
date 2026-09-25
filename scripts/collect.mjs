@@ -230,7 +230,13 @@ async function probeStock(asin, productHtml, title) {
     if (/api-services-support@amazon\.com|Enter the characters you see below/i.test(cart.text || '')) { out.error = 'blocked'; return out; }
 
     const items = readCartItems(cart.text || '');
-    const mine = items.find(x => x.aria && title && x.aria.toLowerCase().indexOf(String(title).slice(0, 40).toLowerCase()) >= 0)
+    /* 认领自己那一条，按可靠度依次尝试：
+       ① 条目里的 data-asin 命中本次加购的 ASIN（或买箱实际指向的变体子 ASIN）—— 最可靠
+       ② 条目 aria-label 里含商品标题前 40 字 —— 标题带变体后缀时可能不匹配
+       ③ 购物车里只有一条 —— 就是它
+       三条都不中说明前一个商品的条目没删干净、购物车串了，如实报 no_match 而不是瞎取。 */
+    const mine = items.find(x => x.nearAsin && (x.nearAsin === formAsin || x.nearAsin === asin))
+      || items.find(x => x.aria && title && x.aria.toLowerCase().indexOf(String(title).slice(0, 40).toLowerCase()) >= 0)
       || (items.length === 1 ? items[0] : null);
     out.cartItems = items.map(x => ({ asin: x.nearAsin, box: x.val, only: x.leftInStock, limit: x.perCustomer }));
 
@@ -241,6 +247,8 @@ async function probeStock(asin, productHtml, title) {
       if (mine.val >= PROBE_QTY) { out.kind = 'stock'; out.qty = PROBE_QTY; out.ge = true; out.raw = `可接受 ${PROBE_QTY} 件，实际库存 ≥ ${PROBE_QTY}`; }
       else if (mine.perCustomer != null && mine.perCustomer === mine.val) { out.kind = 'purchase_limit'; out.qty = mine.val; out.raw = '限购数量（非库存）'; }
       else { out.kind = 'stock'; out.qty = mine.val; out.raw = `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${mine.val}`; }
+    } else {
+      out.error = items.length ? 'no_match_in_cart(' + items.length + ')' : 'cart_empty_after_add';
     }
     await clearProbedCart(cart.text || '');
   } catch (e) { out.error = String(e && e.message || e); }
