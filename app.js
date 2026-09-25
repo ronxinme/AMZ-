@@ -117,7 +117,7 @@ function fmtStock(r) {
       if (s.source === 'amazon_page') {
         inner = `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="pmeta">（亚马逊页面原话）</span>`;
       } else if (s.basis === 'cart_only_n_left') {
-        inner = `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="badge badge-probe" title="加购探针：购物车条目里亚马逊原话 Only N left in stock">加购实测</span>`;
+        inner = `<span class="stock-qty stock-probe">仅剩 ${s.qty} 件</span> <span class="badge badge-probe" title="加购探针：购物车条目里亚马逊原话 Only N left in stock">加购实测</span>`;
       } else if (s.basis === 'atc_seller_available') {
         inner = `<span class="stock-qty stock-probe">库存 ${s.qty} 件</span>`
           + ` <span class="badge badge-probe" title="加购探针：请求 999 件时亚马逊的加购响应里原话写着「than the ${s.qty} available from the seller you've selected」——这是亚马逊自己说出的卖家可售数量，就是库存">加购实测</span>`;
