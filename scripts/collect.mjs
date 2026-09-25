@@ -608,6 +608,31 @@ const lines = [];
 
 const BACKOFF = [3000, 9000, 18000];
 
+/* 把探针结果落到记录上。basis 说明这个数字是怎么来的，前端据此决定措辞：
+     cart_only_n_left   = 购物车里亚马逊原话（最可信，就是库存）
+     probe_ge           = 加购 999 被接受，只能说 ≥999
+     per_customer_limit = 限购数，不是库存
+     max_purchasable    = 被夹到 N，N 是「一次最多能买 N 件」，可能是库存也可能是单笔上限
+   confidence：high = 亚马逊明示；medium = 只能确定上限，不能断言是库存 */
+function applyProbeResult(rec, pr, asin) {
+  const conf = pr.confidence || 'high';
+  rec.stock = {
+    kind: pr.kind, qty: pr.qty, source: 'cart_probe',
+    basis: pr.basis || 'max_purchasable', confidence: conf,
+    note: pr.basis === 'cart_only_n_left' ? '购物车里亚马逊原话「Only N left in stock」'
+      : pr.basis === 'probe_ge' ? `库存 ≥ ${pr.qty}（加购 ${PROBE_QTY} 件被亚马逊接受）`
+        : pr.kind === 'purchase_limit' ? '这是亚马逊限购数，不是库存'
+          : `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限`
+  };
+  rec.stockProbeRaw = pr.raw || null;
+  if (pr.probeRetried) rec.stockProbeRetried = true;
+  if (pr.formAsin && pr.formAsin !== asin) rec.stockProbeVariantAsin = pr.formAsin;
+  delete rec.stockProbeError;
+  return conf;
+}
+/* 探针没取到的商品攒起来，主循环跑完再换会话补一轮 */
+const probeRetry = [];
+
 for (const p of list) {
   let lastErr = null, rec = null, pageHtml = '';
   for (let attempt = 0; attempt < 3 && !rec; attempt++) {
@@ -650,28 +675,12 @@ for (const p of list) {
   if (rec.ok && PROBE_ON && probeNeeded && pageHtml) {
     const pr = await probeStock(p.asin, pageHtml, rec.title || '');
     if (pr.probed) {
-      /* basis 说明这个数字是怎么来的，前端据此决定措辞：
-         cart_only_n_left = 购物车里亚马逊原话（最可信，就是库存）
-         probe_ge         = 加购 999 被接受，只能说 ≥999
-         per_customer_limit = 限购数，不是库存
-         max_purchasable  = 被夹到 N，N 是「一次最多能买 N 件」，可能是库存也可能是单笔上限
-         confidence：high = 亚马逊明示；medium = 只能确定上限，不能断言是库存 */
-      const conf = pr.confidence || 'high';
-      rec.stock = {
-        kind: pr.kind, qty: pr.qty, source: 'cart_probe',
-        basis: pr.basis || 'max_purchasable', confidence: conf,
-        note: pr.basis === 'cart_only_n_left' ? '购物车里亚马逊原话「Only N left in stock」'
-          : pr.basis === 'probe_ge' ? `库存 ≥ ${pr.qty}（加购 ${PROBE_QTY} 件被亚马逊接受）`
-            : pr.kind === 'purchase_limit' ? '这是亚马逊限购数，不是库存'
-              : `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限`
-      };
-      rec.stockProbeRaw = pr.raw || null;
-      if (pr.probeRetried) rec.stockProbeRetried = true;
-      if (pr.formAsin && pr.formAsin !== p.asin) rec.stockProbeVariantAsin = pr.formAsin;
+      const conf = applyProbeResult(rec, pr, p.asin);
       console.log(`    [库存探针] ${p.asin} → ${pr.kind} ${pr.qty} 件 [${pr.basis}/${conf}]${pr.probeRetried ? '(重试后取到)' : ''}（${pr.raw || ''}）${pr.formAsin && pr.formAsin !== p.asin ? ' · 买箱其实是变体 ' + pr.formAsin : ''}`);
     } else {
       rec.stockProbeError = pr.error || 'unknown';
-      console.log(`    [库存探针] ${p.asin} 未取到 · ${pr.error || '-'}`);
+      probeRetry.push({ asin: p.asin, title: rec.title || '' });
+      console.log(`    [库存探针] ${p.asin} 未取到 · ${pr.error || '-'}（已排队收尾补采）`);
     }
     await new Promise(s => setTimeout(s, 1200));
   }
@@ -695,6 +704,38 @@ for (const p of list) {
   lines.push(`| ${rec.ok ? '成功' : '失败'} | ${p.asin} | ${rec.price != null ? '$' + rec.price : '—'} | ${rec.rating ?? '—'} | ${rec.reviews ?? '—'} | ${rec.bsrSmall ? '#' + rec.bsrSmall.rank : '—'} | ${rec.error || (rec.priceSource ? '价源:' + rec.priceSource : '—')} |`);
   console.log(`  ${rec.ok ? 'OK ' : 'ERR'} ${p.asin} price=${rec.price} (src=${rec.priceSource || '-'}${rec.unitPrice ? ', 单价$' + rec.unitPrice + '/' + (rec.unitLabel || 'unit') : ''}) rating=${rec.rating} reviews=${rec.reviews} bsr=${rec.bsrSmall ? rec.bsrSmall.rank : '-'} ${rec.error || ''}`);
   await new Promise(s => setTimeout(s, Math.max(2000, INTERVAL_MS)));
+}
+
+/* 收尾补采：购物车页的验证码是随机的，同一个商品换个会话往往就能过
+   （实测被拦的商品每次不一样，不是商品本身的问题）。
+   主循环跑完后，把探针没取到的商品重建会话再试一轮 —— 这些商品此前只有页面口径的
+   状态值（"有货"），补上精确数字对库存监控的价值很大。 */
+if (PROBE_ON && probeRetry.length) {
+  console.log(`\n收尾补采：${probeRetry.length} 个商品的库存探针没取到，重建会话再试一轮…`);
+  await new Promise(s => setTimeout(s, 20000));
+  let saved = 0, stillFailed = 0;
+  for (const item of probeRetry) {
+    const rec = history[date][item.asin];
+    if (!rec || !rec.ok) continue;
+    const r = await fetchHtml(item.asin, 2);
+    const blocked = !r.ok || !r.text || /Enter the characters you see below|api-services-support@amazon\.com|Robot Check/i.test(r.text);
+    if (blocked) {
+      console.log(`    [补采] ${item.asin} 商品页仍被拦，放弃（保留页面口径的状态值）`);
+      stillFailed++; continue;
+    }
+    const pr = await probeStock(item.asin, r.text, item.title);
+    if (pr.probed) {
+      const conf = applyProbeResult(rec, pr, item.asin);
+      saved++;
+      console.log(`    [补采] ${item.asin} → ${pr.kind} ${pr.qty} 件 [${pr.basis}/${conf}]（${pr.raw || ''}）`);
+    } else {
+      rec.stockProbeError = (pr.error || 'unknown') + '(补采)';
+      stillFailed++;
+      console.log(`    [补采] ${item.asin} 仍未取到 · ${pr.error || '-'}`);
+    }
+    await new Promise(s => setTimeout(s, 2500));
+  }
+  console.log(`收尾补采结束：补回 ${saved} 个，仍有 ${stillFailed} 个没取到\n`);
 }
 
 // 保留最近 3650 天
