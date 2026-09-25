@@ -83,7 +83,10 @@ const fmtBsrL = r => r.bsrLarge ? `<span class="bsr-large">#${r.bsrLarge.rank.to
 /* 库存状态的人类可读短标签，用于「当天数据」和「变化提醒」 */
 function stockLabel(s) {
   const k = (s || {}).kind;
-  if (k === 'stock') return s.source === 'amazon_page' ? `仅剩 ${s.qty} 件` : `库存 ${s.qty}`;
+  if (k === 'stock') {
+    if (s.source === 'amazon_page') return `仅剩 ${s.qty} 件`;
+    return (s.ge ? '≥ ' : '库存 ') + s.qty + ' 件';
+  }
   if (k === 'purchase_limit') return `限购 ${s.qty}`;
   if (k === 'in_stock_no_qty') return '有货';
   if (k === 'unavailable') return '缺货';
@@ -92,19 +95,30 @@ function stockLabel(s) {
 }
 function fmtStock(r) {
   const s = r.stock || { kind: 'unknown' };
-  const manual = s.source === 'manual' ? ' <span class="badge badge-manual">手工</span>' : '';
   let inner;
   switch (s.kind) {
-    case 'stock': inner = s.source === 'amazon_page'
-      ? `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="pmeta">（亚马逊页面原话）</span>`
-      : `<span class="stock-qty">库存 ${s.qty}</span>${manual}`; break;
-    case 'purchase_limit': inner = `<span class="stock-limit">限购 ${s.qty}</span>${manual}`; break;
-    case 'in_stock_no_qty': inner = `<span class="stock-noqty">有货，数量未显示</span>${manual}`; break;
+    case 'stock':
+      if (s.source === 'amazon_page') {
+        inner = `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="pmeta">（亚马逊页面原话）</span>`;
+      } else {
+        const badge = s.source === 'cart_probe'
+          ? ' <span class="badge badge-probe" title="加购探针：把数量设成 999 加入匿名购物车，亚马逊把它夹紧后的数量">加购实测</span>'
+          : (s.source === 'manual' ? ' <span class="badge badge-manual">手工</span>' : '');
+        inner = `<span class="stock-qty">${s.ge ? '≥ ' + s.qty : '库存 ' + s.qty} 件</span>${badge}`;
+      }
+      break;
+    case 'purchase_limit': inner = `<span class="stock-limit">限购 ${s.qty}</span>`; break;
+    case 'in_stock_no_qty': inner = '<span class="stock-noqty">有货，数量未显示</span>'; break;
     case 'unavailable': inner = '<span class="stock-na">不可购买 / 缺货</span>'; break;
     case 'no_offer': inner = '<span class="stock-nooffer">无主报价</span> <span class="pmeta">（亚马逊未展示购买框）</span>'; break;
     default: inner = '<span class="stock-unknown">库存未获取</span>';
   }
-  const tip = r.availabilityText ? ` title="亚马逊页面原话：${esc(r.availabilityText)}"` : '';
+  const tips = [];
+  if (r.availabilityText) tips.push('亚马逊页面原话：' + r.availabilityText);
+  if (s.note) tips.push(s.note);
+  if (r.stockProbeError) tips.push('加购探针未取到：' + r.stockProbeError);
+  if (r.stockProbeVariantAsin) tips.push('买箱实际指向变体子 ASIN ' + r.stockProbeVariantAsin);
+  const tip = tips.length ? ` title="${esc(tips.join('\n'))}"` : '';
   return tip ? `<span${tip}>${inner}</span>` : inner;
 }
 const fmtStatus = r => !r ? '<span class="badge badge-none">未采集</span>'
@@ -260,8 +274,8 @@ function stockAlerts() {
     };
     if (s.kind === 'unavailable') g[isOwn ? 1 : 2].push(Object.assign(item, { tag: '已断货 / 不可购买' }));
     else if (s.kind === 'no_offer') g[isOwn ? 1 : 2].push(Object.assign(item, { tag: '无主报价（无购买框）' }));
-    else if (s.kind === 'stock' && s.qty != null && s.qty <= lowStockQty) g[isOwn ? 1 : 2].push(Object.assign(item, { tag: '仅剩 ' + s.qty + ' 件' }));
-    else if (s.kind === 'stock') g[3].push(Object.assign(item, { tag: '仅剩 ' + s.qty + ' 件' }));
+    else if (s.kind === 'stock' && s.qty != null && s.qty <= lowStockQty) g[isOwn ? 1 : 2].push(Object.assign(item, { tag: stockLabel(s) }));
+    else if (s.kind === 'stock') g[3].push(Object.assign(item, { tag: stockLabel(s) }));
     else if (s.kind === 'purchase_limit') g[3].push(Object.assign(item, { tag: '限购 ' + s.qty + ' 件' }));
   }
 
@@ -324,17 +338,21 @@ function renderStockAlert() {
 /* 历史表格列很窄，这里用紧凑写法 + 悬浮提示，避免折行 */
 function histStock(r) {
   const s = r.stock || { kind: 'unknown' };
-  const manual = s.source === 'manual' ? '（手工补录）' : '';
-  const raw = r.availabilityText ? `｜亚马逊原话：${esc(r.availabilityText)}` : '';
+  const raw = [];
+  if (r.availabilityText) raw.push('亚马逊原话：' + r.availabilityText);
+  if (s.note) raw.push(s.note);
+  if (r.stockProbeError) raw.push('加购探针未取到：' + r.stockProbeError);
+  if (r.stockProbeVariantAsin) raw.push('买箱实际指向变体子 ASIN ' + r.stockProbeVariantAsin);
+  const tip = raw.length ? '｜' + raw.join('｜') : '';
   switch (s.kind) {
-    case 'stock': return s.source === 'amazon_page'
-      ? `<span class="stock-qty" title="亚马逊页面原话「Only ${s.qty} left in stock」">仅剩 ${s.qty} 件</span>`
-      : `<span class="stock-qty" title="库存 ${s.qty}${manual}">库存 ${s.qty}</span>`;
-    case 'purchase_limit': return `<span class="stock-limit" title="限购 ${s.qty} 件${manual}">限购 ${s.qty}</span>`;
-    case 'in_stock_no_qty': return `<span class="stock-noqty" title="有货，但亚马逊没给数量${raw}">有货</span>`;
-    case 'unavailable': return `<span class="stock-na" title="不可购买 / 缺货${raw}">缺货</span>`;
-    case 'no_offer': return `<span class="stock-nooffer" title="亚马逊没有展示购买框（可能只剩第三方卖家，或该 ASIN 已下架）${raw}">无主报价</span>`;
-    default: return `<span class="stock-unknown" title="库存未获取${raw}">未知</span>`;
+    case 'stock':
+      if (s.source === 'amazon_page') return `<span class="stock-qty" title="亚马逊页面原话「Only ${s.qty} left in stock」">仅剩 ${s.qty} 件</span>`;
+      return `<span class="stock-qty" title="加购实测：把数量设成 999 加入匿名购物车，亚马逊夹紧后的数量${tip}">${s.ge ? '≥' : ''}${s.qty} 件</span>`;
+    case 'purchase_limit': return `<span class="stock-limit" title="限购 ${s.qty} 件（亚马逊限购数，不是库存）${tip}">限购 ${s.qty}</span>`;
+    case 'in_stock_no_qty': return `<span class="stock-noqty" title="有货，但亚马逊没给数量${tip}">有货</span>`;
+    case 'unavailable': return `<span class="stock-na" title="不可购买 / 缺货${tip}">缺货</span>`;
+    case 'no_offer': return `<span class="stock-nooffer" title="亚马逊没有展示购买框（可能只剩第三方卖家，或该 ASIN 已下架）${tip}">无主报价</span>`;
+    default: return `<span class="stock-unknown" title="库存未获取${tip}">未知</span>`;
   }
 }
 const histPrice = r => {
