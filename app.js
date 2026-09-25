@@ -84,8 +84,15 @@ const fmtBsrL = r => r.bsrLarge ? `<span class="bsr-large">#${r.bsrLarge.rank.to
 function stockLabel(s) {
   const k = (s || {}).kind;
   if (k === 'stock') {
-    if (s.source === 'amazon_page') return `仅剩 ${s.qty} 件`;
-    return (s.ge ? '≥ ' : '库存 ') + s.qty + ' 件';
+    /* 口径按来源分层，绝不把「加购上限」冒充成「库存」：
+       amazon_page        → 亚马逊页面原话 Only N left
+       cart_only_n_left   → 购物车里亚马逊原话 Only N left（同样是库存）
+       probe_ge           → 加购 999 被接受，只能说 ≥999
+       max_purchasable    → 被夹到 N，N 是「一次最多能买 N 件」，可能是库存也可能是单笔上限 */
+    if (s.source === 'amazon_page' || s.basis === 'cart_only_n_left') return `仅剩 ${s.qty} 件`;
+    if (s.ge || s.basis === 'probe_ge') return `≥ ${s.qty} 件`;
+    if (s.basis === 'max_purchasable' || s.confidence === 'medium') return `最多 ${s.qty} 件`;
+    return `库存 ${s.qty} 件`;
   }
   if (k === 'purchase_limit') return `限购 ${s.qty}`;
   if (k === 'in_stock_no_qty') return '有货';
@@ -100,11 +107,21 @@ function fmtStock(r) {
     case 'stock':
       if (s.source === 'amazon_page') {
         inner = `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="pmeta">（亚马逊页面原话）</span>`;
+      } else if (s.basis === 'cart_only_n_left') {
+        inner = `<span class="stock-qty">仅剩 ${s.qty} 件</span> <span class="badge badge-probe" title="加购探针：购物车条目里亚马逊原话 Only N left in stock">加购实测</span>`;
       } else {
         const badge = s.source === 'cart_probe'
-          ? ' <span class="badge badge-probe" title="加购探针：把数量设成 999 加入匿名购物车，亚马逊把它夹紧后的数量">加购实测</span>'
+          ? ' <span class="badge badge-probe" title="加购探针：把数量设成 999 加入匿名购物车，读取亚马逊夹紧后的数量">加购实测</span>'
           : (s.source === 'manual' ? ' <span class="badge badge-manual">手工</span>' : '');
-        inner = `<span class="stock-qty${s.source === 'cart_probe' ? ' stock-probe' : ''}">${s.ge ? '≥ ' + s.qty : '库存 ' + s.qty} 件</span>${badge}`;
+        /* 夹紧值只能说明「一次最多能买 N 件」，不敢写成「库存 N 件」——N 也可能是单笔上限 */
+        const isClamp = s.basis === 'max_purchasable' || s.confidence === 'medium';
+        const text = s.basis === 'probe_ge' || s.ge ? '≥ ' + s.qty + ' 件'
+          : isClamp ? '最多 ' + s.qty + ' 件'
+            : '库存 ' + s.qty + ' 件';
+        const own = isClamp
+          ? ` title="加购实测：把数量设成 999 加入匿名购物车，亚马逊把它夹到 ${s.qty}。即「一次最多能买 ${s.qty} 件」——可能是库存，也可能是单笔订单上限，亚马逊没明示"`
+          : (s.basis === 'probe_ge' ? ` title="加购实测：请求 999 件被亚马逊接受，只能确定库存 ≥ ${s.qty}"` : '');
+        inner = `<span class="stock-qty${s.source === 'cart_probe' ? ' stock-probe' : ''}"${own}>${text}</span>${badge}`;
       }
       break;
     case 'purchase_limit': inner = `<span class="stock-limit">限购 ${s.qty}</span>`; break;
@@ -347,7 +364,10 @@ function histStock(r) {
   switch (s.kind) {
     case 'stock':
       if (s.source === 'amazon_page') return `<span class="stock-qty" title="亚马逊页面原话「Only ${s.qty} left in stock」">仅剩 ${s.qty} 件</span>`;
-      return `<span class="stock-qty stock-probe" title="加购实测：把数量设成 999 加入匿名购物车，亚马逊夹紧后的数量${tip}">${s.ge ? '≥' : ''}${s.qty} 件</span>`;
+      if (s.basis === 'cart_only_n_left') return `<span class="stock-qty stock-probe" title="加购实测：购物车条目里亚马逊原话 Only ${s.qty} left in stock${tip}">仅剩 ${s.qty} 件</span>`;
+      if (s.basis === 'probe_ge' || s.ge) return `<span class="stock-qty stock-probe" title="加购实测：请求 999 件被接受，只能确定 ≥${s.qty}${tip}">≥${s.qty} 件</span>`;
+      if (s.basis === 'max_purchasable' || s.confidence === 'medium') return `<span class="stock-qty stock-probe" title="加购实测：亚马逊把数量夹到 ${s.qty}，即一次最多能买 ${s.qty} 件（可能是库存，也可能是单笔上限）${tip}">最多 ${s.qty} 件</span>`;
+      return `<span class="stock-qty stock-probe" title="加购实测${tip}">${s.qty} 件</span>`;
     case 'purchase_limit': return `<span class="stock-limit" title="限购 ${s.qty} 件（亚马逊限购数，不是库存）${tip}">限购 ${s.qty}</span>`;
     case 'in_stock_no_qty': return `<span class="stock-noqty" title="有货，但亚马逊没给数量${tip}">有货</span>`;
     case 'unavailable': return `<span class="stock-na" title="不可购买 / 缺货${tip}">缺货</span>`;
