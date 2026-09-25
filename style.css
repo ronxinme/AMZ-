@@ -114,7 +114,15 @@ td.num-cell { font-family: Consolas, monospace; font-size: 13.5px; }
 .alert-head .alert-meta { font-weight: 400; color: var(--muted); font-size: 12px; }
 .alert-head select { padding: 3px 6px; font-size: 12px; }
 .alert-group { display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-.ag-label { flex: none; font-size: 11.5px; border-radius: 8px; padding: 2px 9px; white-space: nowrap; margin-top: 2px; }
+/* 分组标题本身就是折叠按钮（2026-09-25 起三个分组都可折叠） */
+.ag-label { flex: none; font-size: 11.5px; border-radius: 8px; padding: 2px 9px; white-space: nowrap; margin-top: 2px;
+  border: 0; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.ag-label:hover { filter: brightness(0.94); }
+.ag-label:focus-visible { outline: 2px solid var(--green); outline-offset: 1px; }
+.ag-caret { font-size: 9px; opacity: .8; }
+.ag-count::before { content: '· '; opacity: .6; }
+.alert-group.folded .alert-chips { display: none; }
+.alert-group.folded { margin-top: 6px; }
 .ag-red { background: #fdeae7; color: var(--red); font-weight: 700; }
 .ag-amber { background: #fff2d9; color: #a06a00; font-weight: 700; }
 .ag-gray { background: #eef2f1; color: var(--muted); }
@@ -131,8 +139,18 @@ td.num-cell { font-family: Consolas, monospace; font-size: 13.5px; }
 .alert-foot b { color: var(--red); }
 
 /* 历史对比：前两列固定（商品信息 + 指标名），日期列只显示数值 */
+/* 2026-09-25：每个商品占 6 行（售价/星级/评论/近月销量/BSR/库存），行距累计起来非常占高度，
+   所以这里单独把行高压紧 —— 只影响本表，不动其他表格。 */
 .hist-table { table-layout: fixed; min-width: 0; border-collapse: separate; border-spacing: 0; }
-.hist-table th, .hist-table td { padding: 4px 8px; }
+.hist-table th, .hist-table td { padding: 2px 8px; line-height: 1.2; }
+.hist-table thead th { padding: 5px 8px; }
+.hist-table td.num-cell { font-size: 12.5px; }
+/* 商品信息格跨 6 行，顺势把缩略图和信息行也压紧，避免它反过来撑高整块 */
+.hist-table td.prod-col .pcell { gap: 6px; }
+.hist-table td.prod-col .pimg,
+.hist-table td.prod-col .pimg-ph { width: 30px; height: 30px; border-radius: 5px; }
+.hist-table td.prod-col .pname { font-size: 12px; line-height: 1.25; }
+.hist-table td.prod-col .pmeta { font-size: 10.5px; line-height: 1.3; }
 
 .hist-table thead th { background: var(--green-dark); color: #fff; position: sticky; top: 0; z-index: 5; }
 .hist-table thead th.prod-col { left: 0; z-index: 8; }
