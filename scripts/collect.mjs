@@ -149,7 +149,11 @@ function extractAtcForm(html) {
 }
 
 /* 按「条目区块」读购物车：每个 quantityBox 后面紧跟的就是本条目自己的信息，
-   这样不会误抓推荐位里邻居商品的库存。 */
+   这样不会误抓推荐位里邻居商品的库存。
+   注意（2026-09-25 修正）：亚马逊把「Only N left in stock」写在**标题下方**，
+   也就是 quantityBox **之前**约 6-7 千字符处，不是之后。早期版本只在之后找，
+   导致 leftInStock 永远为 null（实测 17 个商品命中 0 个），白白丢掉了最可信的那档数字。
+   现在两侧都找，但仍用「上一个 data-asin 的位置」把搜索框在本条目内，不越界到邻居条目。 */
 function readCartItems(cartHtml) {
   const items = [];
   for (const m of cartHtml.matchAll(/<input\b[^>]*name="quantityBox"[^>]*>/gi)) {
@@ -158,10 +162,13 @@ function readCartItems(cartHtml) {
     const aria = decodeEntities((m[0].match(/aria-label="([^"]*)"/) || [])[1] || '');
     const back = cartHtml.slice(Math.max(0, idx - 80000), idx);
     const as = [...back.matchAll(/data-asin="([A-Z0-9]{10})"/g)];
-    const fwd = cartHtml.slice(idx, idx + 8000).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-    const mOnly = fwd.match(/only\s+([\d,]+)\s+left in stock/i);
-    const mOf = fwd.match(/only\s+([\d,]+)\s+of these available/i);
-    const mLimit = fwd.match(/limit\s+of\s+([\d,]+)\s+per customer/i);
+    /* 本条目区块的起点：最后一个 data-asin 的位置；找不到就退回到 20000 字符前 */
+    const blockStart = as.length ? Math.max(0, (idx - 80000) + as[as.length - 1].index) : Math.max(0, idx - 20000);
+    const own = cartHtml.slice(blockStart, idx + 8000).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+    const mOnly = own.match(/only\s+([\d,]+)\s+left in stock/i);
+    const mOf = own.match(/only\s+([\d,]+)\s+of these available/i);
+    const mLimit = own.match(/limit\s+of\s+([\d,]+)\s+per customer/i)
+      || own.match(/limit\s+([\d,]+)\s+per customer/i);
     if (!isNaN(val)) items.push({
       val, aria,
       nearAsin: as.length ? as[as.length - 1][1] : '',
@@ -221,13 +228,22 @@ async function probeStock(asin, productHtml, title) {
     out.postStatus = post.status;
     if (post.status !== 200) { out.error = 'post_' + post.status; return out; }
 
-    /* 关键：POST 响应里没有 quantityBox，必须再单独 GET 一次购物车页 */
-    const ch = chromeHeaders(0);
-    ch['Cookie'] = cookieHeader();
-    ch['Sec-Fetch-Site'] = 'same-origin';
-    const cart = await http('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart', { headers: ch, redirect: 'follow' }, 25000);
+    /* 关键：POST 响应里没有 quantityBox，必须再单独 GET 一次购物车页。
+       购物车页偶尔会被验证码拦（实测云端 20 次里约 3 次）。被拦时重建会话再试一次 ——
+       重新预热会换一批 Cookie，通常就能过；还不行就如实记 blocked，不硬编数据。 */
+    let cart = await http('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart', { headers: Object.assign({}, chromeHeaders(0), { Cookie: cookieHeader(), 'Sec-Fetch-Site': 'same-origin' }), redirect: 'follow' }, 25000);
     absorbCookies(cart.res);
-    if (/api-services-support@amazon\.com|Enter the characters you see below/i.test(cart.text || '')) { out.error = 'blocked'; return out; }
+    if (/api-services-support@amazon\.com|Enter the characters you see below/i.test(cart.text || '')) {
+      await warmSession(1);
+      await new Promise(s => setTimeout(s, 2500));
+      const ch2 = chromeHeaders(1);
+      ch2['Cookie'] = cookieHeader();
+      ch2['Sec-Fetch-Site'] = 'same-origin';
+      cart = await http('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart', { headers: ch2, redirect: 'follow' }, 25000);
+      absorbCookies(cart.res);
+      out.probeRetried = true;
+      if (/api-services-support@amazon\.com|Enter the characters you see below/i.test(cart.text || '')) { out.error = 'blocked_after_retry'; return out; }
+    }
 
     const items = readCartItems(cart.text || '');
     /* 认领自己那一条，按可靠度依次尝试：
@@ -241,12 +257,30 @@ async function probeStock(asin, productHtml, title) {
     out.cartItems = items.map(x => ({ asin: x.nearAsin, box: x.val, only: x.leftInStock, limit: x.perCustomer }));
 
     if (mine && mine.leftInStock != null) {
-      out.probed = true; out.kind = 'stock'; out.qty = mine.leftInStock; out.raw = '购物车条目里亚马逊原话 only N left in stock';
+      /* 最高可信度：亚马逊自己在购物车条目里写了 only N left in stock —— 这就是库存 */
+      out.probed = true; out.kind = 'stock'; out.qty = mine.leftInStock;
+      out.basis = 'cart_only_n_left'; out.confidence = 'high';
+      out.raw = '购物车条目里亚马逊原话 only N left in stock';
     } else if (mine) {
       out.probed = true;
-      if (mine.val >= PROBE_QTY) { out.kind = 'stock'; out.qty = PROBE_QTY; out.ge = true; out.raw = `可接受 ${PROBE_QTY} 件，实际库存 ≥ ${PROBE_QTY}`; }
-      else if (mine.perCustomer != null && mine.perCustomer === mine.val) { out.kind = 'purchase_limit'; out.qty = mine.val; out.raw = '限购数量（非库存）'; }
-      else { out.kind = 'stock'; out.qty = mine.val; out.raw = `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${mine.val}`; }
+      if (mine.val >= PROBE_QTY) {
+        out.kind = 'stock'; out.qty = PROBE_QTY; out.ge = true;
+        out.basis = 'probe_ge'; out.confidence = 'high';
+        out.raw = `可接受 ${PROBE_QTY} 件，实际库存 ≥ ${PROBE_QTY}`;
+      } else if (mine.perCustomer != null && mine.perCustomer === mine.val) {
+        out.kind = 'purchase_limit'; out.qty = mine.val;
+        out.basis = 'per_customer_limit'; out.confidence = 'high';
+        out.raw = '限购数量（非库存）';
+      } else {
+        /* 亚马逊没写「only N left」，只把数量夹到了 N。
+           N 的准确含义是「这个商品一次最多能买 N 件」——
+           它可能是真实库存（库存不足所以夹住），也可能是单笔订单上限（亚马逊不一定打印限购文案）。
+           两种情况下 N 都是可信的硬事实，但**不能断言是库存**，所以 basis 单独标出来，
+           前端显示成「最多 N 件」而不是「库存 N 件」。 */
+        out.kind = 'stock'; out.qty = mine.val;
+        out.basis = 'max_purchasable'; out.confidence = 'medium';
+        out.raw = `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${mine.val}（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）`;
+      }
     } else {
       out.error = items.length ? 'no_match_in_cart(' + items.length + ')' : 'cart_empty_after_add';
     }
@@ -616,14 +650,25 @@ for (const p of list) {
   if (rec.ok && PROBE_ON && probeNeeded && pageHtml) {
     const pr = await probeStock(p.asin, pageHtml, rec.title || '');
     if (pr.probed) {
+      /* basis 说明这个数字是怎么来的，前端据此决定措辞：
+         cart_only_n_left = 购物车里亚马逊原话（最可信，就是库存）
+         probe_ge         = 加购 999 被接受，只能说 ≥999
+         per_customer_limit = 限购数，不是库存
+         max_purchasable  = 被夹到 N，N 是「一次最多能买 N 件」，可能是库存也可能是单笔上限
+         confidence：high = 亚马逊明示；medium = 只能确定上限，不能断言是库存 */
+      const conf = pr.confidence || 'high';
       rec.stock = {
-        kind: pr.kind, qty: pr.qty, source: 'cart_probe', basis: 'max_purchasable',
-        note: pr.ge ? `库存 ≥ ${pr.qty}（加购 ${PROBE_QTY} 件被接受）`
-          : (pr.kind === 'purchase_limit' ? '这是亚马逊限购数，不是库存' : `加购探针：请求 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}`)
+        kind: pr.kind, qty: pr.qty, source: 'cart_probe',
+        basis: pr.basis || 'max_purchasable', confidence: conf,
+        note: pr.basis === 'cart_only_n_left' ? '购物车里亚马逊原话「Only N left in stock」'
+          : pr.basis === 'probe_ge' ? `库存 ≥ ${pr.qty}（加购 ${PROBE_QTY} 件被亚马逊接受）`
+            : pr.kind === 'purchase_limit' ? '这是亚马逊限购数，不是库存'
+              : `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限`
       };
       rec.stockProbeRaw = pr.raw || null;
+      if (pr.probeRetried) rec.stockProbeRetried = true;
       if (pr.formAsin && pr.formAsin !== p.asin) rec.stockProbeVariantAsin = pr.formAsin;
-      console.log(`    [库存探针] ${p.asin} → ${pr.kind} ${pr.qty} 件（${pr.raw || ''}）${pr.formAsin && pr.formAsin !== p.asin ? ' · 买箱其实是变体 ' + pr.formAsin : ''}`);
+      console.log(`    [库存探针] ${p.asin} → ${pr.kind} ${pr.qty} 件 [${pr.basis}/${conf}]${pr.probeRetried ? '(重试后取到)' : ''}（${pr.raw || ''}）${pr.formAsin && pr.formAsin !== p.asin ? ' · 买箱其实是变体 ' + pr.formAsin : ''}`);
     } else {
       rec.stockProbeError = pr.error || 'unknown';
       console.log(`    [库存探针] ${p.asin} 未取到 · ${pr.error || '-'}`);
