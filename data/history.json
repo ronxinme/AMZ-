@@ -1143,7 +1143,7 @@
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 95206,
+        "rank": 95200,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -1162,10 +1162,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:48:43.487Z",
-      "timingMs": 2432,
-      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 100（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）",
-      "stockProbeRetried": true
+      "fetchedAt": "2026-09-25T08:40:36.846Z",
+      "timingMs": 2281,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 100（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0C9TCZ7WC": {
       "asin": "B0C9TCZ7WC",
@@ -1204,8 +1203,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:48:59.308Z",
-      "timingMs": 2024,
+      "fetchedAt": "2026-09-25T08:40:49.780Z",
+      "timingMs": 1982,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 164（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B09MYYVC3H": {
@@ -1231,11 +1230,11 @@
       },
       "stock": {
         "kind": "stock",
-        "qty": 37,
+        "qty": 38,
         "source": "cart_probe",
         "basis": "max_purchasable",
         "confidence": "medium",
-        "note": "加购 999 件被亚马逊夹紧到 37；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限"
+        "note": "加购 999 件被亚马逊夹紧到 38；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1245,10 +1244,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:49:11.424Z",
-      "timingMs": 1937,
-      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 37（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）",
-      "stockProbeRetried": true
+      "fetchedAt": "2026-09-25T08:41:02.756Z",
+      "timingMs": 1880,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 38（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0DR8RDRFM": {
       "asin": "B0DR8RDRFM",
@@ -1287,8 +1285,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:49:27.436Z",
-      "timingMs": 1903,
+      "fetchedAt": "2026-09-25T08:41:15.273Z",
+      "timingMs": 1736,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 44（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0C6GK3KWB": {
@@ -1305,11 +1303,11 @@
       "rating": 5,
       "reviews": 1,
       "bsrSmall": {
-        "rank": 475,
+        "rank": 476,
         "label": "Fixturing Clamps"
       },
       "bsrLarge": {
-        "rank": 611446,
+        "rank": 611503,
         "label": "Industrial & Scientific"
       },
       "stock": {
@@ -1324,8 +1322,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:49:40.410Z",
-      "timingMs": 1734
+      "fetchedAt": "2026-09-25T08:41:27.833Z",
+      "timingMs": 1658
     },
     "B09F358TBV": {
       "asin": "B09F358TBV",
@@ -1364,8 +1362,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:49:50.424Z",
-      "timingMs": 2010,
+      "fetchedAt": "2026-09-25T08:41:37.610Z",
+      "timingMs": 1773,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 136（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0F9WLV5CY": {
@@ -1405,8 +1403,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:50:03.604Z",
-      "timingMs": 1843,
+      "fetchedAt": "2026-09-25T08:41:50.301Z",
+      "timingMs": 1707,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 36（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B09PTSHFZZ": {
@@ -1446,10 +1444,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:50:17.047Z",
-      "timingMs": 2094,
-      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 57（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）",
-      "stockProbeRetried": true
+      "fetchedAt": "2026-09-25T08:42:02.874Z",
+      "timingMs": 1696,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 57（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0CHR9SZ8B": {
       "asin": "B0CHR9SZ8B",
@@ -1488,10 +1485,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:50:32.567Z",
-      "timingMs": 1847,
-      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 161（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）",
-      "stockProbeRetried": true
+      "fetchedAt": "2026-09-25T08:42:15.570Z",
+      "timingMs": 1848,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 161（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B07DDFMLG1": {
       "asin": "B07DDFMLG1",
@@ -1511,7 +1507,7 @@
         "label": "Stair Brackets"
       },
       "bsrLarge": {
-        "rank": 598141,
+        "rank": 598175,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -1530,8 +1526,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:50:47.807Z",
-      "timingMs": 1783,
+      "fetchedAt": "2026-09-25T08:42:28.013Z",
+      "timingMs": 1769,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 41（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0CCRTKXXQ": {
@@ -1556,12 +1552,12 @@
         "label": "Industrial & Scientific"
       },
       "stock": {
-        "kind": "stock",
+        "kind": "purchase_limit",
         "qty": 1,
         "source": "cart_probe",
-        "basis": "max_purchasable",
-        "confidence": "medium",
-        "note": "加购 999 件被亚马逊夹紧到 1；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限"
+        "basis": "inferred_limit",
+        "confidence": "high",
+        "note": "推断为单笔限购：只允许买 1 件，而亚马逊既没写「Only N left in stock」（有低库存一定会写），也没写限购文案 —— 说明库存高于 1，1 来自购买数量限制"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -1571,9 +1567,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:51:00.562Z",
-      "timingMs": 1865,
-      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 1（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
+      "fetchedAt": "2026-09-25T08:42:40.541Z",
+      "timingMs": 1729,
+      "stockProbeRaw": "只允许买 1 件，且页面与购物车都没有「Only N left」文案 → 判定为单笔限购（库存高于 1）"
     },
     "B0CD8B2D38": {
       "asin": "B0CD8B2D38",
@@ -1612,8 +1608,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:51:13.425Z",
-      "timingMs": 1798,
+      "fetchedAt": "2026-09-25T08:42:53.454Z",
+      "timingMs": 1912,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 21（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0CN71KT1G": {
@@ -1653,8 +1649,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:51:26.635Z",
-      "timingMs": 2174,
+      "fetchedAt": "2026-09-25T08:43:06.262Z",
+      "timingMs": 1828,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 30（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0C743SY46": {
@@ -1692,8 +1688,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:51:39.406Z",
-      "timingMs": 1788
+      "fetchedAt": "2026-09-25T08:43:19.099Z",
+      "timingMs": 1838
     },
     "B07L8LDSQD": {
       "asin": "B07L8LDSQD",
@@ -1728,8 +1724,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:51:49.103Z",
-      "timingMs": 1693
+      "fetchedAt": "2026-09-25T08:43:28.714Z",
+      "timingMs": 1612
     },
     "B099WTYMM6": {
       "asin": "B099WTYMM6",
@@ -1764,8 +1760,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:51:58.809Z",
-      "timingMs": 1701
+      "fetchedAt": "2026-09-25T08:43:38.497Z",
+      "timingMs": 1778
     },
     "B0CJ8MH322": {
       "asin": "B0CJ8MH322",
@@ -1802,8 +1798,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:52:08.576Z",
-      "timingMs": 1764
+      "fetchedAt": "2026-09-25T08:43:48.277Z",
+      "timingMs": 1775
     },
     "B0CBKGVZSW": {
       "asin": "B0CBKGVZSW",
@@ -1840,8 +1836,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:52:18.435Z",
-      "timingMs": 1858
+      "fetchedAt": "2026-09-25T08:43:58.168Z",
+      "timingMs": 1887
     },
     "B0C558XRTP": {
       "asin": "B0C558XRTP",
@@ -1880,8 +1876,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:52:28.193Z",
-      "timingMs": 1753,
+      "fetchedAt": "2026-09-25T08:44:07.949Z",
+      "timingMs": 1776,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 40（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B08FB3FLF2": {
@@ -1902,7 +1898,7 @@
         "label": "Decking Posts"
       },
       "bsrLarge": {
-        "rank": 1298722,
+        "rank": 1298810,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -1921,8 +1917,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:52:40.945Z",
-      "timingMs": 1733,
+      "fetchedAt": "2026-09-25T08:44:20.609Z",
+      "timingMs": 1731,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 25（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B08FB3987P": {
@@ -1943,7 +1939,7 @@
         "label": "Decking"
       },
       "bsrLarge": {
-        "rank": 1307895,
+        "rank": 1307983,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -1962,8 +1958,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:52:53.969Z",
-      "timingMs": 2202,
+      "fetchedAt": "2026-09-25T08:44:33.235Z",
+      "timingMs": 1719,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 179（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0C8B1XNTD": {
@@ -2003,8 +1999,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:53:06.460Z",
-      "timingMs": 1743,
+      "fetchedAt": "2026-09-25T08:44:45.577Z",
+      "timingMs": 1610,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 28（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0HJQQ59K7": {
@@ -2034,8 +2030,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:53:18.450Z",
-      "timingMs": 1364
+      "fetchedAt": "2026-09-25T08:44:57.694Z",
+      "timingMs": 1425
     },
     "B0HHXD8SHF": {
       "asin": "B0HHXD8SHF",
@@ -2053,24 +2049,24 @@
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "stock",
+        "kind": "purchase_limit",
         "qty": 2,
         "source": "cart_probe",
-        "basis": "max_purchasable",
-        "confidence": "medium",
-        "note": "加购 999 件被亚马逊夹紧到 2；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限"
+        "basis": "inferred_limit",
+        "confidence": "high",
+        "note": "推断为单笔限购：只允许买 2 件，而亚马逊既没写「Only N left in stock」（有低库存一定会写），也没写限购文案 —— 说明库存高于 2，2 来自购买数量限制"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
       "availabilityText": null,
-      "image": null,
+      "image": "https://m.media-amazon.com/images/I/61kPwu128QL._SL1313_.jpg",
       "ok": true,
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:53:28.035Z",
-      "timingMs": 1581,
-      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 2（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
+      "fetchedAt": "2026-09-25T08:45:07.231Z",
+      "timingMs": 1533,
+      "stockProbeRaw": "只允许买 2 件，且页面与购物车都没有「Only N left」文案 → 判定为单笔限购（库存高于 2）"
     },
     "B0HFWLCSCS": {
       "asin": "B0HFWLCSCS",
@@ -2088,12 +2084,12 @@
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "stock",
+        "kind": "purchase_limit",
         "qty": 2,
         "source": "cart_probe",
-        "basis": "max_purchasable",
-        "confidence": "medium",
-        "note": "加购 999 件被亚马逊夹紧到 2；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限"
+        "basis": "inferred_limit",
+        "confidence": "high",
+        "note": "推断为单笔限购：只允许买 2 件，而亚马逊既没写「Only N left in stock」（有低库存一定会写），也没写限购文案 —— 说明库存高于 2，2 来自购买数量限制"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -2103,10 +2099,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:53:42.038Z",
-      "timingMs": 1516,
-      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 2（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）",
-      "stockProbeRetried": true
+      "fetchedAt": "2026-09-25T08:45:19.048Z",
+      "timingMs": 1589,
+      "stockProbeRaw": "只允许买 2 件，且页面与购物车都没有「Only N left」文案 → 判定为单笔限购（库存高于 2）"
     },
     "B0H2PQCCVB": {
       "asin": "B0H2PQCCVB",
@@ -2122,11 +2117,11 @@
       "rating": 5,
       "reviews": null,
       "bsrSmall": {
-        "rank": 1254,
+        "rank": 1261,
         "label": "Decking Railings"
       },
       "bsrLarge": {
-        "rank": 794130,
+        "rank": 794180,
         "label": "Tools & Home Improvement"
       },
       "stock": {
@@ -2145,8 +2140,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:53:57.192Z",
-      "timingMs": 1739,
+      "fetchedAt": "2026-09-25T08:45:30.956Z",
+      "timingMs": 1745,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 35（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0GZVRY1N6": {
@@ -2180,8 +2175,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:54:09.658Z",
-      "timingMs": 1668,
+      "fetchedAt": "2026-09-25T08:45:43.005Z",
+      "timingMs": 1569,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 89（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0CJ6HD4R1": {
@@ -2219,7 +2214,7 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-25T07:54:22.049Z",
+      "fetchedAt": "2026-09-25T08:45:55.257Z",
       "timingMs": 1744
     }
   }
