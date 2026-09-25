@@ -16,9 +16,13 @@ on:
         required: false
         default: ''
       stock_probe:
-        description: '库存探针（匿名购物车加购）：0=关闭 1=开启。云端数据中心 IP 下加购多数被拒，默认关闭'
+        description: '库存探针（匿名购物车加购测库存）：1=开启 0=关闭，默认开启'
         required: false
-        default: '0'
+        default: '1'
+      zip:
+        description: '探针使用的美国收货邮编（默认 10001，不设的话部分商品读不到买箱）'
+        required: false
+        default: '10001'
 
 permissions:
   contents: write
@@ -26,6 +30,7 @@ permissions:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    timeout-minutes: 50      # 加了库存探针后耗时翻倍，留足余量
     steps:
       - name: 拉取仓库
         uses: actions/checkout@v4
@@ -45,9 +50,12 @@ jobs:
           SCRAPER_MODE: ${{ secrets.SCRAPER_MODE || 'direct' }}
           SCRAPER_KEY: ${{ secrets.SCRAPER_KEY }}
           INTERVAL_MS: '8000'
+          # 库存探针：复刻「模拟加购直到无法添加」。定时任务也默认开启，要关就设成 0
+          STOCK_PROBE: ${{ github.event_name == 'workflow_dispatch' && inputs.stock_probe || '1' }}
+          # 探针用的美国收货邮编；不设的话「不发中国」的商品亚马逊不展示买箱
+          ZIP: ${{ github.event_name == 'workflow_dispatch' && inputs.zip || '10001' }}
           # 手动点 Run workflow 时强制重采；定时任务不覆盖当天已成功的数据
           FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
-          STOCK_PROBE: ${{ github.event_name == 'workflow_dispatch' && inputs.stock_probe || '0' }}
         run: |
           ARGS=""
           [ -n "${{ inputs.only_asin }}" ] && ARGS="$ARGS --asin ${{ inputs.only_asin }}"
