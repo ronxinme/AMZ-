@@ -311,11 +311,19 @@ function stockAlerts() {
       chg: prevL && prevL !== nowL ? prevL : '',
       tip: [r.availabilityText, s.note].filter(Boolean).join('｜')
     };
+    /* 断货/无主报价 → 直接进「需处理 / 机会窗口」 */
     if (s.kind === 'unavailable') g[isOwn ? 1 : 2].push(Object.assign(item, { tag: '已断货 / 不可购买' }));
     else if (s.kind === 'no_offer') g[isOwn ? 1 : 2].push(Object.assign(item, { tag: '无主报价（无购买框）' }));
-    else if (s.kind === 'stock' && s.qty != null && s.qty <= lowStockQty) g[isOwn ? 1 : 2].push(Object.assign(item, { tag: stockLabel(s) }));
-    else if (s.kind === 'stock') g[3].push(Object.assign(item, { tag: stockLabel(s) }));
-    else if (s.kind === 'purchase_limit') g[3].push(Object.assign(item, { tag: stockLabel(s) }));
+    /* 库存和限购都按「数字小 = 越该看」来分流：
+       数字小的（≤ 低库存阈值）进「自有·需处理 / 竞品·机会窗口」，
+       数字大的进「其他精确数量」当信息垫底。
+       限购也走这条 —— 自家商品被限制单笔只能买 1 件，是要处理的事；
+       竞品被限购，是抢单的窗口。不能让它们掉进「其他」里没人看见。 */
+    else if ((s.kind === 'stock' || s.kind === 'purchase_limit') && s.qty != null && s.qty <= lowStockQty) {
+      g[isOwn ? 1 : 2].push(Object.assign(item, { tag: stockLabel(s) }));
+    } else if (s.kind === 'stock' || s.kind === 'purchase_limit') {
+      g[3].push(Object.assign(item, { tag: stockLabel(s) }));
+    }
   }
 
   /* 组内排序：断货/无主报价（没有数字）排最前，其余按数量从小到大 */
