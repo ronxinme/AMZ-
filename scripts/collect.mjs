@@ -73,87 +73,176 @@ async function warmSession(idx) {
   return cookieHeader();
 }
 
-/* --------- 库存探针：匿名会话加购 999，读取亚马逊给的最大可购买量 --------- */
-/* 说明：全程使用一次性匿名购物车，不会触碰你登录账号的购物车；探针后尽力清空 */
+/* --------- 库存探针：复刻「模拟加购直到无法添加」 --------- */
+/* 原理：加购时把数量写成 999，亚马逊会把它夹到「当前最大可购买量」，
+   再读购物车里的 input[name=quantityBox]，那个数就是库存（或限购上限）。
+   卖家精灵的库存监控用的正是这套机制。
+   实测要点 —— 每条都是踩出来的坑：
+     1. 真实加购接口是 POST /cart/add-to-cart/ref=dp_start-bbf_1_glance。
+        老的 /gp/product/handle-buy-box/ 已废弃，一律返回 404 Page Not Found。
+        字段必须从商品页 form#addToCart 原样解析，自己猜字段一定失败。
+     2. POST 之后必须**再单独 GET 一次购物车页**才读得到 quantityBox ——
+        POST 响应本身不含这个字段（最容易踩的坑，会让人误判为"加购失败"）。
+     3. 必须给匿名会话设美国收货邮编，否则「不发中国」的商品亚马逊根本不展示
+        买箱：form 里 asin / offerListingId / quantity 全缺失，加购按钮也不存在。
+        实测设置后这类商品立刻恢复（失败率从 3/6 降到 0/6）。
+     4. 删条目必须带 anti-csrftoken-a2z，漏了会静默失败、商品在购物车里累积，
+        后面每个商品读到的 quantityBox 都会被污染。
+   局限（如实说明）：数量框 maxlength=3，最多只能探到 999；有限购的商品读到的是
+   限购数而不是真实库存，所以 kind 会标成 purchase_limit。 */
 const PROBE_QTY = Number(process.env.PROBE_QTY || 999);
-async function probeStock(asin, idx, productHtml) {
+const PROBE_ON = process.env.STOCK_PROBE !== '0';   // 默认开启；STOCK_PROBE=0 关闭
+let ZIP_DONE = false;
+
+/* 给匿名会话设美国收货邮编（不设会有商品读不到买箱） */
+async function setUsZip(zip) {
+  if (ZIP_DONE) return true;
+  ZIP_DONE = true;
+  try {
+    const home = await http('https://www.amazon.com/', { headers: Object.assign(chromeHeaders(0), { Cookie: cookieHeader() }), redirect: 'follow' }, 25000);
+    absorbCookies(home.res);
+    const src = home.text || '';
+    const csrf = (src.match(/name="anti-csrftoken-a2z"\s+value="([^"]+)"/) || [])[1]
+      || (src.match(/"anti-csrftoken-a2z"\s*:\s*"([^"]+)"/) || [])[1] || '';
+    const h = chromeHeaders(0);
+    h['Cookie'] = cookieHeader();
+    h['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    h['X-Requested-With'] = 'XMLHttpRequest';
+    h['Accept'] = 'text/html,*/*;q=0.01';
+    h['Sec-Fetch-Mode'] = 'cors';
+    h['Sec-Fetch-Site'] = 'same-origin';
+    h['Referer'] = 'https://www.amazon.com/';
+    h['Origin'] = 'https://www.amazon.com';
+    h['anti-csrftoken-a2z'] = csrf;
+    const body = new URLSearchParams({
+      locationType: 'LOCATION_INPUT', zipCode: zip, storeContext: 'generic',
+      deviceType: 'web', pageType: 'Detail', actionSource: 'glow'
+    });
+    const r = await http('https://www.amazon.com/gp/delivery/ajax/address-change.html', { method: 'POST', headers: h, body: body.toString(), redirect: 'follow' }, 25000);
+    absorbCookies(r.res);
+    let j = null; try { j = JSON.parse(r.text || ''); } catch (e) {}
+    const okZip = !!(j && j.successful && j.isAddressUpdated);
+    console.log(`    [探针] 收货邮编 ${zip}: ${okZip ? '设置成功 ' + [j.address && j.address.city, j.address && j.address.state].filter(Boolean).join(' ') : '设置失败（部分商品可能读不到买箱）'}`);
+    return okZip;
+  } catch (e) { return false; }
+}
+
+/* 从商品页解析真实的 form#addToCart 字段（不能猜） */
+function extractAtcForm(html) {
+  const m = html.match(/<form[^>]*\bid="addToCart"[^>]*>/i);
+  if (!m) return null;
+  const start = m.index;
+  const cands = [html.indexOf('<form', start + 1), html.indexOf('</form>', start)].filter(x => x > 0);
+  const end = cands.length ? Math.min(...cands) : start + 200000;
+  const body = html.slice(start, end);
+  const fields = [];
+  for (const t of body.matchAll(/<input\b[^>]*>/gi)) {
+    const tag = t[0];
+    const name = (tag.match(/\bname="([^"]*)"/) || [])[1];
+    if (!name) continue;
+    const type = ((tag.match(/\btype="([^"]*)"/) || [])[1] || 'text').toLowerCase();
+    if (['submit', 'button', 'image'].indexOf(type) >= 0) continue;
+    if (type === 'checkbox' && !/\bchecked\b/i.test(tag)) continue;
+    fields.push([name, decodeEntities((tag.match(/\bvalue="([^"]*)"/) || [])[1] || '')]);
+  }
+  return { fields };
+}
+
+/* 按「条目区块」读购物车：每个 quantityBox 后面紧跟的就是本条目自己的信息，
+   这样不会误抓推荐位里邻居商品的库存。 */
+function readCartItems(cartHtml) {
+  const items = [];
+  for (const m of cartHtml.matchAll(/<input\b[^>]*name="quantityBox"[^>]*>/gi)) {
+    const idx = m.index;
+    const val = parseInt((m[0].match(/\bvalue="(\d+)"/) || [])[1] || '', 10);
+    const aria = decodeEntities((m[0].match(/aria-label="([^"]*)"/) || [])[1] || '');
+    const back = cartHtml.slice(Math.max(0, idx - 80000), idx);
+    const as = [...back.matchAll(/data-asin="([A-Z0-9]{10})"/g)];
+    const fwd = cartHtml.slice(idx, idx + 8000).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+    const mOnly = fwd.match(/only\s+([\d,]+)\s+left in stock/i);
+    const mOf = fwd.match(/only\s+([\d,]+)\s+of these available/i);
+    const mLimit = fwd.match(/limit\s+of\s+([\d,]+)\s+per customer/i);
+    if (!isNaN(val)) items.push({
+      val, aria,
+      nearAsin: as.length ? as[as.length - 1][1] : '',
+      leftInStock: mOnly ? parseInt(mOnly[1].replace(/,/g, ''), 10) : null,
+      ofThese: mOf ? parseInt(mOf[1].replace(/,/g, ''), 10) : null,
+      perCustomer: mLimit ? parseInt(mLimit[1].replace(/,/g, ''), 10) : null
+    });
+  }
+  return items;
+}
+
+/* 清空探针加进去的条目。必须带 anti-csrftoken-a2z，否则静默失败。 */
+async function clearProbedCart(cartHtml) {
+  const ids = [...new Set([...cartHtml.matchAll(/name="submit\.delete-active\.([0-9a-f-]{8,})"/gi)].map(m => m[1]))];
+  if (!ids.length) return 0;
+  const csrf = (cartHtml.match(/name="anti-csrftoken-a2z"\s+value="([^"]+)"/i) || [])[1] || '';
+  const h = chromeHeaders(0);
+  h['Cookie'] = cookieHeader();
+  h['Content-Type'] = 'application/x-www-form-urlencoded';
+  h['Referer'] = 'https://www.amazon.com/gp/cart/view.html';
+  h['Origin'] = 'https://www.amazon.com';
+  h['Sec-Fetch-Site'] = 'same-origin';
+  h['anti-csrftoken-a2z'] = csrf;
+  const body = new URLSearchParams();
+  body.append('anti-csrftoken-a2z', csrf);
+  for (const id of ids) body.append('submit.delete-active.' + id, 'Delete');
+  const r = await http('https://www.amazon.com/cart/ref=ord_cart_shr?app-nav-type=none&dc=df', { method: 'POST', headers: h, body: body.toString(), redirect: 'follow' }, 20000);
+  absorbCookies(r.res);
+  return ids.length;
+}
+
+async function probeStock(asin, productHtml, title) {
   const out = { probed: false };
   try {
-    const h = chromeHeaders(idx);
+    await setUsZip(process.env.ZIP || '10001');
+    const form = extractAtcForm(productHtml || '');
+    if (!form) { out.error = 'no_atc_form'; return out; }
+    const csrf = (form.fields.find(f => f[0] === 'anti-csrftoken-a2z') || [])[1] || '';
+    const formAsin = (form.fields.find(f => /\[asin\]$/.test(f[0])) || [])[1] || '';
+    const offerId = (form.fields.find(f => /\[offerListingId\]$/.test(f[0])) || [])[1] || '';
+    out.formAsin = formAsin;
+    /* 没有 asin / offerListingId = 亚马逊没给这个会话展示买箱，探针做不了 */
+    if (!formAsin || !offerId) { out.error = 'no_buybox'; return out; }
+
+    const body = new URLSearchParams();
+    for (const f of form.fields) body.append(f[0], /\[quantity\]$/.test(f[0]) ? String(PROBE_QTY) : f[1]);
+    body.set('submit.add-to-cart', 'Add to cart');
+    const h = chromeHeaders(0);
     h['Cookie'] = cookieHeader();
+    h['Content-Type'] = 'application/x-www-form-urlencoded';
     h['Referer'] = `https://www.amazon.com/dp/${asin}`;
+    h['Origin'] = 'https://www.amazon.com';
+    h['Sec-Fetch-Site'] = 'same-origin';
+    h['anti-csrftoken-a2z'] = csrf;
+    const post = await http('https://www.amazon.com/cart/add-to-cart/ref=dp_start-bbf_1_glance', { method: 'POST', headers: h, body: body.toString(), redirect: 'follow' }, 25000);
+    absorbCookies(post.res);
+    out.postStatus = post.status;
+    if (post.status !== 200) { out.error = 'post_' + post.status; return out; }
 
-    // 从商品页取加购所需的表单字段
-    const html = productHtml || '';
-    let offerListingID = (html.match(/name="offerListingID"[^>]*value="([^"]+)"/) || html.match(/"offerListingID"\s*:\s*"([^"]+)"/) || [])[1] || '';
-    let offeringID = (html.match(/"offeringID"\s*:\s*"([^"]+)"/) || [])[1] || '';
-    const sid = COOKIE_JAR['session-id'] || COOKIE_JAR['session-id-time'] ? COOKIE_JAR['session-id'] : '';
-    out.fields = { offerListingID: !!offerListingID, offeringID: !!offeringID, sid: !!sid };
-
-    // 1) 加购 999：优先 POST 真实表单，失败再退回 GET 入口
-    const addEndpoint = 'https://www.amazon.com/gp/cart/desktop/add-to-cart.html';
-    const form = new URLSearchParams({
-      ASIN: asin, Quantity: String(PROBE_QTY), submit_addToCart: 'Add to Cart',
-      'submit.addToCart': 'Add to Cart', offerListingID, offeringID: offeringID, 'session-id': sid
-    });
-    const postH = Object.assign({}, h, { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Site': 'same-origin' });
-    let addText = '';
-    const p1 = await http(addEndpoint, { method: 'POST', headers: postH, body: form.toString(), redirect: 'follow' }, 25000);
-    absorbCookies(p1.res);
-    addText += p1.text || '';
-    if (!p1.ok || !addText) {
-      for (const u of [
-        `https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=${asin}&Quantity.1=${PROBE_QTY}`,
-        `https://www.amazon.com/gp/cart/desktop/add-to-cart.html?ASIN=${asin}&Quantity=${PROBE_QTY}&submit.addToCart=1`
-      ]) {
-        const r = await http(u, { headers: h, redirect: 'follow' }, 25000);
-        absorbCookies(r.res);
-        if (r.text) { addText += r.text; if (r.ok) break; }
-      }
-    }
-    out.addStatus = p1.status;
-    // 2) 读购物车页面确认实际数量
-    const cart = await http('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart', { headers: h, redirect: 'follow' }, 25000);
+    /* 关键：POST 响应里没有 quantityBox，必须再单独 GET 一次购物车页 */
+    const ch = chromeHeaders(0);
+    ch['Cookie'] = cookieHeader();
+    ch['Sec-Fetch-Site'] = 'same-origin';
+    const cart = await http('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart', { headers: ch, redirect: 'follow' }, 25000);
     absorbCookies(cart.res);
-    const t = addText + '\n' + (cart.text || '');
+    if (/api-services-support@amazon\.com|Enter the characters you see below/i.test(cart.text || '')) { out.error = 'blocked'; return out; }
 
-    // 3) 解析数量信号
-    let m = t.match(/only\s+([\d,]+)\s+of\s+these\s+available/i) || t.match(/only\s+([\d,]+)\s+left\s+in\s+stock/i);
-    if (m) { out.probed = true; out.kind = 'stock'; out.qty = parseInt(m[1].replace(/,/g, ''), 10); out.raw = m[0]; }
-    if (!out.probed) {
-      m = t.match(/limit\s+(?:of\s+)?([\d,]+)\s+(?:units\s+)?per\s+customer/i) || t.match(/maximum\s+(?:order\s+)?quantity\s+of\s+([\d,]+)/i);
-      if (m) { out.probed = true; out.kind = 'purchase_limit'; out.qty = parseInt(m[1].replace(/,/g, ''), 10); out.raw = m[0]; }
+    const items = readCartItems(cart.text || '');
+    const mine = items.find(x => x.aria && title && x.aria.toLowerCase().indexOf(String(title).slice(0, 40).toLowerCase()) >= 0)
+      || (items.length === 1 ? items[0] : null);
+    out.cartItems = items.map(x => ({ asin: x.nearAsin, box: x.val, only: x.leftInStock, limit: x.perCustomer }));
+
+    if (mine && mine.leftInStock != null) {
+      out.probed = true; out.kind = 'stock'; out.qty = mine.leftInStock; out.raw = '购物车条目里亚马逊原话 only N left in stock';
+    } else if (mine) {
+      out.probed = true;
+      if (mine.val >= PROBE_QTY) { out.kind = 'stock'; out.qty = PROBE_QTY; out.ge = true; out.raw = `可接受 ${PROBE_QTY} 件，实际库存 ≥ ${PROBE_QTY}`; }
+      else if (mine.perCustomer != null && mine.perCustomer === mine.val) { out.kind = 'purchase_limit'; out.qty = mine.val; out.raw = '限购数量（非库存）'; }
+      else { out.kind = 'stock'; out.qty = mine.val; out.raw = `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${mine.val}`; }
     }
-    if (!out.probed) {
-      // 购物车里的数量输入框：若被压到 N（< 999），说明可购买上限就是 N
-      const qty = [...t.matchAll(/name="quantity[^"]*"[^>]*value="([\d,]+)"/g)].map(x => parseInt(x[1].replace(/,/g, ''), 10));
-      const capped = qty.filter(v => v > 0 && v < PROBE_QTY);
-      if (capped.length) { out.probed = true; out.kind = 'stock'; out.qty = Math.max(...capped); out.raw = 'cart quantity input'; }
-      else if (qty.some(v => v >= PROBE_QTY)) { out.probed = true; out.kind = 'stock'; out.qty = PROBE_QTY; out.ge = true; out.raw = `可接受 ${PROBE_QTY} 件，实际库存 ≥ ${PROBE_QTY}`; }
-    }
-    if (!out.probed && /not enough inventory|out of stock|currently unavailable/i.test(t)) {
-      out.probed = true; out.kind = 'unavailable';
-    }
-    // 调试信息（写入 Actions 日志，便于定位探针命中情况）
-    const ct = (cart.text || '').replace(/\s+/g, ' ');
-    const hits = [];
-    for (const re of [/only [\d,]+ of these available/i, /only [\d,]+ left in stock/i, /limit [\d,]+ per customer/i, /There is not enough inventory/i, /Your Amazon Cart is empty/i, /your cart is empty/i, /quantity/i]) {
-      const mm = ct.match(re);
-      if (mm) hits.push(mm[0] + ' @' + ct.indexOf(mm[0]));
-    }
-    const qm = [...ct.matchAll(/quantity[^>]{0,120}/gi)].slice(0, 3).map(x => x[0].slice(0, 110));
-    out.debug = {
-      addLen: addText.length,
-      cartLen: (cart.text || '').length,
-      cartStatus: cart.status,
-      hits: hits.slice(0, 8),
-      qtySnippets: qm,
-      addStatus: p1.status,
-      fields: out.fields,
-      snippet: ct.slice(0, 200)
-    };
-    // 4) 尽力清空匿名购物车
-    await http('https://www.amazon.com/gp/cart/view.html?action=clear-all', { headers: h, redirect: 'follow' }, 15000).catch(() => {});
+    await clearProbedCart(cart.text || '');
   } catch (e) { out.error = String(e && e.message || e); }
   return out;
 }
@@ -209,9 +298,12 @@ async function fetchHtml(asin, idx) {
     return Object.assign({ via: 'scrapingbee', url }, r);
   }
   // direct：会话预热后的 Cookie + 完整浏览器指纹头
-  const cookies = await warmSession(idx);
+  await warmSession(idx);
+  /* 必须在抓商品页之前就把收货邮编设成美国。否则「不发中国」的商品亚马逊不展示买箱，
+     会被误判成 no_offer（实测 B08FB3FLF2 就是这样），连加购探针都跑不了。 */
+  await setUsZip(process.env.ZIP || '10001');
   const h = chromeHeaders(idx);
-  h['Cookie'] = cookies;
+  h['Cookie'] = cookieHeader();
   h['Referer'] = 'https://www.amazon.com/';
   h['Sec-Fetch-Site'] = 'same-origin';
   const r = await http(url, { headers: h, redirect: 'follow' }, 30000);
@@ -509,19 +601,26 @@ for (const p of list) {
   const prev = history[date][p.asin];
   if (prev && prev.stock && prev.stock.source === 'manual' && rec.stock.kind === 'unknown') rec.stock = prev.stock;
 
-  // 库存探针（匿名购物车加购 999）：**已确认失效，默认关闭**，仅在 STOCK_PROBE=1 时尝试
-  // 2026-09 实测：本机住宅 IP 与云端数据中心 IP 均返回「Your Amazon Cart is empty」，
-  // 亚马逊已封掉匿名会话的加购通道。代码保留备查，等哪天通道恢复可直接打开。
-  if (rec.ok && process.env.STOCK_PROBE === '1' && ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind)) {
-    const pr = await probeStock(p.asin, 0, pageHtml);
-    console.log(`    [库存探针] ${p.asin} probed=${pr.probed} kind=${pr.kind || '-'} qty=${pr.qty ?? '-'} err=${pr.error || '-'}`);
-    if (pr.debug) console.log(`      addLen=${pr.debug.addLen} cartLen=${pr.debug.cartLen} status=${pr.debug.cartStatus} hits=${JSON.stringify(pr.debug.hits)} qty=${JSON.stringify(pr.debug.qtySnippets)}`);
+  /* 库存探针：跑一遍「模拟加购直到无法添加」，拿页面不肯给的精确库存数。
+     只在页面没给出确切数字时才跑（页面已写 Only N left 的商品不必重复付出请求成本）；
+     no_offer / unavailable 没有买箱，探针做不了，直接跳过。 */
+  const probeNeeded = ['in_stock_no_qty', 'unknown'].includes((rec.stock || {}).kind);
+  if (rec.ok && PROBE_ON && probeNeeded && pageHtml) {
+    const pr = await probeStock(p.asin, pageHtml, rec.title || '');
     if (pr.probed) {
-      if (pr.kind === 'unavailable') rec.stock = { kind: 'unavailable', source: 'cart_probe' };
-      else rec.stock = { kind: pr.kind, qty: pr.qty, source: 'cart_probe', note: pr.ge ? `库存 ≥ ${pr.qty}（探针加购 ${PROBE_QTY} 件被接受）` : '最大可购买量（匿名购物车探针）' };
+      rec.stock = {
+        kind: pr.kind, qty: pr.qty, source: 'cart_probe', basis: 'max_purchasable',
+        note: pr.ge ? `库存 ≥ ${pr.qty}（加购 ${PROBE_QTY} 件被接受）`
+          : (pr.kind === 'purchase_limit' ? '这是亚马逊限购数，不是库存' : `加购探针：请求 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}`)
+      };
       rec.stockProbeRaw = pr.raw || null;
+      if (pr.formAsin && pr.formAsin !== p.asin) rec.stockProbeVariantAsin = pr.formAsin;
+      console.log(`    [库存探针] ${p.asin} → ${pr.kind} ${pr.qty} 件（${pr.raw || ''}）${pr.formAsin && pr.formAsin !== p.asin ? ' · 买箱其实是变体 ' + pr.formAsin : ''}`);
+    } else {
+      rec.stockProbeError = pr.error || 'unknown';
+      console.log(`    [库存探针] ${p.asin} 未取到 · ${pr.error || '-'}`);
     }
-    await new Promise(s => setTimeout(s, 2000));
+    await new Promise(s => setTimeout(s, 1200));
   }
 
   // 价格合理性校验：products.json 里可给每个 ASIN 设 priceMin / priceMax
