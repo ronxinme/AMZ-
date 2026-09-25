@@ -92,13 +92,53 @@ async function warmSession(idx) {
    限购数而不是真实库存，所以 kind 会标成 purchase_limit。 */
 const PROBE_QTY = Number(process.env.PROBE_QTY || 999);
 const PROBE_ON = process.env.STOCK_PROBE !== '0';   // 默认开启；STOCK_PROBE=0 关闭
-/* 推断限购的阈值。亚马逊只要库存偏低，就会在商品页买箱区域**和**购物车条目里
-   同时打印「Only N left in stock - order soon.」；实测到 17 件时仍会打印，
-   21 件起就不再打印。所以「夹紧值 ≤ 这个阈值 且 两处都没有该文案」的，
-   只能是单笔限购上限，不可能是库存。
-   默认 20（观测到的边界落在 17~21 之间，取 20）。设成 0 可关闭这条推断。 */
-const LIMIT_PRINT_MAX = Number(process.env.LIMIT_PRINT_MAX || 20);
 let ZIP_DONE = false;
+
+/* ---------------------------------------------------------------------------
+ * 从「加购响应」里读亚马逊自己的原话 —— 这是区分库存和限购的**权威判据**。
+ *
+ * 2026-09-25 实测确立（此前一版靠「亚马逊没打印 low-stock 文案」反推，被用户实测证伪）：
+ *
+ *   库存不足 → "... than the N available from the seller you've selected.
+ *                Click here to return to the product detail page and see if
+ *                additional quantities are available from another seller."
+ *              ↑ 讲的是「你选的这个卖家手里有多少可售」，所以 N 就是库存。
+ *
+ *   单笔限购 → "limit of N per customer"
+ *
+ *   同一个形态的商品（都想买 999 结果只让买很小的数），只有这句原话能区分：
+ *     B0HHXD8SHF 夹到 2  → 原话是 "the 2 available from the seller"  → 库存 2
+ *     B09PTH84M7 夹到 100 → 原话是 "limit of 100 per customer"      → 限购 100
+ *   对照验证：B0C743SY46 原话 "the 17 available from the seller"，
+ *             而它商品页也写着 "Only 17 left in stock" —— 两处数字一致，
+ *             证明这句话说的确实是库存。
+ *
+ * 注意：这句话有时埋在 <script> 的 JSON 里，所以**不能只看去掉标签的正文**，
+ *       要对原始响应文本搜（见下面 extractAtcEvidence 的用法）。
+ * ------------------------------------------------------------------------- */
+function extractAtcEvidence(text) {
+  const out = { limit: null, available: null, raw: null };
+  if (!text) return out;
+  /* 把 HTML 实体还原，否则引号/加号会把正则切断 */
+  const t = String(text).replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&#x27;/g, "'");
+  const raws = [];
+  let m = t.match(/limit\s+(?:of\s+)?([\d,]+)\s+(?:units\s+)?per\s+(?:customer|order)/i)
+       || t.match(/limited\s+to\s+([\d,]+)\s+(?:units\s+)?per\s+(?:customer|order)/i);
+  if (m) { out.limit = parseInt(m[1].replace(/,/g, ''), 10); raws.push(m[0]); }
+  m = t.match(/than\s+the\s+([\d,]+)\s+available\s+from\s+the\s+seller/i)
+   || t.match(/([\d,]+)\s+available\s+from\s+the\s+seller\s+you/i);
+  if (m) { out.available = parseInt(m[1].replace(/,/g, ''), 10); raws.push(m[0]); }
+  if (raws.length) out.raw = raws.join(' | ');
+  return out;
+}
+/* 只在「数字与本次夹紧值一致」时才采信 —— 加购响应是整张页面（含推荐位），
+   里面可能出现别的商品的 limit 文案，用数值一致性把它挡掉。 */
+function pickEvidence(ev, clamp) {
+  if (!ev) return null;
+  if (ev.limit != null && ev.limit === clamp) return { kind: 'limit', qty: ev.limit };
+  if (ev.available != null && ev.available === clamp) return { kind: 'available', qty: ev.available };
+  return null;
+}
 
 /* 给匿名会话设美国收货邮编（不设会有商品读不到买箱） */
 async function setUsZip(zip) {
@@ -232,6 +272,8 @@ async function probeStock(asin, productHtml, title, pageLimit) {
     const post = await http('https://www.amazon.com/cart/add-to-cart/ref=dp_start-bbf_1_glance', { method: 'POST', headers: h, body: body.toString(), redirect: 'follow' }, 25000);
     absorbCookies(post.res);
     out.postStatus = post.status;
+    /* 亚马逊会在加购响应里用原话说明为什么被夹紧 —— 这是最权威的判据，先收着 */
+    out.atcEvidence = extractAtcEvidence(post.text);
     if (post.status !== 200) { out.error = 'post_' + post.status; return out; }
 
     /* 关键：POST 响应里没有 quantityBox，必须再单独 GET 一次购物车页。
@@ -262,6 +304,10 @@ async function probeStock(asin, productHtml, title, pageLimit) {
       || (items.length === 1 ? items[0] : null);
     out.cartItems = items.map(x => ({ asin: x.nearAsin, box: x.val, only: x.leftInStock, limit: x.perCustomer }));
 
+    /* 加购响应、购物车页两处都搜一遍亚马逊的原话，取得到就用它定性 */
+    const atcHint = pickEvidence(out.atcEvidence, mine ? mine.val : null)
+      || pickEvidence(extractAtcEvidence(cart.text || ''), mine ? mine.val : null);
+
     if (mine && mine.leftInStock != null) {
       /* 最高可信度：亚马逊自己在购物车条目里写了 only N left in stock —— 这就是库存 */
       out.probed = true; out.kind = 'stock'; out.qty = mine.leftInStock;
@@ -270,40 +316,44 @@ async function probeStock(asin, productHtml, title, pageLimit) {
     } else if (mine) {
       out.probed = true;
       const N = mine.val;
-      if (N >= PROBE_QTY) {
+      if (atcHint && atcHint.kind === 'available' && N === atcHint.qty) {
+        /* ★ 最权威的一条：亚马逊在加购响应里**自己说**「你选的这个卖家只有 N 件可售」。
+           对照验证：B0C743SY46 这里拿到 17，而它商品页也写着 Only 17 left in stock → 就是库存。 */
+        out.kind = 'stock'; out.qty = N;
+        out.basis = 'atc_seller_available'; out.confidence = 'high';
+        out.raw = `亚马逊加购响应原话「than the ${N} available from the seller you've selected」→ 卖家可售数量就是库存`;
+      } else if ((atcHint && atcHint.kind === 'limit' && N === atcHint.qty)
+              || (mine.perCustomer != null && mine.perCustomer === N)
+              || (pageLimit && pageLimit.qty === N)) {
+        /* 亚马逊自己写了 limit N per customer —— 明示的限购，不是库存。
+           basis 如实标出这句话出现在哪儿，前端提示里会写清楚。 */
+        const fromAtc = !!(atcHint && atcHint.kind === 'limit' && N === atcHint.qty);
+        out.kind = 'purchase_limit'; out.qty = N;
+        out.basis = fromAtc ? 'atc_limit' : 'per_customer_limit'; out.confidence = 'high';
+        out.raw = fromAtc
+          ? `亚马逊加购响应原话「limit of ${N} per customer」（明示限购）`
+          : (mine.perCustomer != null && mine.perCustomer === N
+              ? '购物车里亚马逊原话「limit N per customer」'
+              : `商品页亚马逊原话「limit ${N} per customer」`);
+      } else if (N >= PROBE_QTY) {
         out.kind = 'stock'; out.qty = PROBE_QTY; out.ge = true;
         out.basis = 'probe_ge'; out.confidence = 'high';
         out.raw = `可接受 ${PROBE_QTY} 件，实际库存 ≥ ${PROBE_QTY}`;
-      } else if (mine.perCustomer != null && mine.perCustomer === N) {
-        out.kind = 'purchase_limit'; out.qty = N;
-        out.basis = 'per_customer_limit'; out.confidence = 'high';
-        out.raw = '购物车里亚马逊原话「limit N per customer」';
-      } else if (pageLimit && pageLimit.qty === N) {
-        /* 商品页买箱区域里亚马逊自己写了 limit N per customer，且数字与夹紧值一致 */
-        out.kind = 'purchase_limit'; out.qty = N;
-        out.basis = 'per_customer_limit'; out.confidence = 'high';
-        out.raw = `商品页亚马逊原话「limit ${N} per customer」`;
       } else if (pageLimit && pageLimit.qty > N) {
-        /* 页面明示限购 N 件，但这次只让买更少 —— 说明卡住它的是库存而不是限购 */
+        /* 页面明示限购 M 件，但这次只让买更少 —— 卡住它的是库存而不是限购 */
         out.kind = 'stock'; out.qty = N;
-        out.basis = 'max_purchasable'; out.confidence = 'medium';
-        out.raw = `亚马逊写着限购 ${pageLimit.qty} 件，但本次只允许买 ${N} 件（库存比限购更少）`;
-      } else if (N <= LIMIT_PRINT_MAX) {
-        /* ---- 推断限购（2026-09-25 实测确立的规则）----
-           亚马逊只要库存偏低，就会**同时**在商品页买箱区域和购物车条目里打印
-           「Only N left in stock - order soon.」（实测 17 件时仍会打印）。
-           这条商品两处都没有这句，说明**库存高于这个数**；
-           可它加购 999 却只被允许买 N 件 —— 那 N 只能来自单笔限购上限。
-           实测对照：B0CCRTKXXQ 夹到 1、B0HHXD8SHF 夹到 2，两处文案全空。 */
-        out.kind = 'purchase_limit'; out.qty = N;
-        out.basis = 'inferred_limit'; out.confidence = 'high';
-        out.raw = `只允许买 ${N} 件，且页面与购物车都没有「Only N left」文案 → 判定为单笔限购（库存高于 ${N}）`;
+        out.basis = 'atc_seller_available'; out.confidence = 'medium';
+        out.raw = `亚马逊写着限购 ${pageLimit.qty} 件，但本次只允许买 ${N} 件 → 卡住它的是库存（可售 ${N} 件）`;
       } else {
-        /* 亚马逊没写「only N left」，只把数量夹到了 N。
-           N 的准确含义是「这个商品一次最多能买 N 件」——
-           它可能是真实库存（库存不足所以夹住），也可能是单笔订单上限（亚马逊不一定打印限购文案）。
-           两种情况下 N 都是可信的硬事实，但**不能断言是库存**，所以 basis 单独标出来，
-           前端显示成「最多 N 件」而不是「库存 N 件」。 */
+        /* 亚马逊把数量夹到了 N，但没有给出任何说明文字。
+           此时 N 的准确含义是「一次最多能买 N 件」——
+           可能是库存（库存不足所以夹住），也可能是单笔上限（亚马逊有时不打印任何文案）。
+           两种情况 N 都是可信的硬事实，但**不能断言是库存**，所以 basis 单独标出来，
+           前端显示成「最多 N 件」而不是「库存 N 件」。
+           ★ 上一版在这里做了一条「N ≤ 20 且没打印 Only N left ⇒ 判为限购」的推断，
+             2026-09-25 被用户实测证伪（B0HHXD8SHF 夹到 2，实际是库存 2，
+             亚马逊原话 "the 2 available from the seller"）。所以推断整条删掉了：
+             宁可能力弱一点，也不能把库存说成限购。 */
         out.kind = 'stock'; out.qty = N;
         out.basis = 'max_purchasable'; out.confidence = 'medium';
         out.raw = `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${N}（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）`;
@@ -573,8 +623,16 @@ function parseAmazon(html, asin) {
   if (!lp) lp = html.match(/class="a-text-price"[\s\S]{0,300}?a-offscreen">\s*(?:US)?\$([\d,]+\.\d{2})/);
   if (lp) out.listPrice = moneyOf(lp[1]);
 
-  m = html.match(/id="acrPopover"[^>]*title="([\d.]+) out of 5 stars"/) || html.match(/([\d.]+) out of 5 stars/);
-  if (m) out.rating = parseFloat(m[1]);
+  /* 评分只认商品自己的 #acrPopover。
+     ★ 绝对不要再退回「全页搜 `N out of 5 stars`」——
+       零评分的商品页里，下方「看了又看 / 相关商品 / 广告位」有**大量别家商品的星级**，
+       全页搜会让一个根本没评分的商品凭空多出 5 星（2026-09-25 用户实测踩到 B0HHXD8SHF）。
+       实测：有评分的商品页里 id="acrPopover" 出现 2 次（桌面版 + 移动版，值相同）；
+       没评分的商品页里是 0 次 —— 这个 id 就是最干净的判据。*/
+  const acrTag = (html.match(/<[^>]*\bid="acrPopover"[^>]*>/) || [])[0] || '';
+  const am = acrTag.match(/\btitle="\s*([\d.]+)\s+out of 5 stars/) || acrTag.match(/([\d.]+)\s+out of 5 stars/);
+  if (am) out.rating = parseFloat(am[1]);
+  out.hasRatingWidget = !!acrTag;
 
   m = html.match(/id="acrCustomerReviewText"[^>]*aria-label="\s*([\d,]+)\s*(?:Reviews?|ratings?)/i) ||
       html.match(/aria-label="\s*([\d,]+)\s*(?:Reviews?|ratings?)[^"]*"[^>]*id="acrCustomerReviewText"/i) ||
@@ -636,23 +694,26 @@ const lines = [];
 const BACKOFF = [3000, 9000, 18000];
 
 /* 把探针结果落到记录上。basis 说明这个数字是怎么来的，前端据此决定措辞：
-     cart_only_n_left   = 购物车里亚马逊原话（最可信，就是库存）
-     probe_ge           = 加购 999 被接受，只能说 ≥999
-     per_customer_limit = 亚马逊明写 limit N per customer（页面或购物车）→ 限购
-     inferred_limit     = 没写限购也没写低库存，但只允许买 N 件（N 很小）→ 推断为限购
-     max_purchasable    = 被夹到 N，N 是「一次最多能买 N 件」，可能是库存也可能是单笔上限
-   confidence：high = 要么亚马逊明示，要么有强证据；medium = 只能确定上限，不能断言是库存 */
+     cart_only_n_left     = 购物车里亚马逊原话「Only N left in stock」（最可信，就是库存）
+     atc_seller_available = 加购响应里亚马逊原话「the N available from the seller」→ 卖家可售数量 = 库存
+     per_customer_limit   = 亚马逊自己写了 limit N per customer（商品页 / 购物车）→ 限购
+     atc_limit            = 同上，但那句话出现在加购响应里 → 限购
+     probe_ge             = 加购 999 被完整接受，只能说 ≥999
+     max_purchasable      = 被夹到 N 但亚马逊没给任何说明 → 只能说「一次最多能买 N 件」
+   confidence：high = 亚马逊自己写明的；medium = 只有夹紧值，没有说明文字
+   ★ 曾经有过一个 inferred_limit（靠「没打印 low-stock 文案」反推限购），2026-09-25 被用户实测证伪，已删。 */
 function applyProbeResult(rec, pr, asin) {
   const conf = pr.confidence || 'high';
   rec.stock = {
     kind: pr.kind, qty: pr.qty, source: 'cart_probe',
     basis: pr.basis || 'max_purchasable', confidence: conf,
     note: pr.basis === 'cart_only_n_left' ? '购物车里亚马逊原话「Only N left in stock」'
-      : pr.basis === 'probe_ge' ? `库存 ≥ ${pr.qty}（加购 ${PROBE_QTY} 件被亚马逊接受）`
-        : pr.basis === 'per_customer_limit' ? '亚马逊明示的单笔限购上限（不是库存）'
-          : pr.basis === 'inferred_limit'
-            ? `推断为单笔限购：只允许买 ${pr.qty} 件，而亚马逊既没写「Only N left in stock」（有低库存一定会写），也没写限购文案 —— 说明库存高于 ${pr.qty}，${pr.qty} 来自购买数量限制`
-            : `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}；此数是「一次最多能买 N 件」，可能是库存也可能是单笔上限`
+      : pr.basis === 'atc_seller_available'
+        ? `库存 ${pr.qty}：亚马逊加购响应里原话「than the ${pr.qty} available from the seller you've selected」—— 卖家可售数量`
+        : pr.basis === 'probe_ge' ? `库存 ≥ ${pr.qty}（加购 ${PROBE_QTY} 件被亚马逊接受）`
+          : (pr.basis === 'per_customer_limit' || pr.basis === 'atc_limit')
+            ? `亚马逊自己写明的单笔限购上限 ${pr.qty} 件（不是库存）`
+            : `加购 ${PROBE_QTY} 件被亚马逊夹紧到 ${pr.qty}；此数是「一次最多能买 N 件」，亚马逊没给出说明文字，无法确定是库存还是单笔上限`
   };
   rec.stockProbeRaw = pr.raw || null;
   if (pr.probeRetried) rec.stockProbeRetried = true;
