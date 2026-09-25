@@ -90,6 +90,8 @@ td.num-cell { font-family: Consolas, monospace; font-size: 13.5px; }
 .bsr-small { color: #6a3fa0; font-weight: 600; }
 .bsr-large { color: var(--muted); font-size: 11.5px; }
 .stock-qty { color: var(--green-ok); font-weight: 700; }
+/* 加购实测（cart_probe）的数字用蓝色，和「仅剩 N 件」（页面原话，绿色）区分开 —— 颜色跟图例 .lg-probe 一致 */
+.stock-probe { color: #185fa5; }
 .stock-limit { color: var(--red); font-weight: 700; }
 .stock-noqty { color: var(--green-ok); }
 .stock-na { color: #999; }
