@@ -259,5 +259,13 @@
     "type": "own",
     "parentId": "",
     "latestTitle": "10-Pair T316 Invisible Cable Railing Kit for 1/8\" Cable, Black"
+  },
+  {
+    "id": "cmp_B0BXD3SL7T",
+    "asin": "B0BXD3SL7T",
+    "name": "",
+    "shop": "",
+    "type": "compete",
+    "parentId": "own_B0C93R4HL3"
   }
 ]
