@@ -6629,8 +6629,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:41:22.567Z",
-      "timingMs": 1625,
+      "fetchedAt": "2026-09-30T07:14:36.717Z",
+      "timingMs": 1896,
       "stockProbeRaw": "亚马逊加购响应原话「limit of 100 per customer」（明示限购）"
     },
     "B0C9TCZ7WC": {
@@ -6656,11 +6656,11 @@
       },
       "stock": {
         "kind": "stock",
-        "qty": 174,
+        "qty": 181,
         "source": "cart_probe",
         "basis": "atc_seller_available",
         "confidence": "high",
-        "note": "库存 174：亚马逊加购响应里原话「than the 174 available from the seller you've selected」—— 卖家可售数量"
+        "note": "库存 181：亚马逊加购响应里原话「than the 181 available from the seller you've selected」—— 卖家可售数量"
       },
       "purchaseLimit": null,
       "boughtPastMonth": 50,
@@ -6670,9 +6670,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:41:37.811Z",
-      "timingMs": 1521,
-      "stockProbeRaw": "亚马逊加购响应原话「than the 174 available from the seller you've selected」→ 卖家可售数量就是库存"
+      "fetchedAt": "2026-09-30T07:14:52.769Z",
+      "timingMs": 1815,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 181 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B09MYYVC3H": {
       "asin": "B09MYYVC3H",
@@ -6687,8 +6687,14 @@
       "savingsPct": 10,
       "rating": 4.4,
       "reviews": 70,
-      "bsrSmall": null,
-      "bsrLarge": null,
+      "bsrSmall": {
+        "rank": 89,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 285496,
+        "label": "Tools & Home Improvement"
+      },
       "stock": {
         "kind": "stock",
         "qty": 41,
@@ -6705,8 +6711,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:41:48.092Z",
-      "timingMs": 965,
+      "fetchedAt": "2026-09-30T07:15:08.725Z",
+      "timingMs": 1715,
       "stockProbeRaw": "亚马逊加购响应原话「than the 41 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0DR8RDRFM": {
@@ -6746,8 +6752,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:42:03.238Z",
-      "timingMs": 1525,
+      "fetchedAt": "2026-09-30T07:15:24.459Z",
+      "timingMs": 1653,
       "stockProbeRaw": "亚马逊加购响应原话「than the 42 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0C6GK3KWB": {
@@ -6783,8 +6789,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:42:18.494Z",
-      "timingMs": 1441
+      "fetchedAt": "2026-09-30T07:15:40.464Z",
+      "timingMs": 1681
     },
     "B09F358TBV": {
       "asin": "B09F358TBV",
@@ -6823,8 +6829,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:42:31.098Z",
-      "timingMs": 1556,
+      "fetchedAt": "2026-09-30T07:15:53.472Z",
+      "timingMs": 1809,
       "stockProbeRaw": "亚马逊加购响应原话「than the 141 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0F9WLV5CY": {
@@ -6840,8 +6846,14 @@
       "savingsPct": null,
       "rating": 4.5,
       "reviews": 2,
-      "bsrSmall": null,
-      "bsrLarge": null,
+      "bsrSmall": {
+        "rank": 64,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 208191,
+        "label": "Tools & Home Improvement"
+      },
       "stock": {
         "kind": "stock",
         "qty": 35,
@@ -6858,8 +6870,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:42:42.569Z",
-      "timingMs": 849,
+      "fetchedAt": "2026-09-30T07:16:09.180Z",
+      "timingMs": 1650,
       "stockProbeRaw": "亚马逊加购响应原话「than the 35 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B09PTSHFZZ": {
@@ -6899,8 +6911,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:42:56.515Z",
-      "timingMs": 1606,
+      "fetchedAt": "2026-09-30T07:16:34.326Z",
+      "timingMs": 1753,
       "stockProbeRaw": "亚马逊加购响应原话「than the 57 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0CHR9SZ8B": {
@@ -6940,8 +6952,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:43:11.659Z",
-      "timingMs": 1485,
+      "fetchedAt": "2026-09-30T07:16:50.384Z",
+      "timingMs": 1894,
       "stockProbeRaw": "亚马逊加购响应原话「than the 161 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B07DDFMLG1": {
@@ -6957,15 +6969,17 @@
       "savingsPct": 5,
       "rating": 4.5,
       "reviews": 162,
-      "bsrSmall": null,
-      "bsrLarge": null,
+      "bsrSmall": {
+        "rank": 164,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 533783,
+        "label": "Tools & Home Improvement"
+      },
       "stock": {
-        "kind": "stock",
-        "qty": 40,
-        "source": "cart_probe",
-        "basis": "atc_seller_available",
-        "confidence": "high",
-        "note": "库存 40：亚马逊加购响应里原话「than the 40 available from the seller you've selected」—— 卖家可售数量"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -6975,9 +6989,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:43:23.049Z",
-      "timingMs": 660,
-      "stockProbeRaw": "亚马逊加购响应原话「than the 40 available from the seller you've selected」→ 卖家可售数量就是库存"
+      "fetchedAt": "2026-09-30T07:17:15.497Z",
+      "timingMs": 1760,
+      "stockProbeError": "post_503"
     },
     "B0CCRTKXXQ": {
       "asin": "B0CCRTKXXQ",
@@ -7016,8 +7030,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:43:38.328Z",
-      "timingMs": 1525,
+      "fetchedAt": "2026-09-30T07:17:38.949Z",
+      "timingMs": 1772,
       "stockProbeRaw": "加购 999 件被亚马逊夹紧到 1（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）"
     },
     "B0CD8B2D38": {
@@ -7055,8 +7069,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:43:53.628Z",
-      "timingMs": 1555
+      "fetchedAt": "2026-09-30T07:18:04.435Z",
+      "timingMs": 1940
     },
     "B0CN71KT1G": {
       "asin": "B0CN71KT1G",
@@ -7095,8 +7109,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:44:06.129Z",
-      "timingMs": 1442,
+      "fetchedAt": "2026-09-30T07:18:17.395Z",
+      "timingMs": 1741,
       "stockProbeRaw": "亚马逊加购响应原话「limit of 30 per customer」（明示限购）"
     },
     "B0C743SY46": {
@@ -7112,8 +7126,14 @@
       "savingsPct": 5,
       "rating": 5,
       "reviews": 2,
-      "bsrSmall": null,
-      "bsrLarge": null,
+      "bsrSmall": {
+        "rank": 349,
+        "label": "Fixturing Clamps"
+      },
+      "bsrLarge": {
+        "rank": 446003,
+        "label": "Industrial & Scientific"
+      },
       "stock": {
         "kind": "stock",
         "qty": 17,
@@ -7128,8 +7148,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:44:16.108Z",
-      "timingMs": 754
+      "fetchedAt": "2026-09-30T07:18:33.685Z",
+      "timingMs": 1702
     },
     "B07L8LDSQD": {
       "asin": "B07L8LDSQD",
@@ -7144,14 +7164,8 @@
       "savingsPct": null,
       "rating": 4.4,
       "reviews": 31,
-      "bsrSmall": {
-        "rank": 226,
-        "label": "Standoffs"
-      },
-      "bsrLarge": {
-        "rank": 466914,
-        "label": "Industrial & Scientific"
-      },
+      "bsrSmall": null,
+      "bsrLarge": null,
       "stock": {
         "kind": "no_offer",
         "source": "amazon_page"
@@ -7164,8 +7178,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:44:28.599Z",
-      "timingMs": 1438
+      "fetchedAt": "2026-09-30T07:18:42.573Z",
+      "timingMs": 884
     },
     "B099WTYMM6": {
       "asin": "B099WTYMM6",
@@ -7180,8 +7194,14 @@
       "savingsPct": null,
       "rating": 4.5,
       "reviews": 44,
-      "bsrSmall": null,
-      "bsrLarge": null,
+      "bsrSmall": {
+        "rank": 132,
+        "label": "Standoffs"
+      },
+      "bsrLarge": {
+        "rank": 274052,
+        "label": "Industrial & Scientific"
+      },
       "stock": {
         "kind": "unavailable",
         "source": "amazon_page"
@@ -7194,8 +7214,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:44:37.325Z",
-      "timingMs": 722
+      "fetchedAt": "2026-09-30T07:18:55.614Z",
+      "timingMs": 1807
     },
     "B0CJ8MH322": {
       "asin": "B0CJ8MH322",
@@ -7232,8 +7252,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:44:49.927Z",
-      "timingMs": 1550
+      "fetchedAt": "2026-09-30T07:19:08.591Z",
+      "timingMs": 1768
     },
     "B0CBKGVZSW": {
       "asin": "B0CBKGVZSW",
@@ -7270,8 +7290,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:45:02.865Z",
-      "timingMs": 1549
+      "fetchedAt": "2026-09-30T07:19:21.734Z",
+      "timingMs": 1927
     },
     "B0C558XRTP": {
       "asin": "B0C558XRTP",
@@ -7310,8 +7330,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:45:15.467Z",
-      "timingMs": 1501,
+      "fetchedAt": "2026-09-30T07:19:34.692Z",
+      "timingMs": 1758,
       "stockProbeRaw": "亚马逊加购响应原话「than the 50 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B08FB3FLF2": {
@@ -7351,8 +7371,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:45:30.635Z",
-      "timingMs": 1468,
+      "fetchedAt": "2026-09-30T07:19:50.303Z",
+      "timingMs": 1665,
       "stockProbeRaw": "亚马逊加购响应原话「than the 32 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B08FB3987P": {
@@ -7392,8 +7412,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:45:46.249Z",
-      "timingMs": 1409,
+      "fetchedAt": "2026-09-30T07:20:06.748Z",
+      "timingMs": 1721,
       "stockProbeRaw": "亚马逊加购响应原话「than the 174 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0C8B1XNTD": {
@@ -7429,9 +7449,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:46:00.521Z",
-      "timingMs": 1782,
-      "stockProbeError": "post_503(补采)"
+      "fetchedAt": "2026-09-30T07:20:22.745Z",
+      "timingMs": 1626,
+      "stockProbeError": "post_503"
     },
     "B0HJQQ59K7": {
       "asin": "B0HJQQ59K7",
@@ -7460,8 +7480,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:46:14.481Z",
-      "timingMs": 1471
+      "fetchedAt": "2026-09-30T07:20:36.705Z",
+      "timingMs": 1427
     },
     "B0HHXD8SHF": {
       "asin": "B0HHXD8SHF",
@@ -7479,12 +7499,8 @@
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "stock",
-        "qty": 7,
-        "source": "cart_probe",
-        "basis": "atc_seller_available",
-        "confidence": "high",
-        "note": "库存 7：亚马逊加购响应里原话「than the 7 available from the seller you've selected」—— 卖家可售数量"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -7494,9 +7510,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:46:27.059Z",
-      "timingMs": 1354,
-      "stockProbeRaw": "亚马逊加购响应原话「than the 7 available from the seller you've selected」→ 卖家可售数量就是库存"
+      "fetchedAt": "2026-09-30T07:20:49.399Z",
+      "timingMs": 1490,
+      "stockProbeError": "post_503"
     },
     "B0HFWLCSCS": {
       "asin": "B0HFWLCSCS",
@@ -7529,8 +7545,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:46:41.950Z",
-      "timingMs": 1343,
+      "fetchedAt": "2026-09-30T07:21:03.482Z",
+      "timingMs": 1543,
       "stockProbeRaw": "亚马逊加购响应原话「than the 5 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0H2PQCCVB": {
@@ -7570,8 +7586,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:46:56.949Z",
-      "timingMs": 1512,
+      "fetchedAt": "2026-09-30T07:21:19.581Z",
+      "timingMs": 1614,
       "stockProbeRaw": "亚马逊加购响应原话「than the 43 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0GZVRY1N6": {
@@ -7590,12 +7606,8 @@
       "bsrSmall": null,
       "bsrLarge": null,
       "stock": {
-        "kind": "stock",
-        "qty": 89,
-        "source": "cart_probe",
-        "basis": "atc_seller_available",
-        "confidence": "high",
-        "note": "库存 89：亚马逊加购响应里原话「than the 89 available from the seller you've selected」—— 卖家可售数量"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -7605,9 +7617,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:47:12.318Z",
-      "timingMs": 1529,
-      "stockProbeRaw": "亚马逊加购响应原话「than the 89 available from the seller you've selected」→ 卖家可售数量就是库存"
+      "fetchedAt": "2026-09-30T07:21:35.804Z",
+      "timingMs": 1751,
+      "stockProbeError": "post_503"
     },
     "B0CJ6HD4R1": {
       "asin": "B0CJ6HD4R1",
@@ -7644,8 +7656,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:47:27.081Z",
-      "timingMs": 1483
+      "fetchedAt": "2026-09-30T07:21:50.097Z",
+      "timingMs": 1724
     },
     "B0C93R4HL3": {
       "asin": "B0C93R4HL3",
@@ -7682,8 +7694,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:47:39.615Z",
-      "timingMs": 1469
+      "fetchedAt": "2026-09-30T07:22:03.031Z",
+      "timingMs": 1728
     },
     "B0BXD3SL7T": {
       "asin": "B0BXD3SL7T",
@@ -7707,8 +7719,12 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "in_stock_no_qty",
-        "source": "amazon_page"
+        "kind": "stock",
+        "qty": 224,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 224：亚马逊加购响应里原话「than the 224 available from the seller you've selected」—— 卖家可售数量"
       },
       "purchaseLimit": null,
       "boughtPastMonth": 50,
@@ -7718,9 +7734,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:47:52.224Z",
-      "timingMs": 1553,
-      "stockProbeError": "post_503(补采)"
+      "fetchedAt": "2026-09-30T07:22:16.088Z",
+      "timingMs": 1840,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 224 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0C7PY7XR4": {
       "asin": "B0C7PY7XR4",
@@ -7757,8 +7773,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:48:06.059Z",
-      "timingMs": 1555
+      "fetchedAt": "2026-09-30T07:22:31.868Z",
+      "timingMs": 1697
     },
     "B0CM2WZVYQ": {
       "asin": "B0CM2WZVYQ",
@@ -7797,8 +7813,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:48:18.729Z",
-      "timingMs": 1612,
+      "fetchedAt": "2026-09-30T07:22:44.765Z",
+      "timingMs": 1689,
       "stockProbeRaw": "亚马逊加购响应原话「than the 122 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B0DTT7D4ZH": {
@@ -7838,8 +7854,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:48:34.365Z",
-      "timingMs": 1650,
+      "fetchedAt": "2026-09-30T07:22:59.104Z",
+      "timingMs": 1822,
       "stockProbeRaw": "亚马逊加购响应原话「limit of 30 per customer」（明示限购）"
     },
     "B0CG5TXDMW": {
@@ -7877,8 +7893,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:48:49.898Z",
-      "timingMs": 1441
+      "fetchedAt": "2026-09-30T07:23:15.517Z",
+      "timingMs": 1639
     },
     "B0CTSVKGBP": {
       "asin": "B0CTSVKGBP",
@@ -7902,12 +7918,8 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "stock",
-        "qty": 96,
-        "source": "cart_probe",
-        "basis": "atc_seller_available",
-        "confidence": "high",
-        "note": "库存 96：亚马逊加购响应里原话「than the 96 available from the seller you've selected」—— 卖家可售数量"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -7917,9 +7929,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:49:02.554Z",
-      "timingMs": 1608,
-      "stockProbeRaw": "亚马逊加购响应原话「than the 96 available from the seller you've selected」→ 卖家可售数量就是库存"
+      "fetchedAt": "2026-09-30T07:23:28.458Z",
+      "timingMs": 1719,
+      "stockProbeError": "post_503"
     },
     "B08DMYCXYR": {
       "asin": "B08DMYCXYR",
@@ -7958,8 +7970,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:49:18.107Z",
-      "timingMs": 1790,
+      "fetchedAt": "2026-09-30T07:23:42.789Z",
+      "timingMs": 1785,
       "stockProbeRaw": "亚马逊加购响应原话「limit of 30 per customer」（明示限购）"
     },
     "B07RJPXN29": {
@@ -7984,12 +7996,8 @@
         "label": "Tools & Home Improvement"
       },
       "stock": {
-        "kind": "purchase_limit",
-        "qty": 60,
-        "source": "cart_probe",
-        "basis": "atc_limit",
-        "confidence": "high",
-        "note": "亚马逊自己写明的单笔限购上限 60 件（不是库存）"
+        "kind": "in_stock_no_qty",
+        "source": "amazon_page"
       },
       "purchaseLimit": null,
       "boughtPastMonth": null,
@@ -7999,9 +8007,9 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:49:33.492Z",
-      "timingMs": 1635,
-      "stockProbeRaw": "亚马逊加购响应原话「limit of 60 per customer」（明示限购）"
+      "fetchedAt": "2026-09-30T07:23:59.370Z",
+      "timingMs": 1811,
+      "stockProbeError": "post_503"
     },
     "B0CDNXTH6F": {
       "asin": "B0CDNXTH6F",
@@ -8038,8 +8046,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:49:48.863Z",
-      "timingMs": 1395
+      "fetchedAt": "2026-09-30T07:24:13.512Z",
+      "timingMs": 1651
     },
     "B0CTHYM9WT": {
       "asin": "B0CTHYM9WT",
@@ -8078,8 +8086,8 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:50:01.499Z",
-      "timingMs": 1581,
+      "fetchedAt": "2026-09-30T07:24:26.813Z",
+      "timingMs": 2068,
       "stockProbeRaw": "亚马逊加购响应原话「than the 920 available from the seller you've selected」→ 卖家可售数量就是库存"
     },
     "B09CTM3XFN": {
@@ -8119,9 +8127,123 @@
       "error": null,
       "captcha": false,
       "source": "direct",
-      "fetchedAt": "2026-09-30T06:50:16.802Z",
-      "timingMs": 1477,
+      "fetchedAt": "2026-09-30T07:24:43.204Z",
+      "timingMs": 1707,
       "stockProbeRaw": "亚马逊加购响应原话「than the 298 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0DHDJGGK4": {
+      "asin": "B0DHDJGGK4",
+      "realAsin": "B0DHF432S2",
+      "title": "Inline Design - Stainless Steel Handrail Bracket Square for Flat/Curved Bottom Tube Slim Adjustable (Black Matte Powder Coat)",
+      "price": 26.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 1.69,
+      "unitLabel": "oz",
+      "savingsPct": null,
+      "rating": 4.2,
+      "reviews": 96,
+      "bsrSmall": {
+        "rank": 99,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 323997,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 999,
+        "source": "cart_probe",
+        "basis": "probe_ge",
+        "confidence": "high",
+        "note": "库存 ≥ 999（加购 999 件被亚马逊接受）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/51tYsBOkOIL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-30T07:24:59.629Z",
+      "timingMs": 1804,
+      "stockProbeRaw": "可接受 999 件，实际库存 ≥ 999"
+    },
+    "B0CP6DC616": {
+      "asin": "B0CP6DC616",
+      "realAsin": "B0CWWVSM7Y",
+      "title": "Stainless Steel Handrail Wall Bracket Square Slim by Inline Design (Matte Black Powder Coat)",
+      "price": 21.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 21.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 25,
+      "rating": 5,
+      "reviews": 1,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "stock",
+        "qty": 449,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 449：亚马逊加购响应里原话「than the 449 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/516NNAk8KlL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-30T07:25:12.414Z",
+      "timingMs": 1271,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 449 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0CCCGSF3B": {
+      "asin": "B0CCCGSF3B",
+      "realAsin": "B0GZ33P24L",
+      "title": "Cable Railing Posts, 36-Inch, Black, 2-Pack（Middle Post",
+      "price": 66.49,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 3,
+      "bsrSmall": {
+        "rank": 1022,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 645937,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 8,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 8 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/61ixp74RJ+L._SL1315_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-09-30T07:25:28.631Z",
+      "timingMs": 1792
     }
   }
 }
