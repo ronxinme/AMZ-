@@ -337,7 +337,7 @@
     "asin": "B0CTHYM9WT",
     "name": "",
     "shop": "LANGLIER",
-    "type": "own",
-    "parentId": ""
+    "type": "compete",
+    "parentId": "own_B0CTHYM9WT"
   }
 ]
