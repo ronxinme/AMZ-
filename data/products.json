@@ -464,5 +464,13 @@
     "shop": "",
     "type": "compete",
     "parentId": "own_B0G64VRVWK"
+  },
+  {
+    "id": "own_B0FY1LFT58",
+    "asin": "B0FY1LFT58",
+    "name": "",
+    "shop": "KIMCHUL",
+    "type": "own",
+    "parentId": ""
   }
 ]
