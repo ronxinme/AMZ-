@@ -275,5 +275,13 @@
     "shop": "",
     "type": "compete",
     "parentId": "own_B0C93R4HL3"
+  },
+  {
+    "id": "cmp_B0CM2WZVYQ",
+    "asin": "B0CM2WZVYQ",
+    "name": "",
+    "shop": "",
+    "type": "compete",
+    "parentId": "own_B0CJ6HD4R1"
   }
 ]
