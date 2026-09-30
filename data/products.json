@@ -374,5 +374,13 @@
     "shop": "",
     "type": "compete",
     "parentId": "own_B0CDNXTH6F"
+  },
+  {
+    "id": "own_B0CCCGSF3B",
+    "asin": "B0CCCGSF3B",
+    "name": "",
+    "shop": "LANGLIER",
+    "type": "own",
+    "parentId": ""
   }
 ]
