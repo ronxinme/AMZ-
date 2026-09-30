@@ -299,5 +299,13 @@
     "shop": "LANGLIER",
     "type": "own",
     "parentId": ""
+  },
+  {
+    "id": "cmp_B0CTSVKGBP",
+    "asin": "B0CTSVKGBP",
+    "name": "",
+    "shop": "",
+    "type": "compete",
+    "parentId": "own_B0CG5TXDMW"
   }
 ]
