@@ -13429,5 +13429,2245 @@
       "timingMs": 1876,
       "stockProbeRaw": "亚马逊加购响应原话「than the 27 available from the seller you've selected」→ 卖家可售数量就是库存"
     }
+  },
+  "2026-10-03": {
+    "B09PTH84M7": {
+      "asin": "B09PTH84M7",
+      "realAsin": "B0HKCDLNHR",
+      "title": "4-Pack Square Glass Clamps, 304 SS, Black, 1/3-1/2 Inch (LIUCHONGYANG99)",
+      "price": 39.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 39.99,
+      "unitPrice": 10,
+      "unitLabel": "count",
+      "savingsPct": 18,
+      "rating": 4.5,
+      "reviews": 67,
+      "bsrSmall": {
+        "rank": 34,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 125381,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 100,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 100 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71wtQ4XjazL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:16:58.643Z",
+      "timingMs": 2240,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 100 per customer」（明示限购）"
+    },
+    "B0C9TCZ7WC": {
+      "asin": "B0C9TCZ7WC",
+      "realAsin": "B0CQ4MXDHK",
+      "title": "Glass Clamp－304 SS,Adjustable Fits1/3 -1/2\" Glass Thickness(Black-4pcs)",
+      "price": 36.88,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 9.22,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 4,
+      "reviews": 42,
+      "bsrSmall": {
+        "rank": 20,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 67403,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 194,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 194：亚马逊加购响应里原话「than the 194 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": 50,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/712eaVJo-ZL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:17:11.159Z",
+      "timingMs": 1730,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 194 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B09MYYVC3H": {
+      "asin": "B09MYYVC3H",
+      "realAsin": "B0FGGSYXTZ",
+      "title": "Muzata 4Pack Black Square Glass Clamp with Rubber Gaskets GA04 BP4",
+      "price": 26.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 26.99,
+      "unitPrice": 6.75,
+      "unitLabel": "count",
+      "savingsPct": 10,
+      "rating": 4.4,
+      "reviews": 70,
+      "bsrSmall": {
+        "rank": 58,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 233879,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 41,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 41：亚马逊加购响应里原话「than the 41 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71+VLD2nV7L._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:17:23.859Z",
+      "timingMs": 1856,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 41 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0DR8RDRFM": {
+      "asin": "B0DR8RDRFM",
+      "realAsin": "B0DWDWBL9T",
+      "title": "LukLoy 8 PCS Glass Railing Clamp Brushed for 5/16 \"-15/32 \"(8mm-12mm)",
+      "price": 42.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 3.9,
+      "reviews": 23,
+      "bsrSmall": {
+        "rank": 177,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 585286,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 53,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 53：亚马逊加购响应里原话「than the 53 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71u86A-GuzL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:17:36.470Z",
+      "timingMs": 1556,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 53 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0C6GK3KWB": {
+      "asin": "B0C6GK3KWB",
+      "realAsin": "B0F7G5BMK5",
+      "title": "2-Pack Square Glass Clamps, SS304, 6-12mm, Polished(LIUCHONGYANG99)",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 1,
+      "bsrSmall": {
+        "rank": 500,
+        "label": "Fixturing Clamps"
+      },
+      "bsrLarge": {
+        "rank": 629397,
+        "label": "Industrial & Scientific"
+      },
+      "stock": {
+        "kind": "unavailable",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Currently unavailable.",
+      "image": "https://m.media-amazon.com/images/I/71BX86nTjFL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:17:48.774Z",
+      "timingMs": 1388
+    },
+    "B09F358TBV": {
+      "asin": "B09F358TBV",
+      "realAsin": "B09F3441J1",
+      "title": "LukLoy 4 Pack Glass to Glass Clamp Frameless 180° Glass Railing Clamp",
+      "price": 56.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.5,
+      "reviews": 179,
+      "bsrSmall": {
+        "rank": 47,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 44950,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 133,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 133：亚马逊加购响应里原话「than the 133 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/712ueTTROdL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:17:58.418Z",
+      "timingMs": 1640,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 133 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0F9WLV5CY": {
+      "asin": "B0F9WLV5CY",
+      "realAsin": "B0HGS3VLF6",
+      "title": "Railing Glass Clamps 4 Pack, 304 SS, Fits 5/16\"- 3/8\"-1/2\" Glass Thickness",
+      "price": 55.88,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.5,
+      "reviews": 2,
+      "bsrSmall": {
+        "rank": 49,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 184544,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 46,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 46：亚马逊加购响应里原话「than the 46 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71bWliuy8XL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:18:10.892Z",
+      "timingMs": 1559,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 46 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B09PTSHFZZ": {
+      "asin": "B09PTSHFZZ",
+      "realAsin": "B0FP9QX27P",
+      "title": "LukLoy 1 Pack 180° Railing Glass to Glass Clamp Marine Grade SS316 Brushed",
+      "price": 17.5,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.4,
+      "reviews": 73,
+      "bsrSmall": {
+        "rank": 467,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 282374,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 57,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 57：亚马逊加购响应里原话「than the 57 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61lT+KR06WL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:18:23.978Z",
+      "timingMs": 1860,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 57 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0CHR9SZ8B": {
+      "asin": "B0CHR9SZ8B",
+      "realAsin": "B0HK45P597",
+      "title": "4-Pack 304 Round Glass Clamps, 1/3-1/2 Inch, Black (LIUCHONGYANG99)",
+      "price": 30.59,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 33.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 10,
+      "rating": 5,
+      "reviews": 8,
+      "bsrSmall": {
+        "rank": 66,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 246826,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 149,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 149：亚马逊加购响应里原话「than the 149 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61W9mhKDhCL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:18:36.785Z",
+      "timingMs": 1633,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 149 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B07DDFMLG1": {
+      "asin": "B07DDFMLG1",
+      "realAsin": "B07DDFMLG1",
+      "title": "KAMTOP 8 Pack Glass Clamps, 6-7mm Adjustable 304 Stainless Steel Brackets",
+      "price": 21.84,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 22.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 5,
+      "rating": 4.5,
+      "reviews": 162,
+      "bsrSmall": {
+        "rank": 192,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 655307,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 41,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 41：亚马逊加购响应里原话「than the 41 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/614N8TvD2bL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:18:49.167Z",
+      "timingMs": 1553,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 41 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0CCRTKXXQ": {
+      "asin": "B0CCRTKXXQ",
+      "realAsin": "B0CCRX7M35",
+      "title": "2-Pack 304 Glass Clamps, 8-12mm, Black, 0-Degree(LIUCHONGYANG99)",
+      "price": 19.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4,
+      "reviews": 1,
+      "bsrSmall": {
+        "rank": 2432,
+        "label": "Hardware Brackets"
+      },
+      "bsrLarge": {
+        "rank": 215744,
+        "label": "Industrial & Scientific"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 1,
+        "source": "cart_probe",
+        "basis": "max_purchasable",
+        "confidence": "medium",
+        "note": "加购 999 件被亚马逊夹紧到 1；此数是「一次最多能买 N 件」，亚马逊没给出说明文字，无法确定是库存还是单笔上限"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": null,
+      "image": "https://m.media-amazon.com/images/I/51gEnANou+L._AC_SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:19:01.740Z",
+      "timingMs": 1549,
+      "stockProbeRaw": "加购 999 件被亚马逊夹紧到 1（未写 only N left，无法区分「库存只剩 N」和「单笔上限 N」）",
+      "stockProbeRetried": true
+    },
+    "B0CD8B2D38": {
+      "asin": "B0CD8B2D38",
+      "realAsin": "B0F9NKHVTW",
+      "title": "2 Pack Black Railing Wall to Glass Clamp, F-Shape Glass Railing Clip",
+      "price": 19.59,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 19.59,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 10,
+      "rating": 4.6,
+      "reviews": 36,
+      "bsrSmall": {
+        "rank": 30,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 42403,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 17,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 17 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/716aT7Qmu4L._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:19:17.013Z",
+      "timingMs": 1727
+    },
+    "B0CN71KT1G": {
+      "asin": "B0CN71KT1G",
+      "realAsin": "B0D4QZ47ZB",
+      "title": "Muzata 2Pack Black Glass Railing Clamp 90 Degrees Wall-to-Glass GA09 BB4",
+      "price": 21.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 21.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 5,
+      "rating": 4.4,
+      "reviews": 41,
+      "bsrSmall": {
+        "rank": 29,
+        "label": "Fixturing Clamps"
+      },
+      "bsrLarge": {
+        "rank": 80578,
+        "label": "Industrial & Scientific"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 30,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 30 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71EvD9c80VL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:19:26.872Z",
+      "timingMs": 1856,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 30 per customer」（明示限购）"
+    },
+    "B0C743SY46": {
+      "asin": "B0C743SY46",
+      "realAsin": "B0C742XJ4V",
+      "title": "2-Pack 316 Cylindrical Glass Clamps, 8-17.52mm, Black (LIUCHONGYANG99)",
+      "price": 19.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 10,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 2,
+      "bsrSmall": {
+        "rank": 403,
+        "label": "Fixturing Clamps"
+      },
+      "bsrLarge": {
+        "rank": 508894,
+        "label": "Industrial & Scientific"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 17,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 17 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/61fpxRvvoNL._AC_SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:19:39.527Z",
+      "timingMs": 1811
+    },
+    "B07L8LDSQD": {
+      "asin": "B07L8LDSQD",
+      "realAsin": "B0H598NZ15",
+      "title": "Stainless Steel Glass Clamp Standoffs Round Large Heavy Duty 2 inches - Inline Design (Pack of 2) (Satin Stainless Steel)",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.4,
+      "reviews": 31,
+      "bsrSmall": {
+        "rank": 237,
+        "label": "Standoffs"
+      },
+      "bsrLarge": {
+        "rank": 487905,
+        "label": "Industrial & Scientific"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/61CxZ8l3a8L._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:19:49.171Z",
+      "timingMs": 1640
+    },
+    "B099WTYMM6": {
+      "asin": "B099WTYMM6",
+      "realAsin": "B0F292HWRB",
+      "title": "LukLoy 4 Pack Marine-Grade SS316 Solid Heavy Duty Glass Railing Standoff",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.5,
+      "reviews": 44,
+      "bsrSmall": {
+        "rank": 63,
+        "label": "Standoffs"
+      },
+      "bsrLarge": {
+        "rank": 140677,
+        "label": "Industrial & Scientific"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/71W9ckJ30gL._SL1493_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:19:58.854Z",
+      "timingMs": 1679
+    },
+    "B0CJ8MH322": {
+      "asin": "B0CJ8MH322",
+      "realAsin": "B0CJ6FTGMK",
+      "title": "42-Inch Glass Railing Corner Post, 50mm, Black (LIUCHONGYANG99)",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.7,
+      "reviews": 9,
+      "bsrSmall": {
+        "rank": 559,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 333454,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/71IHqwQDRGL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:20:08.426Z",
+      "timingMs": 1568
+    },
+    "B0CBKGVZSW": {
+      "asin": "B0CBKGVZSW",
+      "realAsin": "B0GQML1HJX",
+      "title": "Glass Railing Post, No-Punch Glass Railing System with Spigot Slots & Base, 304 Stainless Steel Clamp Bracket for Deck Balusters, Patio, Stairs, Silver, 23.6in, 60cm Corner Post",
+      "price": 42.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 42.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 10,
+      "rating": 4.4,
+      "reviews": 109,
+      "bsrSmall": {
+        "rank": 321,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 204350,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 4,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 4 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/61ynjTvVcXL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:20:18.070Z",
+      "timingMs": 1639
+    },
+    "B0C558XRTP": {
+      "asin": "B0C558XRTP",
+      "realAsin": "B0HKD1524N",
+      "title": "1-Pack 110cm 304 Glass Railing Post, Silver (LIUCHONGYANG99)",
+      "price": 74.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.8,
+      "reviews": 6,
+      "bsrSmall": {
+        "rank": 1128,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 723209,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 54,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 54：亚马逊加购响应里原话「than the 54 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/51S95elx6BL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:20:27.624Z",
+      "timingMs": 1550,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 54 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B08FB3FLF2": {
+      "asin": "B08FB3FLF2",
+      "realAsin": "B08FB3FLF2",
+      "title": "Glass Railing Post Glass Balustrade Railing Post Stainless Steel Railing Fence Pole Handrail Garden Fencing 43\" End Post",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 5,
+      "bsrSmall": {
+        "rank": 247,
+        "label": "Decking Posts"
+      },
+      "bsrLarge": {
+        "rank": 1351526,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:20:40.149Z",
+      "timingMs": 1507
+    },
+    "B08FB3987P": {
+      "asin": "B08FB3987P",
+      "realAsin": "B08FB3987P",
+      "title": "Glass Railing Post Glass Balustrade Railing Post Stainless Steel Railing Fence Pole Handrail Garden Fencing 35\" Middle Post",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.8,
+      "reviews": 10,
+      "bsrSmall": {
+        "rank": 900,
+        "label": "Decking"
+      },
+      "bsrLarge": {
+        "rank": 1329030,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/61d94IZ2w-L._SL1000_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:20:49.878Z",
+      "timingMs": 1725
+    },
+    "B0C8B1XNTD": {
+      "asin": "B0C8B1XNTD",
+      "realAsin": "B0C8SQD2MQ",
+      "title": "Glass Railing Post, Silvery 304 Stainless Steel Clamp Post Balustrade Railing, Mid Post Railing Fence Pole Handrail Garden Fencing (Mid Post, 43.3\" H)",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": {
+        "rank": 597,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 354068,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/41ZFXOLex5L._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:20:59.409Z",
+      "timingMs": 1527
+    },
+    "B0HJQQ59K7": {
+      "asin": "B0HJQQ59K7",
+      "realAsin": "B0HJQKL5JB",
+      "title": "Pack of 4, 304 Stainless Steel Standoff Screws, Wall Sign Standoff Mounting Hardware Advertising Glass Standoff for Acrylic Picture Frame",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "unavailable",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Currently unavailable.",
+      "image": "https://m.media-amazon.com/images/I/61dM8sLPQUL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:21:08.768Z",
+      "timingMs": 1355
+    },
+    "B0HHXD8SHF": {
+      "asin": "B0HHXD8SHF",
+      "realAsin": "B0HHXPSS1W",
+      "title": "42/38/in Side Mount Square Stair Baluster Posts- 270° Adjustable Metal Railing Spindles; Iron Posts are Suitable for Deck, Balcony, Stair, Indoor and Outdoor Decor，4：38inches",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/61kPwu128QL._SL1313_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:21:18.134Z",
+      "timingMs": 1361
+    },
+    "B0HFWLCSCS": {
+      "asin": "B0HFWLCSCS",
+      "realAsin": "B0HFWD3VHS",
+      "title": "LIUCHONGYANG99201 Stainless Steel 2\" x 4\" (1 ½\" x 3 ½\" Actual) Deck Railing Parallel Stair (2 pc-Black)",
+      "price": 39.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "stock",
+        "qty": 6,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 6：亚马逊加购响应里原话「than the 6 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": null,
+      "image": "https://m.media-amazon.com/images/I/61aTGdWsCjL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:21:27.781Z",
+      "timingMs": 1643,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 6 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0H2PQCCVB": {
+      "asin": "B0H2PQCCVB",
+      "realAsin": "B0H2PMBRG5",
+      "title": "110cm 304 Stainless Steel Glass Railing Post, Silver (LIUCHONGYANG99)",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": {
+        "rank": 1542,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 988021,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/61dSmPFF8TL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:21:39.926Z",
+      "timingMs": 1371
+    },
+    "B0GZVRY1N6": {
+      "asin": "B0GZVRY1N6",
+      "realAsin": "B0GZVRY1N6",
+      "title": "2-Pack 316 Stainless Steel Glass Clamps, 8-12mm (LIUCHONGYANG99)",
+      "price": 49.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 25,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 4,
+      "reviews": 1,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "stock",
+        "qty": 89,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 89：亚马逊加购响应里原话「than the 89 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61f99o-BlZL._AC_SL1252_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:21:49.439Z",
+      "timingMs": 1510,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 89 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0CJ6HD4R1": {
+      "asin": "B0CJ6HD4R1",
+      "realAsin": "B0CJ6FTGMK",
+      "title": "2-Pack 42-Inch Glass Railing End Posts, 50mm, Satin (LIUCHONGYANG99)",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.7,
+      "reviews": 9,
+      "bsrSmall": {
+        "rank": 559,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 333454,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/7182TZEJbZL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:22:01.751Z",
+      "timingMs": 1424
+    },
+    "B0C93R4HL3": {
+      "asin": "B0C93R4HL3",
+      "realAsin": "B0FFMTRBVD",
+      "title": "10-Pair T316 Invisible Cable Railing Kit for 1/8\" Cable, Black",
+      "price": 19.9,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 4,
+      "bsrSmall": {
+        "rank": 1860,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 1191786,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 7,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 7 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/61xsdNF9NTL._SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:22:11.308Z",
+      "timingMs": 1553
+    },
+    "B0BXD3SL7T": {
+      "asin": "B0BXD3SL7T",
+      "realAsin": "B0C2YCVGJP",
+      "title": "BLIKA 100 Pack Cable Railing Rubber Grommets for 1/8\" 5/32\" 3/16\" Cables for Metal Cable Railing Posts, 1/8\" Cable Railing Grommet, Cable Railing Protective Sleeves for Metal Posts, BL10-L",
+      "price": 29.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 29.99,
+      "unitPrice": 0.3,
+      "unitLabel": "count",
+      "savingsPct": 10,
+      "rating": 4.6,
+      "reviews": 121,
+      "bsrSmall": {
+        "rank": 34,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 45660,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 309,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 309：亚马逊加购响应里原话「than the 309 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": 50,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61bJodFxW8L._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:22:21.145Z",
+      "timingMs": 1833,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 309 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0C7PY7XR4": {
+      "asin": "B0C7PY7XR4",
+      "realAsin": "B0C7PY7XR4",
+      "title": "100pcs Cable Railing Rubber Grommets, 1/8\"5/32\"3/16\" Cable Railing Rubber Grommets Railing Protective Sleeves Cable Railing Kit for Metal Posts",
+      "price": 9.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.5,
+      "reviews": 19,
+      "bsrSmall": {
+        "rank": 897,
+        "label": "Grommet Kits"
+      },
+      "bsrLarge": {
+        "rank": 228627,
+        "label": "Industrial & Scientific"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 2,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 2 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/71Im5++BD-L._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:22:33.643Z",
+      "timingMs": 1550
+    },
+    "B0CM2WZVYQ": {
+      "asin": "B0CM2WZVYQ",
+      "realAsin": "B0CYBNBFXK",
+      "title": "BLIKA 20 Pack 5/16\" ID Black Cable Railing Angle Washers for Stair Ends",
+      "price": 39.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 39.99,
+      "unitPrice": 2,
+      "unitLabel": "count",
+      "savingsPct": 10,
+      "rating": 4.6,
+      "reviews": 65,
+      "bsrSmall": {
+        "rank": 41,
+        "label": "Decking & Fencing Hardware"
+      },
+      "bsrLarge": {
+        "rank": 59536,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 118,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 118：亚马逊加购响应里原话「than the 118 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": 50,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61B13LIKFrL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:22:43.452Z",
+      "timingMs": 1804,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 118 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0DTT7D4ZH": {
+      "asin": "B0DTT7D4ZH",
+      "realAsin": "B0F5HPMZ3T",
+      "title": "CKE 50 Pack 3/8\" Black Angle Beveled Washers for Cable Railing, 30 Degree Beveled Washers for 1/8\" 5/32\" 3/16\" Stair Deck Cable Railing Kit, T316 Stainless Steel Black Cable Railing Angle Washer,BCR17",
+      "price": 59.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 1.2,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 4.3,
+      "reviews": 28,
+      "bsrSmall": {
+        "rank": 266,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 178650,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 30,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 30 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61Kv0aPOdGL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:22:56.101Z",
+      "timingMs": 1666,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 30 per customer」（明示限购）"
+    },
+    "B0CG5TXDMW": {
+      "asin": "B0CG5TXDMW",
+      "realAsin": "B0CG5RZ4LG",
+      "title": "10Pairs Black Invisible Cable Railing kit for 1/8\" Cable ，Two Piece Set at Head and Tail， T316 Stainless Steel ，for Wood or Metal Post Deck Stairs Black (Rope Fixing)",
+      "price": 29.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": {
+        "rank": 3538,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 2323667,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 19,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 19 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/61b8-7qM6VL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:23:08.680Z",
+      "timingMs": 1662
+    },
+    "B0CTSVKGBP": {
+      "asin": "B0CTSVKGBP",
+      "realAsin": "B0BTYX5TP3",
+      "title": "BLIKA 10 Pack 1/8\" Invisible Cable Railing Kit, T316 Stainless Steel",
+      "price": 15.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 15.99,
+      "unitPrice": 1.6,
+      "unitLabel": "count",
+      "savingsPct": 10,
+      "rating": 4.5,
+      "reviews": 212,
+      "bsrSmall": {
+        "rank": 54,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 60322,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 122,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 122：亚马逊加购响应里原话「than the 122 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61qhYE3Su3L._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:23:18.384Z",
+      "timingMs": 1701,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 122 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B08DMYCXYR": {
+      "asin": "B08DMYCXYR",
+      "realAsin": "B0FJRT3WNM",
+      "title": "[Patent] Muzata 20Pack Black Cable Railing Tensioner & Terminal CR26",
+      "price": 39.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 39.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 5,
+      "rating": 4.3,
+      "reviews": 120,
+      "bsrSmall": {
+        "rank": 191,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 137120,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 30,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 30 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61w0sIyBJOL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:23:31.421Z",
+      "timingMs": 2119,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 30 per customer」（明示限购）",
+      "stockProbeRetried": true
+    },
+    "B07RJPXN29": {
+      "asin": "B07RJPXN29",
+      "realAsin": "B0H5HGYRCR",
+      "title": "[Patent] Muzata 20Pack Cable Railing Hardware Invisible Tensioner CR36",
+      "price": 45.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.6,
+      "reviews": 53,
+      "bsrSmall": {
+        "rank": 904,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 563736,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 60,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 60 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61s+YJqXOjL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:23:46.688Z",
+      "timingMs": 1731,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 60 per customer」（明示限购）"
+    },
+    "B0CDNXTH6F": {
+      "asin": "B0CDNXTH6F",
+      "realAsin": "B0CDNNT3P5",
+      "title": "Handrail Brackets for Adjustable Staircase Stair Railing Brackets with Screws (Plane, Silvery)",
+      "price": 25.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.2,
+      "reviews": 20,
+      "bsrSmall": {
+        "rank": 245,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 820085,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 1,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 1 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/61Cxi1d0DLL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:23:59.584Z",
+      "timingMs": 1711
+    },
+    "B0CTHYM9WT": {
+      "asin": "B0CTHYM9WT",
+      "realAsin": "B0HH6HYHV1",
+      "title": "khtumeware 6 Pack 3 Inch Matte Black Hand Rail Bracket Heavy Duty Hardware for Stairways, Home or Office Stair Support Handrail Brackets",
+      "price": 14.89,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 15.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 7,
+      "rating": 4.6,
+      "reviews": 578,
+      "bsrSmall": {
+        "rank": 1,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 9431,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 845,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 845：亚马逊加购响应里原话「than the 845 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": 500,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61B9OOwLXFL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:24:09.363Z",
+      "timingMs": 1776,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 845 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B09CTM3XFN": {
+      "asin": "B09CTM3XFN",
+      "realAsin": "B0G6DGD8QH",
+      "title": "Square Handrail Brackets for Staircase Stair Railing Brackets with Screws (Pack of 5) (Textured Black)",
+      "price": 46.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 9.4,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 4.6,
+      "reviews": 102,
+      "bsrSmall": {
+        "rank": 24,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 76163,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 284,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 284：亚马逊加购响应里原话「than the 284 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": 50,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61IoL70GtgL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:24:21.985Z",
+      "timingMs": 1654,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 284 available from the seller you've selected」→ 卖家可售数量就是库存",
+      "stockProbeRetried": true
+    },
+    "B0DHDJGGK4": {
+      "asin": "B0DHDJGGK4",
+      "realAsin": "B0DHF432S2",
+      "title": "Inline Design - Stainless Steel Handrail Bracket Square for Flat/Curved Bottom Tube Slim Adjustable (Black Matte Powder Coat)",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.2,
+      "reviews": 96,
+      "bsrSmall": {
+        "rank": 96,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 314864,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/51tYsBOkOIL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:24:38.123Z",
+      "timingMs": 1684
+    },
+    "B0CP6DC616": {
+      "asin": "B0CP6DC616",
+      "realAsin": "B0CWWVSM7Y",
+      "title": "Stainless Steel Handrail Wall Bracket Square Slim by Inline Design (Matte Black Powder Coat)",
+      "price": 16.49,
+      "currency": "USD",
+      "priceSource": "cart_form",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 1,
+      "bsrSmall": {
+        "rank": 259,
+        "label": "Stair Brackets"
+      },
+      "bsrLarge": {
+        "rank": 805835,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 1,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 1 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/516NNAk8KlL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:24:47.983Z",
+      "timingMs": 1856
+    },
+    "B0CCCGSF3B": {
+      "asin": "B0CCCGSF3B",
+      "realAsin": "B0GZ33P24L",
+      "title": "Cable Railing Posts, 36-Inch, Black, 2-Pack（Middle Post",
+      "price": 66.49,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 3,
+      "bsrSmall": {
+        "rank": 1185,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 757086,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 8,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 8 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/61ixp74RJ+L._SL1315_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:24:57.742Z",
+      "timingMs": 1755
+    },
+    "B0DWF8C78X": {
+      "asin": "B0DWF8C78X",
+      "realAsin": "B0F4QJ2FPV",
+      "title": "CKE T-Drilled Corner Post Cable Railing, Three Sides T-Drilled 36\" Cable Railing Corner Post (Post 35\"x2\"x2\") with Cable Grommets, 90° Black Finish Stainless Steel Corner Post for Indoor Outdoor, CP02",
+      "price": 72.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": 72.99,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": 20,
+      "rating": 5,
+      "reviews": 4,
+      "bsrSmall": {
+        "rank": 24,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 38112,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 5,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 5 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/71lRn6erWSL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:25:07.581Z",
+      "timingMs": 1835
+    },
+    "B0F1XJHR43": {
+      "asin": "B0F1XJHR43",
+      "realAsin": "B0DYK25X7G",
+      "title": "BLIKA 36\" Cable Railing Corner Post, 304 Stainless Steel, 2-Side Drilled Adjustable Top Corner Post, Surface Mount Matte Black Cable Railing System Corner Post",
+      "price": 50.9915,
+      "currency": "USD",
+      "priceSource": "cart_form",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.5,
+      "reviews": 4,
+      "bsrSmall": {
+        "rank": 443,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 272964,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 1,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 1 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/612T1glFBIL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:25:17.277Z",
+      "timingMs": 1692
+    },
+    "B0CNT9MNT2": {
+      "asin": "B0CNT9MNT2",
+      "realAsin": "B0CNT9MNT2",
+      "title": "SS316 Cable Railing Stair Post 36\" (Post 35\"x2\"x2\") for Coastal Lake, 33°Drilled Railing Post with Cable Grommets Fit for 28-38° Stairway, Adjustable Top Stainless Steel Black Finish Deck Post",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 2,
+      "bsrSmall": {
+        "rank": 1891,
+        "label": "Decking Railings"
+      },
+      "bsrLarge": {
+        "rank": 1212335,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "unavailable",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Currently unavailable.",
+      "image": "https://m.media-amazon.com/images/I/71+7V7TrzUL._SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:25:26.837Z",
+      "timingMs": 1556
+    },
+    "B0D1MNYY3P": {
+      "asin": "B0D1MNYY3P",
+      "realAsin": "B0D1MY83L2",
+      "title": "4-Pcs Adjustable Metal Furniture Legs for Cabinets, 10-17 Inch",
+      "price": 36.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 9.25,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 5,
+      "reviews": 5,
+      "bsrSmall": {
+        "rank": 3295,
+        "label": "Furniture Legs"
+      },
+      "bsrLarge": {
+        "rank": 1053723,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 6,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 6 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/61Wo4ClzmkL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:25:36.304Z",
+      "timingMs": 1462
+    },
+    "B0D2NJ1JF7": {
+      "asin": "B0D2NJ1JF7",
+      "realAsin": "B0D2NVKPGY",
+      "title": "Wlrrcwdttc 4 Pcs Adjustable Bed Center Support Legs 7.08-12.2 inch for Bed Frame/Bed Center Slat, Metal Adjustable Furniture Legs for Bed/Cabinet/Sofa/Dresser/Couch/Table, Heavy Bed Legs Replacement",
+      "price": 26.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.6,
+      "reviews": 487,
+      "bsrSmall": {
+        "rank": 5,
+        "label": "Furniture Legs"
+      },
+      "bsrLarge": {
+        "rank": 6990,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 10,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 10 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": 200,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71TRD4PkD+L._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:25:46.202Z",
+      "timingMs": 1893,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 10 per customer」（明示限购）"
+    },
+    "B0CYPLTJF9": {
+      "asin": "B0CYPLTJF9",
+      "realAsin": "B0BX5KMXVD",
+      "title": "Wlrrcwdttc 6 Pcs Adjustable Height Bed Support Legs for Bed Frame/Bed Center Slat, Metal Adjustable Furniture Legs 7.08-12.2 inch for Bed/Sofa/Cabinet/Couch/Dresser/Table, Heavy Bed Legs Replacement",
+      "price": 33.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 5.67,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 4.5,
+      "reviews": 759,
+      "bsrSmall": {
+        "rank": 11,
+        "label": "Furniture Legs"
+      },
+      "bsrLarge": {
+        "rank": 11845,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 10,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 10 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/711LQxvzccL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:25:58.905Z",
+      "timingMs": 1701,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 10 per customer」（明示限购）"
+    },
+    "B0BQCB7QTK": {
+      "asin": "B0BQCB7QTK",
+      "realAsin": "B0B7NVKQNS",
+      "title": "Metal Adjustable Furniture Legs 7-12.6 inch, Wlrrcwdttc Bed Support Legs Adjustable Height Cabinet Legs for Bed Frame/Sofa/Dresser/Couch/Chair/Table,Bed Replacement Legs Bed Center Slats Legs Set of 4",
+      "price": 26.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 6.75,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": 4.5,
+      "reviews": 604,
+      "bsrSmall": {
+        "rank": 88,
+        "label": "Furniture Legs"
+      },
+      "bsrLarge": {
+        "rank": 40284,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 10,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 10 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71NuWDWqvTL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:26:11.487Z",
+      "timingMs": 1616,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 10 per customer」（明示限购）"
+    },
+    "B0G64VRVWK": {
+      "asin": "B0G64VRVWK",
+      "realAsin": "B0G64VRVWK",
+      "title": "Stainless Steel Cutting Board, Scratch-Resistant, 14 x 11 Inch",
+      "price": 19.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 3.9,
+      "reviews": 10,
+      "bsrSmall": {
+        "rank": 2902,
+        "label": "Cutting Boards"
+      },
+      "bsrLarge": {
+        "rank": 232083,
+        "label": "Kitchen & Dining"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 76,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 76：亚马逊加购响应里原话「than the 76 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71ow27F1myL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:26:24.005Z",
+      "timingMs": 1560,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 76 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B0DQG2VHKJ": {
+      "asin": "B0DQG2VHKJ",
+      "realAsin": "B0HJ6LN959",
+      "title": "Titanium Cutting Board for Kitchen, Pure Titanium/PP, Size 16”×11”",
+      "price": 38.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.4,
+      "reviews": 7865,
+      "bsrSmall": {
+        "rank": 1,
+        "label": "Cutting Boards"
+      },
+      "bsrLarge": {
+        "rank": 4,
+        "label": "Handmade Products"
+      },
+      "stock": {
+        "kind": "purchase_limit",
+        "qty": 15,
+        "source": "cart_probe",
+        "basis": "atc_limit",
+        "confidence": "high",
+        "note": "亚马逊自己写明的单笔限购上限 15 件（不是库存）"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/71ccyoxSUML._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:26:36.700Z",
+      "timingMs": 1855,
+      "stockProbeRaw": "亚马逊加购响应原话「limit of 15 per customer」（明示限购）"
+    },
+    "B0DXN467TJ": {
+      "asin": "B0DXN467TJ",
+      "realAsin": "B0GHMJTJFC",
+      "title": "Sumzzz Stainless Steel Cutting Board for Kitchen, 2-in-1 Double-Sided Chopping Board, Dishwasher Safe, Food Grade Stainless Steel/PP, Easy to Clean, Large Size, Non-Slip, 16\"×11\"",
+      "price": 34.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.4,
+      "reviews": 575,
+      "bsrSmall": {
+        "rank": 312,
+        "label": "Cutting Boards"
+      },
+      "bsrLarge": {
+        "rank": 28054,
+        "label": "Kitchen & Dining"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 18,
+        "source": "amazon_page",
+        "note": "亚马逊页面原话「Only N left in stock」"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "Only 18 left in stock - order soon.",
+      "image": "https://m.media-amazon.com/images/I/81p9DRRIfzL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:26:49.728Z",
+      "timingMs": 1718
+    },
+    "B0FY1LFT58": {
+      "asin": "B0FY1LFT58",
+      "realAsin": "B0FY1LFT58",
+      "title": "3-in-1 Foot Callus Remover, Stainless Steel Pedicure File",
+      "price": 9.9,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.2,
+      "reviews": 17,
+      "bsrSmall": {
+        "rank": 872,
+        "label": "Foot Files"
+      },
+      "bsrLarge": {
+        "rank": 295709,
+        "label": "Beauty & Personal Care"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 175,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 175：亚马逊加购响应里原话「than the 175 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": 50,
+      "availabilityText": null,
+      "image": "https://m.media-amazon.com/images/I/51iBOP4H0ZL._AC_SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:26:59.236Z",
+      "timingMs": 1504,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 175 available from the seller you've selected」→ 卖家可售数量就是库存"
+    },
+    "B002YI1ZF0": {
+      "asin": "B002YI1ZF0",
+      "realAsin": "B002YI1ZF0",
+      "title": "PedEgg Foot File, Painless Callus Remover, Mess-Free, As Seen on TV",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.6,
+      "reviews": 9642,
+      "bsrSmall": {
+        "rank": 24,
+        "label": "Foot Files"
+      },
+      "bsrLarge": {
+        "rank": 9884,
+        "label": "Beauty & Personal Care"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "This item cannot be shipped to your selected delivery location. Please choose a different ",
+      "image": "https://m.media-amazon.com/images/I/61Ff1dAPYzL._AC_SL1500_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:27:11.900Z",
+      "timingMs": 1713
+    },
+    "B09BNYF1G7": {
+      "asin": "B09BNYF1G7",
+      "realAsin": "B09BNYF1G7",
+      "title": "Egg Shaped Pedicure Ergonomic Foot File and Callus Remover Best Foot Care Tool Remove Dead Skin As Seen on TV",
+      "price": null,
+      "currency": null,
+      "priceSource": null,
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": 4.1,
+      "reviews": 25,
+      "bsrSmall": {
+        "rank": 966,
+        "label": "Foot Files"
+      },
+      "bsrLarge": {
+        "rank": 331384,
+        "label": "Beauty & Personal Care"
+      },
+      "stock": {
+        "kind": "no_offer",
+        "source": "amazon_page"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": null,
+      "image": "https://m.media-amazon.com/images/I/51DfDMwYdsL._AC_SL1000_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:27:21.443Z",
+      "timingMs": 1539
+    },
+    "B0HCJ7YBCS": {
+      "asin": "B0HCJ7YBCS",
+      "realAsin": "B0HCJ7YBCS",
+      "title": "5-in-1 Multifunctional Makeup Brush",
+      "price": 30.9,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": 30.9,
+      "unitLabel": "count",
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": null,
+      "bsrLarge": null,
+      "stock": {
+        "kind": "stock",
+        "qty": 192,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 192：亚马逊加购响应里原话「than the 192 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": null,
+      "image": "https://m.media-amazon.com/images/I/51gio9Omq0L._SL1400_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:27:30.986Z",
+      "timingMs": 1539,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 192 available from the seller you've selected」→ 卖家可售数量就是库存",
+      "stockProbeRetried": true
+    },
+    "B0FWXX853G": {
+      "asin": "B0FWXX853G",
+      "realAsin": "B0FT3C5GJ4",
+      "title": "2-Pcs Magnetic Push-to-Open Cabinet Latches, Gold",
+      "price": 9.99,
+      "currency": "USD",
+      "priceSource": "buybox_json",
+      "listPrice": null,
+      "unitPrice": null,
+      "unitLabel": null,
+      "savingsPct": null,
+      "rating": null,
+      "reviews": null,
+      "bsrSmall": {
+        "rank": 924,
+        "label": "Cabinet & Furniture Latches"
+      },
+      "bsrLarge": {
+        "rank": 518071,
+        "label": "Tools & Home Improvement"
+      },
+      "stock": {
+        "kind": "stock",
+        "qty": 27,
+        "source": "cart_probe",
+        "basis": "atc_seller_available",
+        "confidence": "high",
+        "note": "库存 27：亚马逊加购响应里原话「than the 27 available from the seller you've selected」—— 卖家可售数量"
+      },
+      "purchaseLimit": null,
+      "boughtPastMonth": null,
+      "availabilityText": "In Stock",
+      "image": "https://m.media-amazon.com/images/I/61gL6TELnaL._AC_SL1254_.jpg",
+      "ok": true,
+      "error": null,
+      "captcha": false,
+      "source": "direct",
+      "fetchedAt": "2026-10-03T01:27:45.731Z",
+      "timingMs": 1568,
+      "stockProbeRaw": "亚马逊加购响应原话「than the 27 available from the seller you've selected」→ 卖家可售数量就是库存"
+    }
   }
 }
